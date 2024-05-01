@@ -1,23 +1,29 @@
-import Alternate from "@/components/Home/Alternate";
-import Hero from "@/components/Home/Hero";
-import Rating from "@/components/Home/Rating";
-import ResumeFaq from "@/components/Home/ResumeFaq";
-import Reviews from "@/components/Home/Reviews";
-import Start from "@/components/Home/Start";
-import Steps from "@/components/Home/Steps";
-import Video from "@/components/Home/Video";
+import Blogs from "@/components/Resume/ResumeBuilder/Blogs";
+import {
+  Features,
+  Hero,
+  OthersIntro,
+  Ratings,
+  Faq,
+  Reviews,
+  Steps,
+} from "@/components/Resume/ResumeBuilder";
+import Templates from "@/components/Resume/Templates";
+import Video from "@/components/Resume/Video";
 
 const page = () => {
   return (
     <>
       <Hero />
       <Steps />
+      <Templates />
       <Video />
-      <Rating />
-      <Start />
-      <Alternate />
+      <Features />
+      <OthersIntro />
+      <Ratings />
+      <Blogs />
       <Reviews />
-      <ResumeFaq />
+      <Faq />
     </>
   );
 };

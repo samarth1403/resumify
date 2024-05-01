@@ -1,10 +1,10 @@
-import Heading from "@/components/Heading";
-import Section from "@/components/Section";
+import Heading from "@/components/SubComponents/Heading";
+import Section from "@/components/SubComponents/Section";
 import { resumeTemplateTypes } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 
-const Start = () => {
+const Templates = () => {
   return (
     <Section
       className="w-full "
@@ -53,4 +53,4 @@ const Start = () => {
   );
 };
 
-export default Start;
+export default Templates;

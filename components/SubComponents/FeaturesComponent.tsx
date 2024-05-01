@@ -1,9 +1,18 @@
-import Heading from "@/components/Heading";
-import Section from "@/components/Section";
-import { resumeAlternateData } from "@/constants";
+import Heading from "@/components/SubComponents/Heading";
+import Section from "@/components/SubComponents/Section";
 import Image from "next/image";
 
-const Alternate = () => {
+interface propTypes {
+  title: string;
+  resumeAlternateData: {
+    id: string;
+    title: string;
+    text: string;
+    logo: string;
+  }[];
+}
+
+const Alternate = ({ title, resumeAlternateData }: propTypes) => {
   return (
     <Section
       className=" w-full"
@@ -13,7 +22,7 @@ const Alternate = () => {
       id="steps"
     >
       <div className="flex-center mt-4 w-full flex-col lg:mt-8 xl:mt-12">
-        <Heading title="Why use our online Resume Builder ?" />
+        <Heading title={title} />
         <div className="flex flex-col gap-8 lg:gap-16 xl:gap-20">
           {resumeAlternateData?.map((data, index) => (
             <div key={data.id} className="max-w-4xl">

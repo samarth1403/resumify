@@ -1,9 +1,19 @@
-import Heading from "@/components/Heading";
-import Section from "@/components/Section";
-import { fiveStarReviews } from "@/constants";
+import Heading from "@/components/SubComponents/Heading";
+import Section from "@/components/SubComponents/Section";
 import Image from "next/image";
 
-const Rating = () => {
+interface propTypes {
+  title: string;
+  text?: string;
+  fiveStarReviews: {
+    id: string;
+    name: string;
+    rating: number;
+    review: string;
+  }[];
+}
+
+const RatingsComponent = ({ title, text, fiveStarReviews }: propTypes) => {
   return (
     <Section
       className=" w-full"
@@ -12,10 +22,9 @@ const Rating = () => {
       customPaddings
       id="steps"
     >
-      {" "}
       <div className="flex-center mt-4 w-full flex-col lg:mt-8 xl:mt-12">
-        <Heading title="Approved By Recruiters And Loved By Job Seekers" />
-        <p className="h5 mb-8 w-full text-left   ">Seeing our 5 Star Reviews</p>
+        <Heading title={title} />
+        {text && <p className="h5 mb-8 w-full text-left   ">{text}</p>}
         <div className="flex w-full flex-wrap items-start justify-around gap-8 lg:gap-8">
           {fiveStarReviews?.map((review, index) => (
             <div
@@ -45,4 +54,4 @@ const Rating = () => {
   );
 };
 
-export default Rating;
+export default RatingsComponent;

@@ -1,4 +1,5 @@
-import { Header } from "@/components";
+import Footer from "@/components/LayoutComponents/Footer";
+import Header from "@/components/LayoutComponents/Header";
 import "@/styles/global.css";
 import { ReactNode } from "react";
 
@@ -17,6 +18,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         <main className="app">
           <Header />
           {children}
+          <Footer />
         </main>
       </body>
     </html>

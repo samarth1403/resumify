@@ -1,11 +1,23 @@
-import React from "react";
-import Section from "@/components/Section";
-import Heading from "@/components/Heading";
-import { stepsData } from "@/constants";
-import Button from "@/components/Button";
+import React, { ReactNode } from "react";
+import Section from "@/components/SubComponents/Section";
+import Heading from "@/components/SubComponents/Heading";
 import Image from "next/image";
 
-const Steps = () => {
+interface stepDataTypes {
+  id: string;
+  title: string;
+  text: string;
+  logo: string;
+}
+
+interface propTypes {
+  title: string;
+  stepsData: stepDataTypes[];
+  showText?: boolean;
+  createBtn: ReactNode;
+}
+
+const Steps = ({ title, stepsData, showText, createBtn }: propTypes) => {
   return (
     <Section
       className="w-full"
@@ -15,7 +27,7 @@ const Steps = () => {
       id="steps"
     >
       <div className="flex-center mt-4 w-full flex-col lg:mt-8 xl:mt-12">
-        <Heading title="Make A Resume In 4 Simple Steps" />
+        <Heading title={title} />
         <div className="flex w-full flex-wrap items-start justify-around gap-8 lg:gap-8 ">
           {stepsData?.map((step, index) => (
             <div key={step?.id} className="flex-center w-48 flex-col gap-4 ">
@@ -31,16 +43,11 @@ const Steps = () => {
               <p className="h6 text-center">
                 {index + 1}. {step.title}
               </p>
-              <p className="body-3">{step.text}</p>
+              {showText && <p className="body-3">{step.text}</p>}
             </div>
           ))}
         </div>
-        <Button
-          href="/"
-          className="mt-6 rounded-xl bg-shades-10 px-6 py-3 text-[1rem] text-shades-1 transition-all hover:bg-shades-4 hover:text-shades-10 lg:mt-12 "
-        >
-          Create your Resume
-        </Button>
+        <div className="mt-6 lg:mt-12">{createBtn && createBtn}</div>
       </div>
     </Section>
   );

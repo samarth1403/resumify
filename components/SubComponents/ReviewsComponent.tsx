@@ -1,9 +1,21 @@
-import Heading from "@/components/Heading";
-import Section from "@/components/Section";
-import { fiveStarReviews } from "@/constants";
+import Heading from "@/components/SubComponents/Heading";
+import Section from "@/components/SubComponents/Section";
 import Image from "next/image";
 
-const Reviews = () => {
+interface propTypes {
+  title: string;
+  text?: string;
+  fiveStarReviews: {
+    id: string;
+    name: string;
+    rating: number;
+    review: string;
+    profile: string;
+    designation: string;
+  }[];
+}
+
+const ReviewsComponent = ({ title, fiveStarReviews }: propTypes) => {
   return (
     <Section
       className="w-full"
@@ -13,7 +25,7 @@ const Reviews = () => {
       id="steps"
     >
       <div className="flex-center mt-4 w-full flex-col lg:mt-8 xl:mt-12">
-        <Heading title="Real customer reviews of our Resume Maker" />
+        <Heading title={title} />
         <div className="flex w-full flex-wrap items-start justify-around gap-6">
           {fiveStarReviews?.map((review, index) => (
             <div
@@ -42,4 +54,4 @@ const Reviews = () => {
   );
 };
 
-export default Reviews;
+export default ReviewsComponent;

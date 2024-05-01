@@ -1,10 +1,18 @@
 import React from "react";
-import Heading from "@/components/Heading";
-import Section from "@/components/Section";
-import { resumeFaqData } from "@/constants";
-import Collapsible from "../Collapsible";
+import Heading from "@/components/SubComponents/Heading";
+import Section from "@/components/SubComponents/Section";
+import Collapsible from "../SubComponents/Collapsible";
 
-const ResumeFaq = () => {
+interface propTypes {
+  title: string;
+  faqData: {
+    id: string;
+    title: string;
+    text: string;
+  }[];
+}
+
+const FaqComponent = ({ title, faqData }: propTypes) => {
   return (
     <Section
       className="w-full"
@@ -14,9 +22,9 @@ const ResumeFaq = () => {
       id="steps"
     >
       <div className="flex-center mt-4 w-full flex-col lg:mt-8 xl:mt-12">
-        <Heading title="Resume Builder FAQ" />
+        <Heading title={title} />
         <div className=" flex w-72 flex-col gap-4 md:w-96 lg:w-[50rem]">
-          {resumeFaqData?.map((data, index) => (
+          {faqData?.map((data, index) => (
             <Collapsible
               key={data.id}
               title={data.title}
@@ -32,4 +40,4 @@ const ResumeFaq = () => {
   );
 };
 
-export default ResumeFaq;
+export default FaqComponent;

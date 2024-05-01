@@ -1,5 +1,5 @@
-import Heading from "@/components/Heading";
-import Section from "@/components/Section";
+import Heading from "@/components/SubComponents/Heading";
+import Section from "@/components/SubComponents/Section";
 
 const Video = () => {
   return (
