@@ -7,9 +7,9 @@ import {
   Faq,
   Reviews,
   Steps,
+  Video,
 } from "@/components/Resume/ResumeBuilder";
 import Templates from "@/components/Resume/Templates";
-import Video from "@/components/Resume/Video";
 
 const page = () => {
   return (

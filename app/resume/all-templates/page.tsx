@@ -1,7 +1,12 @@
+import { TemplateHero } from "@/components/Resume/ResumeTemplates";
 import React from "react";
 
 const ResumeTemplates = () => {
-  return <div>ResumeTemplates</div>;
+  return (
+    <>
+      <TemplateHero />
+    </>
+  );
 };
 
 export default ResumeTemplates;

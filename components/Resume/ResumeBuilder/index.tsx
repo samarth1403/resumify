@@ -5,5 +5,6 @@ import OthersIntro from "@/components/Resume/ResumeBuilder/OthersIntro";
 import Ratings from "@/components/Resume/ResumeBuilder/Ratings";
 import Reviews from "@/components/Resume/ResumeBuilder/Reviews";
 import Faq from "@/components/Resume/ResumeBuilder/Faq";
+import Video from "@/components/Resume/ResumeBuilder/Video";
 
-export { Hero, Steps, Features, OthersIntro, Ratings, Reviews, Faq };
+export { Hero, Steps, Features, OthersIntro, Ratings, Reviews, Faq, Video };

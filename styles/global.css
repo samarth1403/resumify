@@ -259,17 +259,9 @@
 }
 
 .body-2 {
-    @apply font-medium text-[0.875rem] leading-6 md:text-base
+    @apply font-medium text-[1rem] leading-6
 }
 
 .body-3 {
-    @apply font-medium text-[0.9rem] sm:text-[0.5rem] leading-6 md:text-base
-}
-
-.body-4 {
-    @apply font-medium text-[0.4rem] sm:text-[0.4rem] leading-4 md:text-base
-}
-
-.body-5 {
-    @apply font-medium text-[0.2rem] sm:text-[0.2rem] leading-4 md:text-base
+    @apply font-medium text-[0.9rem] leading-6
 }

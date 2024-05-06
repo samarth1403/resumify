@@ -24,12 +24,12 @@ const BlogsComponent = ({ title, blogsData }: propTypes) => {
       id="steps"
     >
       <div className="flex-center mt-4 w-full flex-col lg:mt-8 xl:mt-12">
-        <Heading title="Latest advice from our job search experts" />
+        <Heading title={title} />
         <div className="flex w-full flex-wrap items-start justify-around gap-6">
           {blogsData?.map((blog, index) => (
             <div
               key={blog.id}
-              className="flex-start flex w-72 flex-col gap-4 rounded-xl bg-white p-4 shadow-2xl shadow-shades-2 lg:w-[21rem] lg:gap-8   "
+              className="flex-start flex w-72 flex-col gap-4 rounded-xl bg-white p-4 shadow-2xl shadow-shades-2 lg:w-[21rem] lg:gap-6   "
             >
               <Image
                 src={blog.image}
@@ -41,11 +41,11 @@ const BlogsComponent = ({ title, blogsData }: propTypes) => {
               <div className="flex-start flex-col gap-4">
                 <p className="body-1">{blog.title}</p>
                 <p className="text-[0.95rem]">{blog.text}</p>
-                <p className="text-[0.95rem]">{blog.creator}</p>
-                <p className="text-[0.95rem]">
-                  {new Date(blog.createdAt).getUTCDate()}
-                </p>
               </div>
+              <p className="text-[0.95rem]">
+                <i>by</i> &nbsp; {blog.creator} &nbsp; - &nbsp; {"  "}
+                {new Date(blog.createdAt).toLocaleDateString()}
+              </p>
             </div>
           ))}
         </div>

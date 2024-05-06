@@ -2,6 +2,7 @@ import Footer from "@/components/LayoutComponents/Footer";
 import Header from "@/components/LayoutComponents/Header";
 import "@/styles/global.css";
 import { ReactNode } from "react";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Resumify",
@@ -17,6 +18,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         </div>
         <main className="app">
           <Header />
+          <Toaster />
           {children}
           <Footer />
         </main>

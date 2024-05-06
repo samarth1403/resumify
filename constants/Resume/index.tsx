@@ -188,3 +188,84 @@ export const resumeFaqData = [
     text: "It's not necessary to include references on your resume, but you should have a list of references available to provide to employers if they ask for it.",
   },
 ];
+
+export const resumeTemplateData = [
+  {
+    id: "professional",
+    title: "Professional",
+    templates: [
+      {
+        id: "0",
+        title: "Timeless",
+        image: "/assets/images/hero-resume-example.svg",
+      },
+      {
+        id: "1",
+        title: "Classic",
+        image: "/assets/images/hero-resume-example.svg",
+      },
+      {
+        id: "2",
+        title: "Corporate",
+        image: "/assets/images/hero-resume-example.svg",
+      },
+      {
+        id: "3",
+        title: "Executive",
+        image: "/assets/images/hero-resume-example.svg",
+      },
+    ],
+  },
+  {
+    id: "simple",
+    title: "Simple",
+    templates: [
+      {
+        id: "0",
+        title: "Minimalist",
+        image: "/assets/images/hero-resume-example.svg",
+      },
+      {
+        id: "1",
+        title: "Clean",
+        image: "/assets/images/hero-resume-example.svg",
+      },
+      {
+        id: "2",
+        title: "Basic",
+        image: "/assets/images/hero-resume-example.svg",
+      },
+      {
+        id: "3",
+        title: "Straightforward",
+        image: "/assets/images/hero-resume-example.svg",
+      },
+    ],
+  },
+  {
+    id: "creative",
+    title: "Creative",
+    templates: [
+      {
+        id: "0",
+        title: "Artistic",
+        image: "/assets/images/hero-resume-example.svg",
+      },
+      {
+        id: "1",
+        title: "Innovative",
+        image: "/assets/images/hero-resume-example.svg",
+      },
+      {
+        id: "2",
+        title: "Unique",
+        image: "/assets/images/hero-resume-example.svg",
+      },
+      {
+        id: "3",
+        title: "Original",
+        image: "/assets/images/hero-resume-example.svg",
+      },
+    ],
+  },
+];

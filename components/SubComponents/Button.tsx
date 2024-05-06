@@ -1,22 +1,28 @@
 import Link from "next/link";
 import { MouseEventHandler, ReactNode } from "react";
+import ButtonLoader from "./ButtonLoader";
+
+interface propTypes {
+  className?: string;
+  href?: string;
+  children?: ReactNode;
+  isFormSubmitting?: boolean;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+}
 
 const Button = ({
   className,
   href,
   children,
+  isFormSubmitting,
   onClick,
-}: {
-  className?: string;
-  href?: string;
-  children?: ReactNode;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-}) => {
-  const classes = `button relative inline-flex items-center justify-center rounded-xl bg-shades-10 px-6 py-3 text-[1rem] text-shades-1 transition-all hover:bg-shades-4 hover:text-shades-10 ${className}`;
+}: propTypes) => {
+  const classes = `button relative inline-flex items-center gap-4 justify-center rounded-xl bg-shades-9 px-6 py-3 text-[1rem] text-shades-1 transition-all hover:bg-shades-12 hover:text-shades-1 ${className}`;
   const spanClasses = "relative z-10";
   const renderButton = () => (
-    <button onClick={onClick} className={classes}>
+    <button onClick={onClick} className={classes} type="button">
       <span className={spanClasses}>{children}</span>
+      <ButtonLoader fillColor="#fff" applyLoader={isFormSubmitting!} />
     </button>
   );
 

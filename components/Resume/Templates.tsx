@@ -44,7 +44,7 @@ const Templates = () => {
                   {type?.title}
                 </p>
               </Link>
-              <p className="body-3 text-center">{type.text}</p>
+              <p className="body-2 text-center">{type.text}</p>
             </div>
           ))}
         </div>

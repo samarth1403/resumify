@@ -1,7 +1,12 @@
+import { TemplateHero } from "@/components/CV/CvTemplates";
 import React from "react";
 
 const CvTemplates = () => {
-  return <div>CvTemplates</div>;
+  return (
+    <>
+      <TemplateHero />
+    </>
+  );
 };
 
 export default CvTemplates;

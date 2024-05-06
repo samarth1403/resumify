@@ -6,7 +6,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="mt-8 lg:mt-16">
+    <div className="mt-8 lg:mt-10">
       <FaqComponent
         title="Resume, CV, and Cover Letter FAQs"
         faqData={[...resumeFaqData, ...cvFaqData, ...coverLetterFaqData]}
