@@ -6,6 +6,7 @@ import {
   Section,
 } from "@/components/SubComponents";
 import { validateSignIn } from "@/components/Validation/Validation";
+import { useGlobalContext } from "@/context/GlobalProvider";
 import axios, { isAxiosError } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -18,6 +19,7 @@ interface formDataTypes {
 }
 
 const SignIn = () => {
+  const { setIsUserLoggedIn } = useGlobalContext();
   const [isFormSubmitting, setFormIsSubmitting] = useState<boolean>(false);
   const [formData, setFormData] = useState<formDataTypes>({
     email: "",
@@ -44,6 +46,7 @@ const SignIn = () => {
       const { data, status } = await axios.post("/api/user/sign-in", formData);
       if (status === 200) {
         toast.success(data.message);
+        setIsUserLoggedIn(true);
         router.push("/");
       }
     } catch (error: unknown) {
@@ -52,6 +55,7 @@ const SignIn = () => {
       } else {
         toast.error("An error occurred");
       }
+      setIsUserLoggedIn(false);
     } finally {
       setFormIsSubmitting(false);
       setErrors({});

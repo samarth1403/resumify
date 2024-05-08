@@ -36,7 +36,7 @@ const ResetPassword = () => {
     setIsFormSubmitting(true);
     try {
       const { data, status } = await axios.post("/api/user/reset-password", {
-        token: searchParams.get("token"),
+        token: searchParams.get("resumify-token"),
         newPassword: formData.newPassword,
       });
       if (status === 200) {

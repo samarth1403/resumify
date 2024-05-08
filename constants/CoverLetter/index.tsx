@@ -188,3 +188,24 @@ export const coverLetterFaqData = [
     text: "It's not necessary to mention salary expectations in your cover letter, unless the job posting specifically asks for it.",
   },
 ];
+
+export const buildCoverLetterIntroData = [
+  {
+    id: "0",
+    title: "Choose a professionally designed template",
+    text: "",
+    logo: "/assets/images/step1.svg",
+  },
+  {
+    id: "1",
+    title: "Fill out each section using our expert suggestions",
+    text: "",
+    logo: "/assets/images/step2.svg",
+  },
+  {
+    id: "2",
+    title: "Tailor your cover letter with a few clicks for any job",
+    text: "",
+    logo: "/assets/images/step3.svg",
+  },
+];

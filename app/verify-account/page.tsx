@@ -14,7 +14,7 @@ const VerifyAccount = () => {
     setIsFormSubmitting(true);
     try {
       const { data, status } = await axios.post("/api/user/verify-account", {
-        token: searchParams.get("token"),
+        token: searchParams.get("resumify-token"),
       });
       if (status === 200) {
         toast.success(data.message);

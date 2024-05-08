@@ -1,3 +1,4 @@
+import { Providers } from "@/app/providers";
 import Footer from "@/components/LayoutComponents/Footer";
 import Header from "@/components/LayoutComponents/Header";
 import "@/styles/global.css";
@@ -16,12 +17,14 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         <div className="main">
           <div className="gradient" />
         </div>
-        <main className="app">
-          <Header />
-          <Toaster />
-          {children}
-          <Footer />
-        </main>
+        <Providers>
+          <main className="app">
+            <Header />
+            <Toaster />
+            {children}
+            <Footer />
+          </main>
+        </Providers>
       </body>
     </html>
   );

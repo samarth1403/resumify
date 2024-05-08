@@ -12,7 +12,7 @@ export const GET = async (request: NextRequest) => {
       },
       { status: 200 }
     );
-    response.cookies.set("token", "", {
+    response.cookies.set("resumify-token", "", {
       httpOnly: true,
       sameSite: "strict",
       secure: true,

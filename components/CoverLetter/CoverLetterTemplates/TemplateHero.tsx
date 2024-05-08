@@ -1,4 +1,4 @@
-import TemplateHeroComponent from "@/components/SubComponents/TemplateHeroComponent";
+import TemplateHeroComponent from "@/components/SubComponents/ChooseTemplateComponent";
 import { resumeTemplateData } from "@/constants/Resume";
 import React from "react";
 

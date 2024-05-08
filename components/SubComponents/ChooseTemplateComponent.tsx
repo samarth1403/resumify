@@ -17,7 +17,7 @@ interface propTypes {
   }[];
 }
 
-const TemplateHeroComponent = ({ title, templateData }: propTypes) => {
+const ChooseTemplateComponent = ({ title, templateData }: propTypes) => {
   const [activeType, setActiveType] = useState("professional");
   return (
     <Section
@@ -72,4 +72,4 @@ const TemplateHeroComponent = ({ title, templateData }: propTypes) => {
   );
 };
 
-export default TemplateHeroComponent;
+export default ChooseTemplateComponent;

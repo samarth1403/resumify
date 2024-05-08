@@ -1,12 +1,43 @@
 "use client";
+import { navLinks } from "@/constants";
+import { useGlobalContext } from "@/context/GlobalProvider";
+import { GlobalContextType } from "@/next-env";
+import axios, { isAxiosError } from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
-import { navLinks } from "@/constants";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { Button } from "../SubComponents";
 
 const Header = () => {
+  const { isUserLoggedIn, user, setIsUserLoggedIn }: GlobalContextType =
+    useGlobalContext();
+  const router = useRouter();
+  const [isFormSubmitting, setFormIsSubmitting] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState("");
   const [active, setActive] = useState("");
+
+  const handleLogout = async () => {
+    setFormIsSubmitting(true);
+    try {
+      const { data, status } = await axios.get("/api/user/sign-out");
+      if (status === 200) {
+        toast.success(data.message);
+        router.replace("/");
+        setIsUserLoggedIn(false);
+      }
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        toast.error(error.response?.data?.error || "An error occurred");
+      } else {
+        toast.error("An error occurred");
+      }
+      setIsUserLoggedIn(true);
+    } finally {
+      setFormIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="fixed left-0 top-0 z-50 mb-4 w-full border-b border-shades-4  lg:mb-6 lg:backdrop-blur-lg ">
@@ -67,21 +98,35 @@ const Header = () => {
                 )}
             </Link>
           ))}
-          {/* <Link href={"/sign-in"}>
-              <button
-                // key={provider?.name}
-                type="button"
-                // onClick={() => signIn(provider?.id)}
-                className="black_btn"
+          {!isUserLoggedIn ? (
+            <div className="flex-center gap-4">
+              <Link href={"/sign-in"}>
+                <button type="button" className="black_btn">
+                  Sign In
+                </button>
+              </Link>
+              <Link href={"/sign-up"}>
+                <button type="button" className="black_btn">
+                  Sign Up
+                </button>
+              </Link>
+            </div>
+          ) : (
+            <div className="flex-center gap-4">
+              <Link href={"/profile"}>
+                <button className="black_btn size-4 h-full rounded-full text-2xl ">
+                  {String(user.username).charAt(0).toUpperCase()}
+                </button>
+              </Link>
+              <Button
+                isFormSubmitting={isFormSubmitting}
+                className="outline_btn"
+                onClick={() => handleLogout()}
               >
-                Sign in
-              </button>
-            </Link> */}
-          <Link href={"/sign-in"}>
-            <button type="button" className="black_btn">
-              Sign In
-            </button>
-          </Link>
+                {"Logout"}
+              </Button>
+            </div>
+          )}
         </div>
       </nav>
     </div>

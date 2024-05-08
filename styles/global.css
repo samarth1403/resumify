@@ -265,3 +265,11 @@
 .body-3 {
     @apply font-medium text-[0.9rem] leading-6
 }
+
+.body-4 {
+    @apply font-medium text-[0.8rem] leading-6
+}
+
+.body-5 {
+    @apply font-medium text-[0.7rem] leading-6
+}
