@@ -1,8 +1,10 @@
 "use client";
-import React, { useState } from "react";
-import Section from "@/components/SubComponents/Section";
 import Heading from "@/components/SubComponents/Heading";
-import Image from "next/image";
+import Section from "@/components/SubComponents/Section";
+import { templateType } from "@/constants";
+import { resumeTemplateData } from "@/constants/Resume";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 interface propTypes {
   title: string;
@@ -19,6 +21,52 @@ interface propTypes {
 
 const ChooseTemplateComponent = ({ title, templateData }: propTypes) => {
   const [activeType, setActiveType] = useState("professional");
+  const [templates, setTemplates] = useState<templateType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const getCurrentUser = async () => {
+      try {
+        const { data, status } = await axios.get("/api/template/all-templates");
+        if (status === 200) {
+          console.log("data", data);
+          setTemplates(data.data);
+        }
+      } catch (error: unknown) {
+        setTemplates([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getCurrentUser();
+  }, []);
+
+  console.log("templates", templates);
+
+  const templateList = () => {
+    if (templates.length > 0) {
+      return templates.map((template, index) => {
+        let renderedTemplate = template.jsx;
+        template.dynamicFields.forEach((field: string) => {
+          const regex = new RegExp(`{${field}}`, "g");
+          renderedTemplate = renderedTemplate.replace(regex, "Hello");
+        });
+        return (
+          <div
+            key={template._id}
+            className="flex-center flex w-72 scale-50 flex-col gap-4 rounded-xl bg-white p-4 shadow-2xl shadow-shades-2 lg:w-[21rem] lg:gap-6   "
+          >
+            <div dangerouslySetInnerHTML={{ __html: renderedTemplate }} />
+            <p className="body-1">{template.name}</p>
+          </div>
+        );
+      });
+    } else {
+      return null;
+    }
+  };
+
   return (
     <Section
       className="mt-4 w-full"
@@ -31,7 +79,7 @@ const ChooseTemplateComponent = ({ title, templateData }: propTypes) => {
         <Heading title={title} />
         <div className="flex-center  w-full flex-col">
           <div className="flex-center flex-wrap gap-4 lg:gap-8 xl:gap-16">
-            {templateData?.map((type, index) => (
+            {resumeTemplateData?.map((type, index) => (
               <div
                 key={index}
                 className="relative cursor-pointer pb-3"
@@ -47,25 +95,9 @@ const ChooseTemplateComponent = ({ title, templateData }: propTypes) => {
             ))}
           </div>
           <hr className="h-0.5 w-full bg-shades-4" />
-        </div>
-        <div className="mt-8 flex w-full flex-wrap items-start justify-start gap-6 lg:mt-12">
-          {templateData
-            ?.find((item) => item.id === activeType)
-            ?.templates?.map((template, index) => (
-              <div
-                key={template.id}
-                className="flex-center flex w-72 flex-col gap-4 rounded-xl bg-white p-4 shadow-2xl shadow-shades-2 lg:w-[21rem] lg:gap-6   "
-              >
-                <Image
-                  src={template.image}
-                  alt=""
-                  height={100}
-                  width={100}
-                  className="size-full rounded-xl object-contain"
-                />
-                <p className="body-1">{template.title}</p>
-              </div>
-            ))}
+          <div className="mt-8 flex w-full flex-wrap items-start justify-start gap-6 lg:mt-12">
+            {templateList()}
+          </div>
         </div>
       </div>
     </Section>

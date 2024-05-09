@@ -1,5 +1,3 @@
-import { GlobalContextType, userInfoType } from "@/next-env";
-
 export const VERIFY = "VERIFY";
 export const RESET_PASSWORD = "RESET_PASSWORD";
 export const SIGN_IN_SUCCESS_MESSAGE = "Signed in successfully";
@@ -249,6 +247,44 @@ export const resumeTemplateTypes = [
     uri: "/",
   },
 ];
+
+export type userInfoType = {
+  username: string;
+  email: string;
+  isAdmin: boolean;
+  isVerified: boolean;
+};
+
+export type GlobalContextType = {
+  isUserLoggedIn: boolean;
+  isLoading: boolean;
+  user: userInfoType | null;
+  setIsUserLoggedIn: (isLoggedIn: boolean) => void;
+  setUser: (user: userInfoType) => void;
+};
+
+export type templateType = {
+  sampleData: {
+    name: string;
+    email: string;
+    phone: string;
+    address: string;
+    date: Date;
+    recruiterName?: string;
+    recruiterPosition?: string;
+    hiringCompanyName?: string;
+    hiringCompanyAddress?: string;
+    coverLetterOpener?: string;
+    coverLetterBody?: string;
+    coverLetterCloser?: string;
+  };
+  _id: string;
+  name: string;
+  type: string;
+  subtype: string;
+  jsx: string;
+  dynamicFields: string[];
+};
 
 export const initialUserInfo: userInfoType = {
   username: "",

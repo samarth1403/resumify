@@ -1,5 +1,9 @@
-import { initialGlobalContext, initialUserInfo } from "@/constants";
-import { GlobalContextType, userInfoType } from "@/next-env";
+import {
+  GlobalContextType,
+  initialGlobalContext,
+  initialUserInfo,
+  userInfoType,
+} from "@/constants";
 import axios from "axios";
 import {
   ReactNode,
