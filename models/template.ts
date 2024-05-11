@@ -20,8 +20,13 @@ const templateSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  jsxOption: {
+    type: String,
+    required: true,
+  },
   sampleData: {
     name: String,
+    initials: String,
     email: String,
     phone: String,
     address: String,
@@ -32,7 +37,8 @@ const templateSchema = new mongoose.Schema({
     hiringCompanyName: String,
     hiringCompanyAddress: String,
     coverLetterOpener: String,
-    coverLetterBody: String,
+    coverLetterBody1: String,
+    coverLetterBody2: String,
     coverLetterCloser: String,
   },
   dynamicFields: [String],

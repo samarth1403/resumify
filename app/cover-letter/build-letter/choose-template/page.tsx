@@ -1,6 +1,5 @@
 "use client";
 import ChooseTemplateComponent from "@/components/SubComponents/ChooseTemplateComponent";
-import React from "react";
 
 const ChooseTemplate = () => {
   return (

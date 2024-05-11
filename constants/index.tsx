@@ -266,6 +266,7 @@ export type GlobalContextType = {
 export type templateType = {
   sampleData: {
     name: string;
+    initials: string;
     email: string;
     phone: string;
     address: string;
@@ -275,14 +276,17 @@ export type templateType = {
     hiringCompanyName?: string;
     hiringCompanyAddress?: string;
     coverLetterOpener?: string;
-    coverLetterBody?: string;
+    coverLetterBody1?: string;
+    coverLetterBody2?: string;
     coverLetterCloser?: string;
   };
   _id: string;
   name: string;
+  description: string;
   type: string;
   subtype: string;
   jsx: string;
+  jsxOption: string;
   dynamicFields: string[];
 };
 
