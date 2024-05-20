@@ -6,17 +6,13 @@ import {
   Section,
 } from "@/components/SubComponents";
 import { validateSignIn } from "@/components/Validation/Validation";
+import { formDataTypes } from "@/constants";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import axios, { isAxiosError } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-
-interface formDataTypes {
-  email: string;
-  password: string;
-}
 
 const SignIn = () => {
   const { setIsUserLoggedIn } = useGlobalContext();
@@ -82,6 +78,7 @@ const SignIn = () => {
             placeholder="Drop Your Email Here"
             className="w-full rounded-lg border-2 border-shades-4 p-4 focus:border-shades-8 focus:outline-none"
             error={errors.email}
+            isRequired
           />
           <FormField
             label="Password"
@@ -92,6 +89,7 @@ const SignIn = () => {
             placeholder="Password"
             className="w-full rounded-lg border-2 border-shades-4 p-4 focus:border-shades-8 focus:outline-none"
             error={errors.password}
+            isRequired
           />
           <Link href={"/forgot-password"} className="flex w-full justify-end">
             <p className="text-blue-600">Forgot Password ?</p>

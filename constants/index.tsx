@@ -1,3 +1,6 @@
+import moment from "moment";
+import React from "react";
+
 export const VERIFY = "VERIFY";
 export const RESET_PASSWORD = "RESET_PASSWORD";
 export const SIGN_IN_SUCCESS_MESSAGE = "Signed in successfully";
@@ -255,12 +258,33 @@ export type userInfoType = {
   isVerified: boolean;
 };
 
+export type coverLetterType = {
+  name: string;
+  initials: string;
+  email: string;
+  phone: string;
+  address: string;
+  date: string;
+  recruiterName?: string;
+  recruiterPosition?: string;
+  hiringCompanyName?: string;
+  hiringCompanyAddress?: string;
+  coverLetterOpener?: string;
+  coverLetterBody1?: string;
+  coverLetterBody2?: string;
+  coverLetterCloser?: string;
+};
+
 export type GlobalContextType = {
   isUserLoggedIn: boolean;
   isLoading: boolean;
   user: userInfoType | null;
   setIsUserLoggedIn: (isLoggedIn: boolean) => void;
   setUser: (user: userInfoType) => void;
+  selectedTemplateId: string;
+  setSelectedTemplateId: (id: string) => void;
+  coverLetterData: coverLetterType;
+  setCoverLetterData: React.Dispatch<React.SetStateAction<coverLetterType>>;
 };
 
 export type templateType = {
@@ -270,7 +294,7 @@ export type templateType = {
     email: string;
     phone: string;
     address: string;
-    date: Date;
+    date: string;
     recruiterName?: string;
     recruiterPosition?: string;
     hiringCompanyName?: string;
@@ -285,8 +309,8 @@ export type templateType = {
   description: string;
   type: string;
   subtype: string;
-  jsx: string;
-  jsxOption: string;
+  html: string;
+  htmlOption: string;
   dynamicFields: string[];
 };
 
@@ -296,6 +320,40 @@ export const initialUserInfo: userInfoType = {
   isAdmin: false,
   isVerified: false,
 };
+export interface formDataTypes {
+  username?: string;
+  email: string;
+  password: string;
+}
+
+export const initialCoverLetterData: coverLetterType = {
+  name: "",
+  initials: "",
+  email: "",
+  phone: "",
+  address: "",
+  date: `${moment()?.format("Do MMM YYYY")}`,
+  recruiterName: "",
+  recruiterPosition: "",
+  hiringCompanyName: "",
+  hiringCompanyAddress: "",
+  coverLetterOpener: "",
+  coverLetterBody1: "",
+  coverLetterBody2: "",
+  coverLetterCloser: "",
+};
+
+export const initialTemplateData: templateType = {
+  sampleData: initialCoverLetterData,
+  _id: "",
+  name: "",
+  description: "",
+  type: "",
+  subtype: "",
+  html: "",
+  htmlOption: "",
+  dynamicFields: [],
+};
 
 export const initialGlobalContext: GlobalContextType = {
   isUserLoggedIn: false,
@@ -303,4 +361,8 @@ export const initialGlobalContext: GlobalContextType = {
   user: initialUserInfo,
   setIsUserLoggedIn: () => {},
   setUser: () => {},
+  selectedTemplateId: "",
+  setSelectedTemplateId: () => {},
+  coverLetterData: initialCoverLetterData,
+  setCoverLetterData: () => {},
 };

@@ -1,3 +1,5 @@
+"use client";
+import React from "react";
 const Template1 = () => {
   const dataObject = {
     name: "Logo",
@@ -5,78 +7,77 @@ const Template1 = () => {
       "Wow employers with an elegant insignia , neat header design and thoughtful placement of contact info for maximum impact.",
     type: "cover-letter",
     subtype: "professional",
-    jsx: `<div class="flex h-full min-h-[1000px] w-[800px] flex-col items-start justify-start rounded-xl shadow-xl shadow-gray-400 ">
-        <div class="h-40 w-full rounded-t-xl px-10 ">
-          <div class="flex  size-full items-center justify-center ">
-            <div class="flex h-auto w-full items-center justify-between gap-2 ">
-              <div class="flex-center gap-8">
-                <div class=" flex-center rounded-full border-2 border-gray-500 bg-gray-500 p-4 text-white">
-                  <p class="h3">
-                    {initials}
-                  </p>
-                </div>
-                <p class="h3">{name}</p>
-              </div>
-              <div class="flex-start body-3 flex-col gap-1 font-bold">
-                <p>{email} &nbsp; &nbsp;</p>
-                <p>{phone} &nbsp; &nbsp;</p>
-                <p>{address} - 413006</p>
-              </div>
-            </div>
+    jsx: `   <div style="min-height: 1000px; height: 100%; width: 800px; display: flex; flex-direction: column; align-items: start; justify-content: start; background-color: white; border-radius: 20px;">
+    <div style="height: 160px; background-color: rgb(55, 65, 81); border-radius: 20px 20px 0 0; width: 100%; padding: 0 20px;">
+      <div style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; gap: 32px;">
+        <p style="background-color: rgb(17, 24, 39); color: white; font-size: 2.5rem; padding: 24px; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: 1px solid white;">{initials}</p>
+        <div style="display: flex; width: 100%; height: auto; flex-direction: column; gap: 16px; color: white; align-items: start; justify-content: center;">
+          <p style="font-size: 2.5rem;">{name}</p>
+          <div style="display: flex; flex-direction: row; justify-content: start; align-items: start; gap: 4px; font-size: 0.9rem;">
+            <p>{email} &nbsp; | &nbsp;</p>
+            <p>{phone} &nbsp; | &nbsp;</p>
+            <p>{address}</p>
           </div>
         </div>
-        <div class="size-full rounded-b-xl bg-white ">
-          <div class="body-4 flex size-full flex-col items-start justify-start gap-6 p-8 text-justify ">
-            <p>February 2024</p>
-            <div class="flex-start flex-col gap-1">
-              <p>{recruiterName}, {recruiterPosition}</p>
-              <p>{hiringCompanyName}</p>
-              <p>{hiringCompanyAddress}</p>
-            </div>
-            <p>Dear Mr. {recruiterName}</p>
-            <p>
-             {coverLetterOpener}
-            </p>
-            <p>
-              {coverLetterBody1}
-            </p>
-            <p>
-              {coverLetterBody2}
-            </p>
-            <p>
-              {coverLetterCloser}
-            </p>
-            <div class="flex-start flex-col">
-              <p>Sincerely,</p>
-              <p> {name} </p>
-            </div>
-          </div>
+      </div>
+    </div>
+    <div style="width: 100%; height: 100%; background-color: white; border-radius: 0 0 20px 20px;">
+      <div style="display:flex; flex-direction:column; font-size: 0.8rem; padding: 32px; gap: 32px; width: 100%; height: 100%; text-align: justify;">
+        <p>{date}</p>
+        <div style="display: flex; flex-direction: column; align-items: start; justify-content: start; gap: 4px;">
+          <p>{recruiterName} , {recruiterPosition}</p>
+          <p>{hiringCompanyName}</p>
+          <p>{hiringCompanyAddress}</p>
         </div>
-      </div>`,
+        <p>Dear Mr. {recruiterName} ,</p>
+        <p>{coverLetterOpener}</p>
+        <p>{coverLetterBody1}</p>
+        <p>{coverLetterBody2}</p>
+        <p>{coverLetterCloser}</p>
+        <div style="display: flex; flex-direction: column; align-items: start; justify-content: start;">
+          <p>Sincerely,</p>
+          <p>{name}</p>
+        </div>
+      </div>
+    </div>
+  </div>`,
     // eslint-disable-next-line max-len
-    jsxOption: `<div class="flex h-full min-h-[410px] w-[320px] flex-col items-start justify-start rounded-xl">
-    <div class="h-20 w-full rounded-t-xl bg-gray-200 px-4 pt-4 ">
-    <div class="flex size-full items-center justify-center border-x-2 border-t-2 rounded-t-xl border-gray-400 ">
-    <p class="h5">{name}</p>
+    jsxOption: `<div style="display: flex; min-height: 410px; background-color: white; width: 320px; flex-direction: column; align-items: start; justify-content: start; border-radius: 20px;" >
+  <div style="display: flex; border-radius: 20px; padding: 1rem;">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-start; gap: 0.5rem;" >
+      <div style="display: flex; justify-content: center; align-items: center; border: 2px solid #718096; padding: 0.5rem;">
+        <p style="font-size: 1rem;" >{initials}</p>
+      </div>
+      <p style="font-size: 0.9rem; text-align: center;" >{name}</p>
+      <div style="display: flex; flex-direction: column; gap: 0.25rem; font-weight: bold; font-size: 0.35rem;" >
+        <p>{email}</p>
+        <p>{phone}</p>
+        <p>{address}</p>
+      </div>
     </div>
+    <div style="font-size: 0.35rem; display: flex; flex-direction: column; align-items: start; justify-start; gap: 1.5rem; padding-left: 1rem; text-align: justify;" >
+      <div style="display: flex; flex-direction: column; align-items: start; justify-start; gap: 1rem; border-left: 2px solid #CBD5E0; padding-left: 1rem;" >
+        <p>{date}</p>
+        <div style="display: flex; flex-direction: column; gap: 0.25rem;" >
+          <p>{recruiterName}, {recruiterPosition}</p>
+          <p>{hiringCompanyName}</p>
+          <p>{hiringCompanyAddress}</p>
+        </div>
+        <p>Dear Mr. {recruiterName} ,</p>
+        <p>{coverLetterOpener}</p>
+        <p>{coverLetterBody1}</p>
+        <p>{coverLetterBody2}</p>
+        <p>{coverLetterCloser}</p>
+        <div style="display: flex; flex-direction: column;" >
+          <p>Sincerely,</p>
+          <p>{name}</p>
+        </div>
+      </div>
     </div>
-    <div class="size-full rounded-b-xl bg-white px-4 pb-4 ">
-    <div class="text-[0.35rem] flex size-full flex-col items-start justify-start gap-2 border-x-2 border-b-2 rounded-b-xl border-gray-400 p-4 text-justify ">
-    <div class="flex w-full items-start justify-between">
-    <p>{date}</p>
-    <div class="flex-start flex-col gap-1">
-    <p>{email}</p>
-    <p>{phone}</p>
-    <p>{address}</p>
-    </div>
-    </div>
-    <div class="flex-start flex-col gap-1">
-    <p>{recruiterName}</p>
-    <p>{hiringCompanyName}</p>
-    <p>{hiringCompanyAddress}</p>
-    </div>
-    <p>Dear Mr. {recruiterName},</p>
-    <div class="flex-col flex-start gap-2" ><p>{coverLetterOpener}</p><p>{coverLetterBody1}</p><p>{coverLetterBody2}</p><p>{coverLetterCloser}</p></div><div class="flex-start flex-col"><p>Sincerely,</p><p>{name}</p></div></div></div></div>`,
+  </div>
+</div>
+
+`,
     sampleData: {
       name: "John Doe",
       initials: "JD",
@@ -112,6 +113,7 @@ const Template1 = () => {
       "phone",
       "address",
       "recruiterName",
+      "recruiterPosition",
       "hiringCompanyName",
       "hiringCompanyAddress",
       "recruiterName",
@@ -121,7 +123,7 @@ const Template1 = () => {
       "coverLetterCloser",
     ],
   };
-  let renderedTemplate = dataObject.jsxOption;
+  let renderedTemplate = dataObject.jsx;
 
   dataObject.dynamicFields.forEach((field: string) => {
     const regex = new RegExp(`{${field}}`, "g");
@@ -133,7 +135,7 @@ const Template1 = () => {
 
   return (
     // <Section
-    //   className="border-2 border-blue-500"
+    //   class="border-2 border-blue-500"
     //   crosses
     //   crossesOffset="lg:translate-y-[5.25rem]"
     //   customPaddings

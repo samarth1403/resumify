@@ -40,9 +40,7 @@ const Template3 = () => {
               et quos alias cupiditate quas
             </p>
             <p className="whitespace-pre-line">
-              {`Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti error hic, eveniet fugiat, explicabo exercitationem soluta optio perspiciatis ipsum nobis fuga tenetur! Optio natus debitis aspernatur commodi error repellendus cum? Fugit doloremque placeat quam veniam minus aut non voluptate explicabo?
-              
-              Cupiditate, aut ab, culpa nisi repellat rem quae expedita voluptates id corporis sint possimus laboriosam voluptate provident qui explicabo similique facilis? 
+              {`Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti error hic, eveniet fugiat, explicabo exercitationem soluta optio perspiciatis ipsum nobis fuga tenetur! Optio natus debitis aspernatur commodi error repellendus cum? Fugit doloremque placeat quam veniam minus aut non voluptate explicabo? Cupiditate, aut ab, culpa nisi repellat rem quae expedita voluptates id corporis sint possimus laboriosam voluptate provident qui explicabo similique facilis? 
               `}
             </p>
             <p>

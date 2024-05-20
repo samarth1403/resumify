@@ -16,11 +16,11 @@ const templateSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  jsx: {
+  html: {
     type: String,
     required: true,
   },
-  jsxOption: {
+  htmlOption: {
     type: String,
     required: true,
   },
@@ -30,7 +30,7 @@ const templateSchema = new mongoose.Schema({
     email: String,
     phone: String,
     address: String,
-    date: Date,
+    date: String,
     // Cover Letter Info
     recruiterName: String,
     recruiterPosition: String,

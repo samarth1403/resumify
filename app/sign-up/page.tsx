@@ -4,16 +4,11 @@ import FormField from "@/components/SubComponents/FormField";
 import Heading from "@/components/SubComponents/Heading";
 import Section from "@/components/SubComponents/Section";
 import { validateSignUp } from "@/components/Validation/Validation";
+import { formDataTypes } from "@/constants";
 import axios, { isAxiosError } from "axios";
 import Link from "next/link";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-
-interface formDataTypes {
-  username: string;
-  email: string;
-  password: string;
-}
 
 const SignUp = () => {
   const [isFormSubmitting, setFormIsSubmitting] = useState<boolean>(false);
@@ -76,6 +71,7 @@ const SignUp = () => {
             placeholder="Username"
             className="w-full rounded-lg border-2 border-shades-4 p-3 focus:border-shades-8 focus:outline-none"
             error={errors.username}
+            isRequired
           />
           <FormField
             label="Email"
@@ -86,6 +82,7 @@ const SignUp = () => {
             placeholder="Drop Your Email Here"
             className="w-full rounded-lg border-2 border-shades-4 p-3 focus:border-shades-8 focus:outline-none"
             error={errors.email}
+            isRequired
           />
           <FormField
             label="Password"
@@ -96,6 +93,7 @@ const SignUp = () => {
             placeholder="Password"
             className="w-full rounded-lg border-2 border-shades-4 p-3 focus:border-shades-8 focus:outline-none"
             error={errors.password}
+            isRequired
           />
           <Button
             onClick={handleSubmit}

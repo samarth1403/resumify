@@ -109,6 +109,58 @@
     filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.loader {
+    width: 6vmax;
+    height: 6vmax;
+    border-right: 6px solid #000000;
+    border-radius: 100%;
+    animation: spinRight 800ms linear infinite;
+
+    &:before,
+    &:after {
+        content: '';
+        width: 4vmax;
+        height: 4vmax;
+        display: block;
+        position: absolute;
+        top: calc(50% - 2vmax);
+        left: calc(50% - 2vmax);
+        border-left: 4px solid #000000;
+        border-radius: 100%;
+        animation: spinLeft 800ms linear infinite;
+    }
+
+    &:after {
+        width: 2vmax;
+        height: 2vmax;
+        top: calc(50% - 1vmax);
+        left: calc(50% - 1vmax);
+        border: 0;
+        border-right: 2px solid #000000;
+        animation: none;
+    }
+}
+
+@keyframes spinLeft {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(720deg);
+    }
+}
+
+@keyframes spinRight {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+}
+
 @keyframes logo-spin {
     from {
         transform: rotate(0deg);

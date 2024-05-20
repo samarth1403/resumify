@@ -1,12 +1,18 @@
 "use client";
+import {
+  Heading,
+  Loader,
+  Section,
+  TemplateCard,
+} from "@/components/SubComponents";
 import { templateType } from "@/constants";
 import { resumeTemplateData } from "@/constants/Resume";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Heading, Section, TemplateCard } from "@/components/SubComponents";
 
 interface propTypes {
   title: string;
+  text?: string;
   templateData: {
     id: string;
     title: string;
@@ -18,18 +24,20 @@ interface propTypes {
   }[];
 }
 
-const ChooseTemplateComponent = ({ title, templateData }: propTypes) => {
+const ChooseTemplateComponent = ({ title, templateData, text }: propTypes) => {
   const [activeType, setActiveType] = useState("professional");
   const [templates, setTemplates] = useState<templateType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setIsLoading(true);
-    const getCurrentUser = async () => {
+    const getAllTemplates = async () => {
       try {
-        const { data, status } = await axios.get("/api/template/all-templates");
+        const { data, status } = await axios.get(
+          "/api/template/all-templates",
+          { params: { type: "cover-letter", subtype: activeType } }
+        );
         if (status === 200) {
-          console.log("data", data);
           setTemplates(data.data);
         }
       } catch (error: unknown) {
@@ -38,25 +46,12 @@ const ChooseTemplateComponent = ({ title, templateData }: propTypes) => {
         setIsLoading(false);
       }
     };
-    getCurrentUser();
-  }, []);
+    getAllTemplates();
+  }, [activeType]);
 
   const templateList = () => {
     if (templates.length > 0) {
       return templates.map((template, index) => {
-        let renderedTemplate = template.jsxOption;
-        template.dynamicFields.forEach((field: string) => {
-          const regex = new RegExp(`{${field}}`, "g");
-          let fieldValue =
-            template.sampleData[field as keyof typeof template.sampleData];
-          if (fieldValue instanceof Date) {
-            fieldValue = fieldValue.toISOString(); // Convert Date to string
-          }
-          renderedTemplate = renderedTemplate.replace(
-            regex,
-            fieldValue as string
-          );
-        });
         return <TemplateCard key={index} template={template} />;
       });
     } else {
@@ -73,9 +68,9 @@ const ChooseTemplateComponent = ({ title, templateData }: propTypes) => {
       id="steps"
     >
       <div className="flex-center mt-4 w-full flex-col lg:mt-8 xl:mt-16">
-        <Heading title={title} />
+        <Heading title={title} text={text} />
         <div className="flex-center  w-full flex-col">
-          <div className="flex-center flex-wrap gap-4 lg:gap-8 xl:gap-12">
+          <div className="flex-center flex-wrap gap-6 lg:gap-8 xl:gap-16">
             {resumeTemplateData?.map((type, index) => (
               <div
                 key={index}
@@ -93,38 +88,7 @@ const ChooseTemplateComponent = ({ title, templateData }: propTypes) => {
           </div>
           <hr className="h-0.5 w-full bg-shades-4" />
           <div className="mt-8 flex w-full flex-row flex-wrap items-start justify-center gap-10">
-            {templateList()}
-            {templateList()}
-            {/* <Section
-              className="mt-4"
-              crosses
-              crossesOffset="lg:translate-y-[5.25rem]"
-              customPaddings
-              id="steps"
-            >
-              <Template1 />
-            </Section>
-            <Section
-              className="mt-4"
-              crosses
-              crossesOffset="lg:translate-y-[5.25rem]"
-              customPaddings
-              id="steps"
-            >
-              <Template1 />
-            </Section>
-            <Section
-              className="mt-4"
-              crosses
-              crossesOffset="lg:translate-y-[5.25rem]"
-              customPaddings
-              id="steps"
-            >
-              <Template1 />
-            </Section> */}
-            {/* <Template1 />
-            <Template1 />
-            <Template1 /> */}
+            {isLoading ? <Loader /> : templateList()}
           </div>
         </div>
       </div>

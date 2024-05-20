@@ -72,6 +72,7 @@ const ResetPassword = () => {
             placeholder="Enter New Password"
             className="w-full rounded-lg border-2 border-shades-4 p-4 focus:border-shades-8 focus:outline-none"
             error={errors.newPassword}
+            isRequired
           />
           <Button
             onClick={ResetPassword}

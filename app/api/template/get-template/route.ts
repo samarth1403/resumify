@@ -7,20 +7,15 @@ dbConnection();
 export const GET = async (request: NextRequest, response: NextResponse) => {
   const searchParams = request.nextUrl.searchParams;
   try {
-    const allTemplates = await Template.find({
-      $and: [
-        { type: searchParams.get("type") },
-        { subtype: searchParams.get("subtype") },
-      ],
-    });
-    if (!allTemplates) {
+    const template = await Template.findById(searchParams.get("templateId"));
+    if (!template) {
       return NextResponse.json(
-        { error: "Templates not found" },
+        { error: "Template not found" },
         { status: 404 }
       );
     }
     return NextResponse.json(
-      { data: allTemplates, success: true },
+      { data: template, success: true },
       { status: 200 }
     );
   } catch (error: unknown) {

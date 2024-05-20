@@ -209,3 +209,26 @@ export const buildCoverLetterIntroData = [
     logo: "/assets/images/step3.svg",
   },
 ];
+
+export const stepperData = [
+  {
+    id: "0",
+    title: "Header",
+    uri: "/cover-letter/build-letter/create/header",
+  },
+  {
+    id: "1",
+    title: "Opener",
+    uri: "/cover-letter/build-letter/create/opener",
+  },
+  {
+    id: "2",
+    title: "Body",
+    uri: "/cover-letter/build-letter/create/body",
+  },
+  {
+    id: "3",
+    title: "Closer",
+    uri: "/cover-letter/build-letter/create/closer",
+  },
+];
