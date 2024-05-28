@@ -109,6 +109,41 @@
     filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* HTML: <div class="loader"></div> */
+.small-bar-loader {
+    width: 45px;
+    aspect-ratio: 1;
+    --c: no-repeat linear-gradient(#000 0 0);
+    background:
+        var(--c) 0% 50%,
+        var(--c) 50% 50%,
+        var(--c) 100% 50%;
+    background-size: 20% 100%;
+    animation: l1 1s infinite linear;
+}
+
+@keyframes l1 {
+    0% {
+        background-size: 20% 100%, 20% 100%, 20% 100%
+    }
+
+    33% {
+        background-size: 20% 10%, 20% 100%, 20% 100%
+    }
+
+    50% {
+        background-size: 20% 100%, 20% 10%, 20% 100%
+    }
+
+    66% {
+        background-size: 20% 100%, 20% 100%, 20% 10%
+    }
+
+    100% {
+        background-size: 20% 100%, 20% 100%, 20% 100%
+    }
+}
+
 .loader {
     width: 6vmax;
     height: 6vmax;
@@ -177,8 +212,17 @@
     }
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #fb923c;
+    border-radius: 6px;
+}
+
 .app {
-    @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-12 px-2;
+    @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-8 px-2;
 }
 
 .black_btn {

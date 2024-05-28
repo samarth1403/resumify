@@ -1,3 +1,4 @@
+import { coverLetterType } from "@/constants";
 import { Validator } from "./Validator";
 
 interface singInPropTypes {
@@ -70,4 +71,95 @@ export const validateSignUp = (formData: signUpPropTypes) => {
     field: "Password",
   }).required();
   return { ...usernameV.errors, ...emailV.errors, ...passwordV.errors };
+};
+
+export const validateCoverLetterPersonalInfo = (formData: coverLetterType) => {
+  const { email, name, phone, address } = formData;
+  const usernameV = new Validator({
+    value: name,
+    key: "name",
+    field: "Name",
+  }).required();
+  const emailV = new Validator({
+    value: email,
+    key: "email",
+    field: "Email",
+  })
+    .email()
+    .required();
+  const phoneV = new Validator({
+    value: phone,
+    key: "phone",
+    field: "Phone Number",
+  }).required();
+  const addressV = new Validator({
+    value: address,
+    key: "address",
+    field: "Address",
+  }).required();
+  return {
+    ...usernameV.errors,
+    ...emailV.errors,
+    ...phoneV.errors,
+    ...addressV.errors,
+  };
+};
+export const validateCoverLetterRecruiterInfo = (formData: coverLetterType) => {
+  const { recruiterName, hiringCompanyAddress, hiringCompanyName } = formData;
+  const nameV = new Validator({
+    value: recruiterName!,
+    key: "recruiterName",
+    field: "Recruiter Name",
+  }).required();
+  const companyNameV = new Validator({
+    value: hiringCompanyName!,
+    key: "hiringCompanyName",
+    field: "Hiring Company Name",
+  }).required();
+  const addressV = new Validator({
+    value: hiringCompanyAddress!,
+    key: "hiringCompanyAddress",
+    field: "Hiring Company Address",
+  }).required();
+  return {
+    ...nameV.errors,
+    ...companyNameV.errors,
+    ...addressV.errors,
+  };
+};
+
+export const validateCoverLetterOpener = (formData: coverLetterType) => {
+  const { coverLetterOpener } = formData;
+  const coverLetterOpenerV = new Validator({
+    value: coverLetterOpener!,
+    key: "coverLetterOpener",
+    field: "Opening Paragraph",
+  }).required();
+  return {
+    ...coverLetterOpenerV.errors,
+  };
+};
+
+export const validateCoverLetterBody = (formData: coverLetterType) => {
+  const { coverLetterBody1 } = formData;
+  const coverLetterBody1V = new Validator({
+    value: coverLetterBody1!,
+    key: "coverLetterBody1",
+    field: "Body Paragraph",
+  }).required();
+  return {
+    ...coverLetterBody1V.errors,
+  };
+};
+
+export const validateCoverLetterCloser = (formData: coverLetterType) => {
+  const { coverLetterCloser } = formData;
+  const coverLetterCloserV = new Validator({
+    value: coverLetterCloser!,
+    key: "coverLetterCloser",
+    field: "Closer Paragraph",
+  }).required();
+  return {
+    ...coverLetterCloserV.errors,
+  };
 };

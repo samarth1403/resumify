@@ -151,32 +151,7 @@ export const footerLinks = [
       },
     ],
   },
-  {
-    id: "3",
-    title: "Resources",
-    subLinks: [
-      {
-        id: "0",
-        title: "Blogs",
-        uri: "/blogs",
-      },
-      {
-        id: "1",
-        title: "FAQ",
-        uri: "/faq",
-      },
-      {
-        id: "2",
-        title: "Contact",
-        uri: "/contact",
-      },
-      {
-        id: "3",
-        title: "About",
-        uri: "/about",
-      },
-    ],
-  },
+
   {
     id: "2",
     title: "CV",
@@ -203,7 +178,32 @@ export const footerLinks = [
       },
     ],
   },
-
+  {
+    id: "3",
+    title: "Resources",
+    subLinks: [
+      {
+        id: "0",
+        title: "Blogs",
+        uri: "/blogs",
+      },
+      {
+        id: "1",
+        title: "FAQ",
+        uri: "/faq",
+      },
+      {
+        id: "2",
+        title: "Contact",
+        uri: "/contact",
+      },
+      {
+        id: "3",
+        title: "About",
+        uri: "/about",
+      },
+    ],
+  },
   {
     id: "4",
     title: "Legal",

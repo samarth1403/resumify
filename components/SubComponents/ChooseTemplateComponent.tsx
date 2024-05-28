@@ -5,10 +5,9 @@ import {
   Section,
   TemplateCard,
 } from "@/components/SubComponents";
-import { templateType } from "@/constants";
 import { resumeTemplateData } from "@/constants/Resume";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import useGetAllTemplates from "@/utils/useGetAllTemplates";
+import { useState } from "react";
 
 interface propTypes {
   title: string;
@@ -26,28 +25,10 @@ interface propTypes {
 
 const ChooseTemplateComponent = ({ title, templateData, text }: propTypes) => {
   const [activeType, setActiveType] = useState("professional");
-  const [templates, setTemplates] = useState<templateType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsLoading(true);
-    const getAllTemplates = async () => {
-      try {
-        const { data, status } = await axios.get(
-          "/api/template/all-templates",
-          { params: { type: "cover-letter", subtype: activeType } }
-        );
-        if (status === 200) {
-          setTemplates(data.data);
-        }
-      } catch (error: unknown) {
-        setTemplates([]);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getAllTemplates();
-  }, [activeType]);
+  const { templates, isLoading } = useGetAllTemplates({
+    type: "cover-letter",
+    subtype: activeType,
+  });
 
   const templateList = () => {
     if (templates.length > 0) {

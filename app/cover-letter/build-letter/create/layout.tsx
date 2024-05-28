@@ -1,53 +1,31 @@
 "use client";
 import {
+  Button,
   Loader,
   RenderHtmlContent,
   Section,
   StepperComponent,
   TemplateModalComponent,
 } from "@/components/SubComponents";
-import { initialTemplateData, templateType } from "@/constants";
 import { stepperData } from "@/constants/CoverLetter";
 import { useGlobalContext } from "@/context/GlobalProvider";
-import axios from "axios";
-import React, { ReactNode, useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import useGetTemplateData from "@/utils/useGetTemplateData";
+import { ReactNode, useState } from "react";
 import { MdOutlineZoomIn } from "react-icons/md";
 
 const CoverLetterCreateLayout = ({ children }: { children: ReactNode }) => {
-  const { selectedTemplateId, coverLetterData } = useGlobalContext();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { coverLetterData } = useGlobalContext();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [templateData, setTemplateData] =
-    useState<templateType>(initialTemplateData);
-
-  useEffect(() => {
-    setIsLoading(true);
-    const getAllTemplates = async () => {
-      try {
-        const { data, status } = await axios.get(`/api/template/get-template`, {
-          params: {
-            templateId: selectedTemplateId,
-          },
-        });
-        if (status === 200) {
-          setTemplateData(data.data);
-        }
-      } catch (error: unknown) {
-        toast.error("Failed to fetch template data");
-        setTemplateData(initialTemplateData);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    if (selectedTemplateId) {
-      getAllTemplates();
-    }
-  }, [selectedTemplateId]);
+  const { templateData, isLoading } = useGetTemplateData();
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
     document.body.style.overflow = "hidden";
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    document.body.style.overflow = "";
   };
 
   return (
@@ -65,12 +43,6 @@ const CoverLetterCreateLayout = ({ children }: { children: ReactNode }) => {
         <div className="flex-1">{children}</div>
         <div className="w-80">
           {!isLoading ? (
-            // <RenderHtmlContent
-            //   className="rounded-xl shadow-2xl shadow-gray-400 duration-500 hover:-translate-y-4 "
-            //   dynamicFields={templateData.dynamicFields}
-            //   sampleData={coverLetterData}
-            //   html={templateData.htmlOption}
-            // />
             <div
               className={` ${isModalOpen ? "overflow-hidden" : ""} flex-center group relative w-full cursor-pointer flex-col gap-10  `}
             >
@@ -92,11 +64,22 @@ const CoverLetterCreateLayout = ({ children }: { children: ReactNode }) => {
               <p className="h6">{templateData.name}</p>
 
               {isModalOpen && (
-                <TemplateModalComponent
-                  sampleData={coverLetterData}
-                  template={templateData}
-                  setIsModalOpen={setIsModalOpen}
-                />
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-gray-500 bg-opacity-75">
+                  <div className="absolute inset-0 flex flex-col items-center justify-start  overflow-auto">
+                    <div className="flex-start mt-24 max-w-[1000px] flex-col flex-wrap gap-4 rounded-2xl bg-white px-8 pb-8 ">
+                      <div className="flex w-full items-start justify-between px-4 pt-10">
+                        <div className=" flex-start max-w-[700px] flex-col gap-6">
+                          <p className="h4">Preview</p>
+                        </div>
+                        <Button onClick={handleModalClose}>X</Button>
+                      </div>
+                      <TemplateModalComponent
+                        sampleData={coverLetterData}
+                        template={templateData}
+                      />
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
           ) : (

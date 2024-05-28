@@ -1,9 +1,13 @@
 "use client";
-import { FormField, Heading } from "@/components/SubComponents";
+import { Button, FormField } from "@/components/SubComponents";
+import { validateCoverLetterPersonalInfo } from "@/components/Validation/Validation";
 import { useGlobalContext } from "@/context/GlobalProvider";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const Header = () => {
+  const router = useRouter();
   const { coverLetterData, setCoverLetterData } = useGlobalContext();
   const [errors, setErrors] = useState<Record<string, { message: string }>>({});
 
@@ -14,15 +18,29 @@ const Header = () => {
     setCoverLetterData((prev) => ({ ...prev, [key]: value }));
   };
 
+  const handleContinue = () => {
+    const errors = validateCoverLetterPersonalInfo(coverLetterData);
+    if (Object.keys(errors).length > 0) {
+      toast.error("Please fill all required fields");
+      setErrors(errors);
+      return;
+    }
+    toast.success("Personal Info Saved Successfully");
+    router.push("/cover-letter/build-letter/create/recruiter-info");
+    localStorage.setItem("coverLetterData", JSON.stringify(coverLetterData));
+    setErrors({});
+  };
+
   return (
     <div className="h-auto w-full ">
       {/* <Heading
         title="Let’s start with your header"
         text="Your name will be in the heading and signature of your letter."
-        className="mb-8"
+        className="mb-8 text-[0.6rem]"
       /> */}
-      <div className="flex-start w-full flex-wrap gap-6 ">
-        <div className={`flex-start w-52 flex-col gap-[5px]`}>
+      <span className="h6">{`[ Personal Info ]`}</span>
+      <div className="flex-start mt-6 w-full flex-wrap gap-5 ">
+        <div className={`flex-start w-64 flex-col gap-[5px]`}>
           <label htmlFor={"name"}>
             {"Name"}
             {<span className="ml-1 text-red-500">*</span>}
@@ -46,47 +64,54 @@ const Header = () => {
           />
           {errors.name && (
             <span className="text-[0.85rem] text-red-700">
-              {errors.error.message}
+              {errors.name.message}
             </span>
           )}
         </div>
-        <FormField
-          label="Phone"
-          type="number"
-          name="phone"
-          value={coverLetterData.phone}
-          setValue={setFormDataKey}
-          placeholder="Phone"
-          className="w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none"
-          error={errors.phone}
-          isRequired
-          divClassName="w-52"
-        />
-        <FormField
-          label="Email"
-          type="email"
-          name="email"
-          value={coverLetterData.email}
-          setValue={setFormDataKey}
-          placeholder="Drop Your Email Here"
-          className="w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none"
-          error={errors.email}
-          isRequired
-          divClassName="w-80"
-        />
-
-        <FormField
-          label="Address"
-          type="text"
-          name="address"
-          value={coverLetterData.address}
-          setValue={setFormDataKey}
-          placeholder="Enter Address"
-          className="w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none"
-          error={errors.address}
-          isRequired
-          divClassName="w-80"
-        />
+        <div className="w-48">
+          <FormField
+            label="Phone"
+            type="number"
+            name="phone"
+            value={coverLetterData.phone}
+            setValue={setFormDataKey}
+            placeholder="Phone"
+            className="w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none"
+            error={errors.phone}
+            isRequired
+          />
+        </div>
+        <div className="w-full">
+          <FormField
+            label="Email"
+            type="email"
+            name="email"
+            value={coverLetterData.email}
+            setValue={setFormDataKey}
+            placeholder="Drop Your Email Here"
+            className="w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none"
+            error={errors.email}
+            isRequired
+          />
+        </div>
+        <div className="w-full">
+          <FormField
+            label="Address"
+            type="text"
+            name="address"
+            value={coverLetterData.address}
+            setValue={setFormDataKey}
+            placeholder="Enter Address"
+            className="w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none "
+            error={errors.address}
+            isRequired
+          />
+        </div>
+        <div className="mt-4 flex w-full flex-row flex-wrap items-center justify-end">
+          <Button onClick={handleContinue}>
+            Save &nbsp; & &nbsp; Continue
+          </Button>
+        </div>
       </div>
     </div>
   );

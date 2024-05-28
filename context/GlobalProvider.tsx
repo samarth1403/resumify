@@ -32,8 +32,13 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const savedTemplateId = localStorage.getItem("selectedTemplateId");
+    const coverLetterDataFromLocalStorage =
+      localStorage.getItem("coverLetterData");
     if (savedTemplateId) {
       setSelectedTemplateId(savedTemplateId);
+    }
+    if (coverLetterDataFromLocalStorage) {
+      setCoverLetterData(JSON.parse(coverLetterDataFromLocalStorage));
     }
   }, []);
 

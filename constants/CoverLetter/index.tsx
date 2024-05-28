@@ -218,16 +218,21 @@ export const stepperData = [
   },
   {
     id: "1",
+    title: "Recruiter Info",
+    uri: "/cover-letter/build-letter/create/recruiter-info",
+  },
+  {
+    id: "2",
     title: "Opener",
     uri: "/cover-letter/build-letter/create/opener",
   },
   {
-    id: "2",
+    id: "3",
     title: "Body",
     uri: "/cover-letter/build-letter/create/body",
   },
   {
-    id: "3",
+    id: "4",
     title: "Closer",
     uri: "/cover-letter/build-letter/create/closer",
   },

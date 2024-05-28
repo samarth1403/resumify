@@ -8,6 +8,8 @@ import RenderHtmlContent from "@/components/SubComponents/RenderHtmlContent";
 import Loader from "@/components/SubComponents/Loader";
 import StepperComponent from "@/components/SubComponents/StepperComponent";
 import TemplateModalComponent from "@/components/SubComponents/TemplateModalComponent";
+import FormHeading from "@/components/SubComponents/FormHeading";
+import TextAreaField from "@/components/SubComponents/TextAreaField";
 
 export {
   FormField,
@@ -20,4 +22,6 @@ export {
   Loader,
   StepperComponent,
   TemplateModalComponent,
+  FormHeading,
+  TextAreaField,
 };

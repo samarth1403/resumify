@@ -6,13 +6,24 @@ dbConnection();
 
 export const GET = async (request: NextRequest, response: NextResponse) => {
   const searchParams = request.nextUrl.searchParams;
+  const type = searchParams.get("type");
+  const subtype = searchParams.get("subtype");
+
+  if (!type) {
+    return NextResponse.json(
+      { error: "Type parameter is required" },
+      { status: 400 }
+    );
+  }
+
+  const query: { type: string; subtype?: string } = { type };
+
+  if (subtype) {
+    query.subtype = subtype;
+  }
+
   try {
-    const allTemplates = await Template.find({
-      $and: [
-        { type: searchParams.get("type") },
-        { subtype: searchParams.get("subtype") },
-      ],
-    });
+    const allTemplates = await Template.find(query);
     if (!allTemplates) {
       return NextResponse.json(
         { error: "Templates not found" },
