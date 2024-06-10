@@ -66,7 +66,7 @@ const SignUp = () => {
             label="Username"
             type="text"
             name="username"
-            value={formData.username}
+            value={formData.username!}
             setValue={setFormDataKey}
             placeholder="Username"
             className="w-full rounded-lg border-2 border-shades-4 p-3 focus:border-shades-8 focus:outline-none"

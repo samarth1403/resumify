@@ -67,7 +67,6 @@ const TemplateCard = ({
           </button>
           {/* <Button>Use this Template</Button> */}
         </div>
-
         <p className="h6">{template.name}</p>
 
         {isModalOpen && (
@@ -83,7 +82,9 @@ const TemplateCard = ({
                   <div className=" flex-start max-w-[700px] flex-col gap-6">
                     <p className="h4">{template.name}</p>
                     <p className="body-2 leading-8 ">{template.description}</p>
-                    <Button>Use this Template</Button>
+                    <Button onClick={handleTemplateChoose}>
+                      Use this Template
+                    </Button>
                   </div>
                   <Button onClick={handleModalClose}>X</Button>
                 </div>

@@ -1,3 +1,4 @@
+"use client";
 import Blogs from "@/components/Resume/ResumeBuilder/Blogs";
 import {
   Features,
@@ -10,11 +11,14 @@ import {
   Video,
 } from "@/components/Resume/ResumeBuilder";
 import Templates from "@/components/Resume/Templates";
+import { useGlobalContext } from "@/context/GlobalProvider";
+import { UserDocuments } from "@/components/SubComponents";
 
-const page = () => {
+const Homepage = () => {
+  const { isUserLoggedIn } = useGlobalContext();
   return (
     <>
-      <Hero />
+      {isUserLoggedIn ? <UserDocuments /> : <Hero />}
       <Steps />
       <Templates />
       <Video />
@@ -28,4 +32,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Homepage;

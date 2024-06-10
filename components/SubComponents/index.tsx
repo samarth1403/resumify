@@ -10,6 +10,9 @@ import StepperComponent from "@/components/SubComponents/StepperComponent";
 import TemplateModalComponent from "@/components/SubComponents/TemplateModalComponent";
 import FormHeading from "@/components/SubComponents/FormHeading";
 import TextAreaField from "@/components/SubComponents/TextAreaField";
+import UserDocuments from "@/components/SubComponents/UserDocuments";
+import DocumentCard from "@/components/SubComponents/DocumentCard";
+import TemplateShowCard from "@/components/SubComponents/TemplateShowCard";
 
 export {
   FormField,
@@ -24,4 +27,7 @@ export {
   TemplateModalComponent,
   FormHeading,
   TextAreaField,
+  UserDocuments,
+  DocumentCard,
+  TemplateShowCard,
 };

@@ -1,15 +1,19 @@
 "use client";
 import { Button, FormHeading, TextAreaField } from "@/components/SubComponents";
-import { validateCoverLetterCloser } from "@/components/Validation/Validation";
+import { validateCoverLetter } from "@/components/Validation/Validation";
 import { useGlobalContext } from "@/context/GlobalProvider";
+import axios, { isAxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 
 const Closer = () => {
   const router = useRouter();
-  const { coverLetterData, setCoverLetterData } = useGlobalContext();
+
+  const [isFormSubmitting, setFormIsSubmitting] = useState<boolean>(false);
+  const { coverLetterData, setCoverLetterData, selectedTemplateId, user } =
+    useGlobalContext();
   const [errors, setErrors] = useState<Record<string, { message: string }>>({});
 
   const setFormDataKey = (
@@ -19,16 +23,43 @@ const Closer = () => {
     setCoverLetterData((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleContinue = () => {
-    const errors = validateCoverLetterCloser(coverLetterData);
+  console.log(user);
+
+  const handleContinue = async () => {
+    const { errors, errorTab } = validateCoverLetter(coverLetterData);
+    console.log(errors, errorTab);
     if (Object.keys(errors).length > 0) {
       toast.error("Please fill required field");
       setErrors(errors);
+      router.push(`/cover-letter/build-letter/create/${errorTab}`);
       return;
     }
     router.push("/cover-letter/build-letter/preview");
     localStorage.setItem("coverLetterData", JSON.stringify(coverLetterData));
     setErrors({});
+
+    setFormIsSubmitting(true);
+    try {
+      const { data, status } = await axios.post("/api/document/create", {
+        type: "cover-letter",
+        userData: coverLetterData,
+        user: user?.userId,
+        template: selectedTemplateId,
+      });
+      if (status === 201) {
+        toast.success(data.message);
+        // router.push("/");
+      }
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        toast.error(error.response?.data?.error || "An error occurred");
+      } else {
+        toast.error("An error occurred");
+      }
+    } finally {
+      setFormIsSubmitting(false);
+      setErrors({});
+    }
   };
 
   return (
@@ -61,7 +92,8 @@ const Closer = () => {
           <Button
             onClick={handleContinue}
             iconAfter={<IoIosArrowRoundForward size={24} />}
-            className="border border-black bg-yellow-400 pr-3 text-black "
+            // className="border border-black bg-yellow-400 pr-3 text-black "
+            isFormSubmitting={isFormSubmitting}
           >
             Submit
           </Button>

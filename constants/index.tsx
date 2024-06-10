@@ -256,6 +256,7 @@ export type userInfoType = {
   email: string;
   isAdmin: boolean;
   isVerified: boolean;
+  userId: string;
 };
 
 export type coverLetterType = {
@@ -277,7 +278,6 @@ export type coverLetterType = {
 
 export type GlobalContextType = {
   isUserLoggedIn: boolean;
-  isLoading: boolean;
   user: userInfoType | null;
   setIsUserLoggedIn: (isLoggedIn: boolean) => void;
   setUser: (user: userInfoType) => void;
@@ -319,6 +319,7 @@ export const initialUserInfo: userInfoType = {
   email: "",
   isAdmin: false,
   isVerified: false,
+  userId: "",
 };
 export interface formDataTypes {
   username?: string;
@@ -355,9 +356,23 @@ export const initialTemplateData: templateType = {
   dynamicFields: [],
 };
 
+export interface documentType {
+  _id: string;
+  type: string;
+  userData: coverLetterType;
+  user: string;
+  template: templateType;
+  createdAt: string;
+}
+
+export interface documentsDataType {
+  resumes: documentType[];
+  coverLetters: documentType[];
+  cvs: documentType[];
+}
+
 export const initialGlobalContext: GlobalContextType = {
   isUserLoggedIn: false,
-  isLoading: true,
   user: initialUserInfo,
   setIsUserLoggedIn: () => {},
   setUser: () => {},
@@ -365,4 +380,10 @@ export const initialGlobalContext: GlobalContextType = {
   setSelectedTemplateId: () => {},
   coverLetterData: initialCoverLetterData,
   setCoverLetterData: () => {},
+};
+
+export const initialDocumentsData: documentsDataType = {
+  resumes: [],
+  coverLetters: [],
+  cvs: [],
 };

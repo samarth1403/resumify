@@ -7,7 +7,7 @@ interface singInPropTypes {
 }
 
 interface signUpPropTypes {
-  username: string;
+  username?: string;
   email: string;
   password: string;
 }
@@ -54,7 +54,7 @@ export const validateResetPassword = (formData: { newPassword: string }) => {
 export const validateSignUp = (formData: signUpPropTypes) => {
   const { email, password, username } = formData;
   const usernameV = new Validator({
-    value: username,
+    value: username!,
     key: "username",
     field: "Username",
   }).required();
@@ -162,4 +162,37 @@ export const validateCoverLetterCloser = (formData: coverLetterType) => {
   return {
     ...coverLetterCloserV.errors,
   };
+};
+
+export const validateCoverLetter = (formData: coverLetterType) => {
+  let errorTab;
+  const headerErrors = validateCoverLetterPersonalInfo(formData);
+  if (Object.keys(headerErrors).length > 0) {
+    errorTab = "header";
+  }
+  const recruiterErrors = validateCoverLetterRecruiterInfo(formData);
+  if (Object.keys(recruiterErrors).length > 0) {
+    errorTab = "recruiter-info";
+  }
+  const openerErrors = validateCoverLetterOpener(formData);
+  if (Object.keys(openerErrors).length > 0) {
+    errorTab = "opener";
+  }
+  const bodyErrors = validateCoverLetterBody(formData);
+  if (Object.keys(bodyErrors).length > 0) {
+    errorTab = "body";
+  }
+  const closerErrors = validateCoverLetterCloser(formData);
+  if (Object.keys(closerErrors).length > 0) {
+    errorTab = "closer";
+  }
+
+  const errors = {
+    ...validateCoverLetterPersonalInfo(formData),
+    ...validateCoverLetterRecruiterInfo(formData),
+    ...validateCoverLetterOpener(formData),
+    ...validateCoverLetterBody(formData),
+    ...validateCoverLetterCloser(formData),
+  };
+  return { errors, errorTab };
 };

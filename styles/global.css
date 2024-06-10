@@ -176,6 +176,38 @@
     }
 }
 
+.medium-loader {
+    width: 3vmax;
+    height: 3vmax;
+    border-right: 4px solid #000000;
+    border-radius: 100%;
+    animation: spinRight 800ms linear infinite;
+
+    &:before,
+    &:after {
+        content: '';
+        width: 2vmax;
+        height: 2vmax;
+        display: block;
+        position: absolute;
+        top: calc(50% - 1vmax);
+        left: calc(50% - 1vmax);
+        border-left: 2px solid #000000;
+        border-radius: 100%;
+        animation: spinLeft 800ms linear infinite;
+    }
+
+    /* &:after {
+        width: 1vmax;
+        height: 1vmax;
+        top: calc(50% - 1vmax);
+        left: calc(50% - 1vmax);
+        border: 0;
+        border-right: 2px solid #000000;
+        animation: spinRight 800ms linear infinite;
+    } */
+}
+
 @keyframes spinLeft {
     from {
         transform: rotate(0deg);

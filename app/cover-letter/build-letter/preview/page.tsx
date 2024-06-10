@@ -16,6 +16,8 @@ import useGetAllTemplates from "@/utils/useGetAllTemplates";
 import { usePathname } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
+import { jsPDF as JsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 
 const Preview = () => {
   const { coverLetterData, selectedTemplateId } = useGlobalContext();
@@ -54,6 +56,24 @@ const Preview = () => {
     setShowOtherTemplates(event.target.checked);
   };
 
+  const downloadPdf = () => {
+    const input = coverLetterDivRef.current!;
+
+    html2canvas(input, { scale: 2 })
+      .then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new JsPDF("p", "pt", "a4");
+
+        const margin = 20;
+        const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+        pdf.addImage(imgData, "PNG", margin, margin, pdfWidth, pdfHeight);
+        pdf.save("download.pdf");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <Section
       className="mt-20 w-full"
@@ -90,7 +110,7 @@ const Preview = () => {
               Print
             </Button>
             <Button
-              // onClick={handleContinue}/
+              onClick={downloadPdf}
               className=""
               iconBefore={<LuDownload className="mr-1" />}
             >

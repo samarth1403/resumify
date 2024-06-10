@@ -1,22 +1,51 @@
 "use client";
-import { navLinks } from "@/constants";
+import { GlobalContextType, navLinks, userInfoType } from "@/constants";
 import { useGlobalContext } from "@/context/GlobalProvider";
-import { GlobalContextType } from "@/next-env";
 import axios, { isAxiosError } from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Button } from "../SubComponents";
 
 const Header = () => {
-  const { isUserLoggedIn, user, setIsUserLoggedIn }: GlobalContextType =
-    useGlobalContext();
+  const {
+    isUserLoggedIn,
+    user,
+    setIsUserLoggedIn,
+    setUser,
+  }: GlobalContextType = useGlobalContext();
   const router = useRouter();
   const [isFormSubmitting, setFormIsSubmitting] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState("");
   const [active, setActive] = useState("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const getCurrentUser = async () => {
+      try {
+        const { data, status } = await axios.post("/api/user/me");
+        if (status === 200) {
+          setUser({
+            username: data.user.username,
+            email: data.user.email,
+            isAdmin: data.user.isAdmin,
+            isVerified: data.user.isVerified,
+            userId: data.user._id,
+          });
+          setIsUserLoggedIn(true);
+        }
+      } catch (error: unknown) {
+        setIsUserLoggedIn(false);
+        setUser({} as userInfoType);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getCurrentUser();
+  }, [isUserLoggedIn, setUser, setIsUserLoggedIn]);
 
   const handleLogout = async () => {
     setFormIsSubmitting(true);
@@ -101,9 +130,13 @@ const Header = () => {
           {!isUserLoggedIn ? (
             <div className="flex-center gap-4">
               <Link href={"/sign-in"}>
-                <button type="button" className="black_btn">
-                  Sign In
-                </button>
+                {!isLoading ? (
+                  <button type="button" className="black_btn">
+                    Sign In
+                  </button>
+                ) : (
+                  <div className="medium-loader" />
+                )}
               </Link>
               <Link href={"/sign-up"}>
                 <button type="button" className="black_btn">
@@ -114,9 +147,13 @@ const Header = () => {
           ) : (
             <div className="flex-center gap-4">
               <Link href={"/profile"}>
-                <button className="black_btn size-4 h-full rounded-full text-2xl ">
-                  {String(user.username).charAt(0).toUpperCase()}
-                </button>
+                {!isLoading ? (
+                  <button className="black_btn size-4 h-full rounded-full text-2xl ">
+                    {String(user?.username).charAt(0).toUpperCase()}
+                  </button>
+                ) : (
+                  <div className="medium-loader" />
+                )}
               </Link>
               <Button
                 isFormSubmitting={isFormSubmitting}
