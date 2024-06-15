@@ -30,6 +30,7 @@ const CoverLetterCreateLayout = ({ children }: { children: ReactNode }) => {
           templateContentData={coverLetterData}
           isLoading={isLoading}
           template={templateData}
+          cardTitle={templateData.name}
         />
       </div>
     </Section>

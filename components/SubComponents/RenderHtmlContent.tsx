@@ -13,7 +13,7 @@ const RenderHtmlContent = forwardRef<HTMLDivElement, RenderHtmlContentProps>(
     ref
   ) {
     let renderedTemplate = html;
-    dynamicFields.forEach((field: string) => {
+    dynamicFields?.forEach((field: string) => {
       const regex = new RegExp(`{${field}}`, "g");
       const fieldValue = sampleData[field as keyof typeof sampleData];
       renderedTemplate = renderedTemplate.replace(regex, fieldValue as string);

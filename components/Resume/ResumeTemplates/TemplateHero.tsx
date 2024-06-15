@@ -1,11 +1,11 @@
-import React from "react";
 import { ChooseTemplateComponent } from "@/components/SubComponents";
+import React from "react";
 
 const TemplateHero = () => {
   return (
     <ChooseTemplateComponent
-      title="Explore our Professional CV Templates"
-      type="cv"
+      title="Job-winning Professional Resume Templates"
+      type="resume"
     />
   );
 };

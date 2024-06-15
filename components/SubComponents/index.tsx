@@ -13,6 +13,8 @@ import TextAreaField from "@/components/SubComponents/TextAreaField";
 import UserDocuments from "@/components/SubComponents/UserDocuments";
 import DocumentCard from "@/components/SubComponents/DocumentCard";
 import TemplateShowCard from "@/components/SubComponents/TemplateShowCard";
+import ChooseTemplateComponent from "@/components/SubComponents/ChooseTemplateComponent";
+import ChooseExampleComponent from "@/components/SubComponents/ChooseExampleComponent";
 
 export {
   FormField,
@@ -30,4 +32,6 @@ export {
   UserDocuments,
   DocumentCard,
   TemplateShowCard,
+  ChooseTemplateComponent,
+  ChooseExampleComponent,
 };

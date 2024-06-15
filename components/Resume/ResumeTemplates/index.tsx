@@ -1,3 +1,3 @@
-import ChooseTemplate from "@/components/Resume/ResumeTemplates/ChooseTemplate";
+import TemplateHero from "@/components/Resume/ResumeTemplates/TemplateHero";
 
-export { ChooseTemplate };
+export { TemplateHero };

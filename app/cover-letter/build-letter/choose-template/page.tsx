@@ -1,6 +1,5 @@
 "use client";
-import Template1 from "@/components/CoverLetter/sample-templates/Template1";
-import ChooseTemplateComponent from "@/components/SubComponents/ChooseTemplateComponent";
+import { ChooseTemplateComponent } from "@/components/SubComponents";
 
 const ChooseTemplate = () => {
   return (
@@ -8,9 +7,8 @@ const ChooseTemplate = () => {
       <ChooseTemplateComponent
         title={`Choose a template for your cover letter`}
         text="Stand out and get hired faster with our collection of free professional cover letter templates expertly-designed to land you the perfect position."
-        templateData={[]}
+        type="cover-letter"
       />
-      {/* <Template1 /> */}
     </>
   );
 };

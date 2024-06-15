@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
 
-const documentSchema = new mongoose.Schema(
+const exampleSchema = new mongoose.Schema(
   {
+    title: {
+      type: String,
+      required: true,
+    },
     type: {
       type: String,
       required: true,
     },
     userData: {},
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
     templateId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Template",
@@ -21,6 +21,6 @@ const documentSchema = new mongoose.Schema(
   }
 );
 
-const Document =
-  mongoose.models.Document || mongoose.model("Document", documentSchema);
-export default Document;
+const Example =
+  mongoose.models.Example || mongoose.model("Example", exampleSchema);
+export default Example;

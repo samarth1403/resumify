@@ -19,11 +19,15 @@ const TemplateShowCard = ({
   isLoading,
   template,
   selfDocument = false,
+  cardTitle,
+  isExample = false,
 }: {
   templateContentData: coverLetterType;
-  isLoading: boolean;
+  isLoading?: boolean;
   template: templateType;
   selfDocument?: boolean;
+  isExample?: boolean;
+  cardTitle: string;
 }) => {
   const router = useRouter();
   const { setSelectedTemplateId } = useGlobalContext();
@@ -43,6 +47,12 @@ const TemplateShowCard = ({
   const handleTemplateChoose = () => {
     setSelectedTemplateId(template._id);
     localStorage.setItem("selectedTemplateId", template._id);
+    if (isExample) {
+      localStorage.setItem(
+        "coverLetterData",
+        JSON.stringify(templateContentData)
+      );
+    }
     router.push(`/cover-letter/build-letter/create/header`);
   };
 
@@ -70,7 +80,7 @@ const TemplateShowCard = ({
         <div
           className={` ${isModalOpen ? "overflow-hidden" : ""} flex-center group relative w-full cursor-pointer flex-col gap-6  `}
         >
-          <div className="relative">
+          <div className="relative w-full">
             <RenderHtmlContent
               className="rounded-xl shadow-2xl shadow-gray-400 duration-500 hover:-translate-y-4 "
               dynamicFields={template.dynamicFields}
@@ -92,10 +102,18 @@ const TemplateShowCard = ({
             >
               <MdOutlineZoomIn className="size-8 rounded-full text-white " />
             </div>
+            {isExample || selfDocument ? (
+              <button
+                onClick={handleTemplateChoose}
+                // eslint-disable-next-line max-len, tailwindcss/enforces-negative-arbitrary-values
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-xl  bg-shades-8 px-4 py-2 text-sm text-white opacity-0  transition-transform  duration-500 ease-in-out hover:bg-shades-10 group-hover:-translate-y-[200px] group-hover:opacity-100"
+              >
+                Edit this Template
+              </button>
+            ) : null}
           </div>
-          <div className="flex-between w-full flex-nowrap px-1">
-            <p className="h6">{template.name}</p>
-            <Button onClick={handleTemplateChoose}>Edit</Button>
+          <div className={`flex-center mt-4 w-full flex-nowrap px-1`}>
+            <p className="h6">{cardTitle}</p>
           </div>
 
           {isModalOpen && (

@@ -1,3 +1,4 @@
+import Template from "@/models/template";
 import Document from "@/models/document";
 import { dbConnection } from "@/utils/dbConnection";
 import { getIdfromToken } from "@/utils/getIdfromToken";
@@ -13,7 +14,18 @@ export const GET = async (request: NextRequest) => {
     }
 
     const documents = await Document.find({ user: userId }).populate(
-      "template"
+      "templateId",
+      [
+        "sampleData",
+        "name",
+        "htmlOption",
+        "description",
+        "type",
+        "subtype",
+        "html",
+        "dynamicFields",
+      ],
+      Template
     );
 
     if (!documents) {

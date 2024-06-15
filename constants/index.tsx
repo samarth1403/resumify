@@ -9,6 +9,24 @@ export const USER_ALREADY_EXISTS = "User already exists";
 export const INVALID_CREDENTIALS = "Invalid Credentials";
 export const UNKNOW_ERROR = "Unknown error occurred";
 
+export const masterDocumentTypes = [
+  {
+    id: "resume",
+    title: "Resume",
+    uri: "/resume",
+  },
+  {
+    id: "cover-letter",
+    title: "Cover Letter",
+    uri: "/cover-letter",
+  },
+  {
+    id: "cv",
+    title: "CV",
+    uri: "/cv",
+  },
+];
+
 export const navLinks = [
   {
     id: "0",
@@ -361,7 +379,16 @@ export interface documentType {
   type: string;
   userData: coverLetterType;
   user: string;
-  template: templateType;
+  templateId: templateType;
+  createdAt: string;
+}
+
+export interface exampleType {
+  _id: string;
+  title: string;
+  type: string;
+  userData: coverLetterType;
+  templateId: templateType;
   createdAt: string;
 }
 

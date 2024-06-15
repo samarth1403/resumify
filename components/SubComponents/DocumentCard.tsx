@@ -24,7 +24,8 @@ const DocumentCard = ({
               key={document._id}
               templateContentData={document?.userData}
               isLoading={isLoading}
-              template={document.template}
+              template={document.templateId}
+              cardTitle={document.templateId.name}
               selfDocument
             />
           ))}

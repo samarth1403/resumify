@@ -1,10 +1,5 @@
 "use client";
-import {
-  Heading,
-  Loader,
-  Section,
-  TemplateCard,
-} from "@/components/SubComponents";
+import { Heading, Section, TemplateCard } from "@/components/SubComponents";
 import { resumeTemplateData } from "@/constants/Resume";
 import useGetAllTemplates from "@/utils/useGetAllTemplates";
 import { useState } from "react";
@@ -12,21 +7,13 @@ import { useState } from "react";
 interface propTypes {
   title: string;
   text?: string;
-  templateData: {
-    id: string;
-    title: string;
-    templates: {
-      id: string;
-      title: string;
-      image: string;
-    }[];
-  }[];
+  type: string;
 }
 
-const ChooseTemplateComponent = ({ title, templateData, text }: propTypes) => {
+const ChooseTemplateComponent = ({ title, type, text }: propTypes) => {
   const [activeType, setActiveType] = useState("professional");
   const { templates, isLoading } = useGetAllTemplates({
-    type: "cover-letter",
+    type,
     subtype: activeType,
   });
 
@@ -69,7 +56,7 @@ const ChooseTemplateComponent = ({ title, templateData, text }: propTypes) => {
           </div>
           <hr className="h-0.5 w-full bg-shades-4" />
           <div className="mt-8 flex w-full flex-row flex-wrap items-start justify-center gap-10">
-            {isLoading ? <Loader /> : templateList()}
+            {isLoading ? <div className="medium-loader" /> : templateList()}
           </div>
         </div>
       </div>

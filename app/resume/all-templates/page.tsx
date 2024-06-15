@@ -1,10 +1,10 @@
-import { ChooseTemplate } from "@/components/Resume/ResumeTemplates";
+import { TemplateHero } from "@/components/Resume/ResumeTemplates";
 import React from "react";
 
 const ResumeTemplates = () => {
   return (
     <>
-      <ChooseTemplate />
+      <TemplateHero />
     </>
   );
 };

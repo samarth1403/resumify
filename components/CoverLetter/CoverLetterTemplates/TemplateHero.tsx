@@ -1,12 +1,11 @@
-import TemplateHeroComponent from "@/components/SubComponents/ChooseTemplateComponent";
-import { resumeTemplateData } from "@/constants/Resume";
+import { ChooseTemplateComponent } from "@/components/SubComponents";
 import React from "react";
 
 const TemplateHero = () => {
   return (
-    <TemplateHeroComponent
+    <ChooseTemplateComponent
       title="Take A Look at our Cover Letter Templates"
-      templateData={resumeTemplateData}
+      type="cover-letter"
     />
   );
 };
