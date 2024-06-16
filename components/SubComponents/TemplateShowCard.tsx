@@ -83,9 +83,9 @@ const TemplateShowCard = ({
           <div className="relative w-full">
             <RenderHtmlContent
               className="rounded-xl shadow-2xl shadow-gray-400 duration-500 hover:-translate-y-4 "
-              dynamicFields={template.dynamicFields}
+              dynamicFields={template?.dynamicFields}
               sampleData={templateContentData}
-              html={template.htmlOption}
+              html={template?.htmlOption}
               ref={componentRef}
             />
             {selfDocument && (
@@ -106,7 +106,7 @@ const TemplateShowCard = ({
               <button
                 onClick={handleTemplateChoose}
                 // eslint-disable-next-line max-len, tailwindcss/enforces-negative-arbitrary-values
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-xl  bg-shades-8 px-4 py-2 text-sm text-white opacity-0  transition-transform  duration-500 ease-in-out hover:bg-shades-10 group-hover:-translate-y-[200px] group-hover:opacity-100"
+                className="bg-shades-8 hover:bg-shades-10 absolute bottom-0 left-1/2 -translate-x-1/2  translate-y-1/2 rounded-xl px-4 py-2 text-sm text-white  opacity-0  transition-transform duration-500 ease-in-out group-hover:-translate-y-[200px] group-hover:opacity-100"
               >
                 Edit this Template
               </button>

@@ -49,7 +49,7 @@ const ChooseExampleComponent = ({ title, text, type }: propTypes) => {
             {masterDocumentTypes?.map((type, index) => (
               <div
                 key={index}
-                className={`flex-center relative cursor-pointer rounded-xl ${activeType === type.id ? "bg-shades-1" : "bg-shades-1/40"} px-8 py-3 shadow-xl transition-all duration-300 ease-in-out hover:bg-shades-1 hover:shadow-shades-4 `}
+                className={`flex-center relative cursor-pointer rounded-xl ${activeType === type.id ? "bg-shades-1" : "bg-shades-1/40"} hover:bg-shades-1 hover:shadow-shades-4 px-8 py-3 shadow-xl transition-all duration-300 ease-in-out `}
                 onClick={() => setActiveType(type.id)}
               >
                 <p className={`${activeType === type.id ? "h6" : "body-2"}`}>
@@ -61,7 +61,7 @@ const ChooseExampleComponent = ({ title, text, type }: propTypes) => {
               </div>
             ))}
           </div>
-          <hr className="h-0.5 w-full bg-shades-4" />
+          <hr className="bg-shades-4 h-0.5 w-full" />
           <div className="mt-8 flex w-full flex-row flex-wrap items-start justify-center gap-10 ">
             {isLoading ? <div className="medium-loader" /> : exampleList()}
           </div>
