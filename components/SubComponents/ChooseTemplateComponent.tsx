@@ -3,6 +3,7 @@ import { Heading, Section, TemplateCard } from "@/components/SubComponents";
 import { resumeTemplateData } from "@/constants/Resume";
 import useGetAllTemplates from "@/utils/useGetAllTemplates";
 import { useState } from "react";
+import Template1 from "../Resume/sample-templates/Template1";
 
 interface propTypes {
   title: string;
@@ -57,6 +58,7 @@ const ChooseTemplateComponent = ({ title, type, text }: propTypes) => {
           <hr className="h-0.5 w-full bg-shades-4" />
           <div className="mt-8 flex w-full flex-row flex-wrap items-start justify-center gap-10">
             {isLoading ? <div className="medium-loader" /> : templateList()}
+            <Template1 />
           </div>
         </div>
       </div>

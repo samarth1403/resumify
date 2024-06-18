@@ -305,6 +305,22 @@ export type GlobalContextType = {
   setCoverLetterData: React.Dispatch<React.SetStateAction<coverLetterType>>;
 };
 
+export interface experienceType {
+  jobTitle: string;
+  company: string;
+  startDate: string;
+  endDate: string;
+  jobDescription: string;
+}
+
+export interface educationType {
+  degree: string;
+  institution: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+}
+
 export type templateType = {
   sampleData: {
     name: string;
@@ -312,7 +328,7 @@ export type templateType = {
     email: string;
     phone: string;
     address: string;
-    date: string;
+    date?: string;
     recruiterName?: string;
     recruiterPosition?: string;
     hiringCompanyName?: string;
@@ -321,6 +337,11 @@ export type templateType = {
     coverLetterBody1?: string;
     coverLetterBody2?: string;
     coverLetterCloser?: string;
+    experience?: experienceType[];
+    education?: educationType[];
+    skills?: string[];
+    profilePicture?: string;
+    summary?: string;
   };
   _id: string;
   name: string;
