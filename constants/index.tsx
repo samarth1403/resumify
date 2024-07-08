@@ -321,6 +321,17 @@ export interface educationType {
   description: string;
 }
 
+export interface profileType {
+  profile: string;
+  link: string;
+}
+
+export interface projectType {
+  title: string;
+  description: string;
+  link: string;
+}
+
 export type templateType = {
   sampleData: {
     name: string;
@@ -340,8 +351,11 @@ export type templateType = {
     experience?: experienceType[];
     education?: educationType[];
     skills?: string[];
+    profiles?: profileType[];
+    projects?: projectType[];
     profilePicture?: string;
     summary?: string;
+    color?: string;
   };
   _id: string;
   name: string;

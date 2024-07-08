@@ -1,5 +1,11 @@
 "use client";
-import { educationType, experienceType, templateType } from "@/constants";
+import {
+  educationType,
+  experienceType,
+  profileType,
+  projectType,
+  templateType,
+} from "@/constants";
 import React from "react";
 
 const Template1: React.FC = () => {
@@ -10,99 +16,50 @@ const Template1: React.FC = () => {
       "A clean and professional resume template with a well-organized layout to highlight your skills and experiences effectively.",
     type: "resume",
     subtype: "professional",
-    html: ` <div style="min-height: 1000px; height: 100%; width: 800px; display: flex; flex-direction: column; align-items: start; justify-content: start; background-color: white;">
-<div style="height: 160px; background-color: lightgray; border-radius: 20px 20px 0 0; width: 100%; padding: 0 20px;">
-<div style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center;">
-<div style="display: flex; width: 100%; height: auto; flex-direction: column; gap: 16px; color: black; align-items: center; justify-content: center;">
-<p style="font-size: 2.5rem; font-weight: bold">{name}</p>
-<div style="display: flex; flex-direction: row; justify-content: start; align-items: start; gap: 4px; font-size: 1rem; font-weight:medium; ">
-<p>{email} &nbsp; | &nbsp;</p>
-<p>{phone} &nbsp; | &nbsp;</p>
-<p>{address}</p>
-</div>
-</div>
-</div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 30px; width: 100%; padding: 30px">
-<div>
-<p style="font-size: 0.9rem;">{summary}</p>
-</div>
-<div  style="display: flex; flex-direction: column; justify-content:flex-start; align-items:flex-start; gap: 15px;" >
-<h3 style="font-size: 1.5rem; font-weight:bold;">Experience</h3>
-<div style="display: flex; flex-direction: column; gap: 10px;">
-{experience.map((exp, index) => (
-<div key={index} style="display: flex; flex-direction: column; justify-content:flex-start; align-items:flex-start; gap:10px;">
-<p style="font-size: 1rem; font-weight: semibold;">{exp.jobTitle} - {exp.company}</p>
-<p style="font-size: 0.8rem;">{exp.startDate} - {exp.endDate}</p>
-<p style="font-size: 1rem;">{exp.jobDescription}</p>
-</div>
-))}
-</div>
-</div>
-<div style="display: flex; flex-direction: column; justify-content:flex-start; align-items:flex-start; gap: 15px;">
-<h3 style="font-size: 1.5rem; font-weight:bold;">Education</h3>
-<div style="display: flex; flex-direction: column; gap: 10px;">
-{education.map((edu, index) => (
-<div key={index} style="display: flex; flex-direction: column;">
-<p style="font-size: 1rem; font-weight: bold;">{edu.degree} - {edu.institution}</p>
-<p style="font-size: 0.9rem; color: gray;">{edu.startDate} - {edu.endDate}</p>
-<p style="font-size: 1rem;">{edu.description}</p>
-</div>
-))}
-</div>
-</div>
-<div style="display: flex; flex-direction: column; justify-content:flex-start; align-items:flex-start; gap: 15px;">
-<h3  style="font-size: 1.5rem; font-weight:bold;">Skills</h3>
-<ul style="list-style-type: disc; margin-left: 20px;">
-{skills.map((skill, index) => (
-<li key={index} style="font-size: 0.9rem;">{skill}</li>
-))}
-</ul>
-</div>
-</div>
-
-  </div>`, // Original jsx string from your code
-    htmlOption: `<div style="display: flex; flex-direction: column; align-items: start; justify-content: start; min-height: 410px; width: 320px; background-color: white; border-radius: 20px;" >
-  <div style="height: 80px; width: 100%; border-radius: 20px 20px 0 0; background-color: #E2E8F0; padding: 1rem 1rem 0rem 1rem;" >
-    <div style="display: flex; width: 100%; height:100%; align-items: center; justify-content: center; border-top: 1px solid #9a9ca1; border-left: 1px solid #9a9ca1; border-right : 1px solid #9a9ca1; border-radius:12px 12px 0px 0px " >
-      <p style="font-size: 1.2rem;">{name}</p>
-    </div>
-  </div>
-  <div style="width: 100%; border-radius: 0 0 20px 20px; background-color: white; padding: 0rem 1rem 1rem 1rem;" >
-    <div style="font-size: 0.35rem; border-radius:0px 0px 12px 12px ; display: flex; flex-direction: column; align-items: start; justify-content: start; gap: 0.5rem; border-bottom: 1px solid #9a9ca1; border-left: 1px solid #9a9ca1; border-right : 1px solid #9a9ca1; padding:0.6rem; ">
-      <div style="display: flex; width: 100%; align-items: start; justify-content: space-between;">
-        <p>{email} | {phone}</p>
-        <div style="display: flex; flex-direction: column; gap: 0.25rem;" >
+    html: `
+    <div style="min-height: 1000px; height: 100%; width: 800px; display: flex; flex-direction: column; align-items: start; justify-content: start; background-color: white;">
+  <div style="height: 100px; background-color: #004080; color: white; width: 100%; padding: 20px 30px;">
+    <div style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center;">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <p style="font-size: 2.5rem; font-weight: bold;">{name}</p>
+        <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; font-size: 1rem;">
+          <p>{email}</p>
+          <p>{phone}</p>
           <p>{address}</p>
         </div>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 0.5rem;" >
-        <p>Experience</p>
-        <ul style="list-style-type: disc; margin-left: 20px;">
-          {experience.map((exp, index) => (
-            <li key={index} style="font-size: 0.35rem;">{exp.jobTitle} - {exp.company} ({exp.startDate} - {exp.endDate})</li>
-          ))}
-        </ul>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 0.5rem;" >
-        <p>Education</p>
-        <ul style="list-style-type: disc; margin-left: 20px;">
-          {education.map((edu, index) => (
-            <li key={index} style="font-size: 0.35rem;">{edu.degree} - {edu.institution} ({edu.startDate} - {edu.endDate})</li>
-          ))}
-        </ul>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 0.5rem;" >
-        <p>Skills</p>
-        <ul style="list-style-type: disc; margin-left: 20px;">
-          {skills.map((skill, index) => (
-            <li key={index} style="font-size: 0.35rem;">{skill}</li>
-          ))}
-        </ul>
-      </div>
     </div>
   </div>
-</div>`, // Original jsxOption string from your code
+  <div style="display: flex; flex-direction: column; gap: 20px; width: 100%; padding: 20px 30px;">
+    <div>
+      <p style="font-size: 1.2rem; font-weight: bold;">Summary</p>
+      <p style="font-size: 0.9rem;">{summary}</p>
+    </div>
+    <div>
+      <p style="font-size: 1.2rem; font-weight: bold;">Experience</p>
+      {experience}
+    </div>
+    <div>
+      <p style="font-size: 1.2rem; font-weight: bold;">Education</p>
+      {education}
+    </div>
+    <div>
+      <p style="font-size: 1.2rem; font-weight: bold;">Projects</p>
+      {projects}
+    </div>
+    <div>
+      <p style="font-size: 1.2rem; font-weight: bold;">Skills</p>
+      {skills}
+    </div>
+    <div>
+      <p style="font-size: 1.2rem; font-weight: bold;">Profiles</p>
+      {profiles}
+    </div>
+  </div>
+</div>
+
+`, // Original jsx string from your code
+    htmlOption: ``, // Original jsxOption string from your code
     sampleData: {
       name: "John Doe",
       profilePicture: "profile-picture-url",
@@ -139,8 +96,35 @@ const Template1: React.FC = () => {
             "Graduated with honors, specializing in software development and algorithms.",
         },
       ],
+      profiles: [
+        {
+          profile: "LinkedIn",
+          link: "https://www.linkedin.com",
+        },
+        {
+          profile: "GitHub",
+          link: "https://www.github.com",
+        },
+      ],
+      projects: [
+        {
+          title: "Project 1",
+          description: "A web application for managing tasks and deadlines.",
+          link: "project1.com",
+        },
+        {
+          title: "Project 2",
+          description:
+            "An e-commerce platform with real-time inventory tracking.",
+          link: "project2.com",
+        },
+      ],
       skills: ["JavaScript", "React", "Node.js", "CSS", "HTML"],
       initials: "JD",
+      // color: "#004080",
+      // color: "#363535",
+      // color: "#213b3a",
+      // color: "black",
     },
     dynamicFields: [
       "name",
@@ -152,6 +136,9 @@ const Template1: React.FC = () => {
       "experience",
       "education",
       "skills",
+      "initials",
+      "profiles",
+      "projects",
     ],
   };
 
@@ -163,11 +150,14 @@ const Template1: React.FC = () => {
     dynamicFields.forEach((field) => {
       if (Array.isArray(sampleData[field as keyof typeof sampleData])) {
         let listString = "";
+        let jsxString = "";
         (
           sampleData[field as keyof typeof sampleData] as
             | educationType[]
             | experienceType[]
             | string[]
+            | profileType[]
+            | projectType[]
         ).forEach((item, index: number) => {
           if (field === "experience" || field === "education") {
             listString += `
@@ -179,15 +169,35 @@ const Template1: React.FC = () => {
             `;
           } else if (field === "skills") {
             listString += `<li key={${index}} style="font-size: 0.9rem;">${item}</li>`;
+          } else if (field === "profiles") {
+            listString += `<li key={${index}} style="font-size: 0.9rem;"><a href=${(item as profileType).link} target="_blank" >${(item as profileType).profile}</a></li>`;
+          } else if (field === "projects") {
+            listString += `
+              <div key={${index}} style="display: flex; flex-direction: column; gap:6px;">
+                <p style="font-size: 1rem; font-weight: bold;">${(item as projectType).title}</p>
+                <p style="font-size: 0.9rem;">${(item as projectType).description}</p>
+                <a href=${(item as projectType).link} target="_blank" style="font-size: 0.9rem; color: ${sampleData.color};">${(item as projectType).link}</a>
+              </div>
+            `;
           }
         });
-        newJsx = newJsx.replace(
-          new RegExp(
-            `{${field}\\.map\\(\\(\\w+, \\w+\\) => \\((.*?)\\)\\)}`,
-            "gs"
-          ),
-          listString
-        );
+        jsxString =
+          (
+            sampleData[field as keyof typeof sampleData] as
+              | educationType[]
+              | experienceType[]
+              | string[]
+              | profileType[]
+              | projectType[]
+          )?.length > 0
+            ? `<div style="display: flex; flex-direction: column; gap: 1rem;" >
+                   <h3 style="font-size: 1.5rem; font-weight:bold; color: ${sampleData.color};">${String(field)?.[0]?.toUpperCase() + String(field)?.slice(1)}</h3>
+              <ul style=" ${field === "skills" || field === "profiles" ? "margin-left : 20px;" : ""} list-style-type: disc; display: flex; flex-direction: column; gap: 1rem;  ">
+                  ${listString}
+              </ul>
+                 </div>`
+            : "";
+        newJsx = newJsx.replace(new RegExp(`{${field}}`, "gs"), jsxString);
       } else {
         newJsx = newJsx.replace(
           new RegExp(`{${field}}`, "g"),
@@ -204,3 +214,110 @@ const Template1: React.FC = () => {
 };
 
 export default Template1;
+
+// Template1 :
+{
+  /* <div style="min-height: 1000px; height: 100%; width: 800px; display: flex; flex-direction: column; align-items: start; justify-content: start; background-color: white;">
+  <div style="height: 130px; background-color: #004080; color: white; border-radius: 20px 20px 0 0; width: 100%; padding: 0 30px;">
+    <div style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center;">
+      <div style="display: flex; width: 100%; height: auto; flex-direction: column; gap: 4px; align-items: start; justify-content: center;">
+        <p style="font-size: 2.5rem; font-weight: bold">{name}</p>
+        <div style="display: flex; flex-direction: row; justify-content: start; align-items: start; gap: 4px; font-size: 1rem; font-weight:medium;">
+          <p>{email} &nbsp; | &nbsp;</p>
+          <p>{phone} &nbsp; | &nbsp;</p>
+          <p>{address}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 30px; width: 100%; padding: 30px;">
+    <div>
+      <p style="font-size: 0.9rem;">{summary}</p>
+    </div>
+    {experience}
+    {education}
+    {projects}
+    {skills}
+    {profiles}
+  </div>
+</div>; */
+}
+
+// Template2 :
+
+// <div style="min-height: 1000px; height: 100%; width: 800px; display: flex; flex-direction: column; align-items: start; justify-content: start; background-color: white;">
+//   <div style="height: 150px; background-color: #363535; color: white; border-radius: 20px 20px 0 0; width: 100%; padding: 20px 30px;">
+//     <div style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: space-between;">
+//       <div style="display: flex; flex-direction: column; gap: 4px; align-items: start;">
+//         <p style="font-size: 2.5rem; font-weight: bold;">{name}</p>
+//         <div style="display: flex; flex-direction: row; justify-content: start; align-items: start; gap: 10px; font-size: 1rem;">
+//           <p>{email}</p>
+//           <p>{phone}</p>
+//           <p>{address}</p>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+//   <div style="display: flex; flex-direction: row; width: 100%; padding: 30px;">
+//     <div style="width: 30%; display: flex; flex-direction: column; gap: 20px; padding-right: 20px;">
+//       <div>{skills}</div>
+//       <div>{profiles}</div>
+//     </div>
+//     <div style="width: 70%; display: flex; flex-direction: column; gap: 20px;">
+//       <div>{education}</div>
+//       <div>{experience}</div>
+
+//       <div>{projects}</div>
+//     </div>
+//   </div>
+// </div>;
+
+// Template3 :
+{
+  /* <div style="min-height: 1000px; height: 100%; width: 800px; display: flex; flex-direction: column; align-items: start; justify-content: start; background-color: white;">
+  <div style="height: 150px; background-color: #213b3a; color: white; border-radius: 20px 20px 0 0; width: 100%; padding: 20px 30px;">
+    <div style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center;">
+      <div style="display: flex; flex-direction: column; gap: 4px; align-items: center;">
+        <p style="font-size: 2.5rem; font-weight: bold;">{name}</p>
+        <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; font-size: 1rem;">
+          <p>{email} | </p>
+          <p>{phone} | </p>
+          <p>{address}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 20px; width: 100%; padding: 20px 30px;">
+    <div>{experience}</div>
+    <div>{education}</div>
+    <div>{projects}</div>
+    <div>{skills}</div>
+    <div>{profiles}</div>
+  </div>
+</div>; */
+}
+
+// Template 4
+{
+  /* <div style="min-height: 1000px; height: 100%; width: 800px; display: flex; flex-direction: column; align-items: start; justify-content: start; background-color: white;">
+  <div style="height: 150px; background-color: #e0e0e0; color: black; border-radius: 20px 20px 0 0; width: 100%; padding: 20px 30px;">
+    <div style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: space-between;">
+      <div style="display: flex; flex-direction: column; gap: 4px; align-items: start;">
+        <p style="font-size: 2.5rem; font-weight: bold;">{name}</p>
+        <div style="display: flex; flex-direction: row; justify-content: start; align-items: start; gap: 10px; font-size: 1rem;">
+          <p>{email} |</p>
+          <p>{phone} |</p>
+          <p>{address}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 20px; width: 100%; padding: 20px 30px;">
+    <div>{experience}</div>
+    <div>{education}</div>
+    <div>{projects}</div>
+    <div>{skills}</div>
+    <div>{profiles}</div>
+  </div>
+</div>; */
+}
