@@ -1,6 +1,7 @@
 "use client";
 import { Button, FormHeading, TextAreaField } from "@/components/SubComponents";
 import { validateCoverLetterOpener } from "@/components/Validation/Validation";
+import { dataType } from "@/constants";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -9,18 +10,18 @@ import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 
 const Opener = () => {
   const router = useRouter();
-  const { coverLetterData, setCoverLetterData } = useGlobalContext();
+  const { data, setData } = useGlobalContext();
   const [errors, setErrors] = useState<Record<string, { message: string }>>({});
 
   const setFormDataKey = (
     key: string,
     value: string | number | boolean | readonly string[]
   ) => {
-    setCoverLetterData((prev) => ({ ...prev, [key]: value }));
+    setData((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleContinue = () => {
-    const errors = validateCoverLetterOpener(coverLetterData);
+    const errors = validateCoverLetterOpener(data as dataType);
     if (Object.keys(errors).length > 0) {
       toast.error("Please fill required field");
       setErrors(errors);
@@ -28,7 +29,7 @@ const Opener = () => {
     }
     toast.success("Opener of Cover Letter Saved Successfully");
     router.push("/cover-letter/build-letter/create/body");
-    localStorage.setItem("coverLetterData", JSON.stringify(coverLetterData));
+    localStorage.setItem("data", JSON.stringify(data));
     setErrors({});
   };
 
@@ -39,7 +40,7 @@ const Opener = () => {
         <div className="w-full">
           <TextAreaField
             name="coverLetterOpener"
-            value={coverLetterData.coverLetterOpener!}
+            value={data.coverLetterOpener! || ""}
             setValue={setFormDataKey}
             rows={8}
             label="Opener"
@@ -47,6 +48,7 @@ const Opener = () => {
             error={errors.coverLetterOpener}
             className={`w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none`}
             isRequired
+            iconPath="/assets/images/comment.svg"
           />
         </div>
         <div className="mt-4 flex w-full flex-row flex-wrap items-center justify-between">

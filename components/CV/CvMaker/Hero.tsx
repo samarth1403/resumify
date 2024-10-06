@@ -13,6 +13,7 @@ const Hero = () => {
       heroImage="/assets/images/hero-resume-example.svg"
       createBtn={<Button href="/">Create your CV</Button>}
       orderReverse
+      showUnderLineImage
     />
   );
 };

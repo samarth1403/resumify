@@ -20,7 +20,7 @@ import { jsPDF as JsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
 const Preview = () => {
-  const { coverLetterData, selectedTemplateId } = useGlobalContext();
+  const { data, selectedTemplateId } = useGlobalContext();
   const { templateData, isLoading } = useGetTemplateData();
   const [showOtherTemplates, setShowOtherTemplates] = useState<boolean>(false);
   const coverLetterDivRef = useRef<HTMLDivElement>(null);
@@ -91,7 +91,7 @@ const Preview = () => {
           <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
             <TemplateModalComponent
               template={templateData}
-              sampleData={coverLetterData}
+              sampleData={data}
               ref={coverLetterDivRef}
             />
           </div>

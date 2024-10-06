@@ -11,7 +11,9 @@ const Hero = () => {
       text="Build an effective 2024 resume in minutes with our free-to-use resume builder. Choose a recruiter-approved template and add prewritten skills by Certified Professional Resume Writers."
       heroImage="/assets/images/hero-resume-example.svg"
       importBtn={<Button href="/">Import your Resume</Button>}
-      createBtn={<Button href="/">Create your Resume</Button>}
+      createBtn={
+        <Button href="/resume/build-resume">Create Your Resume</Button>
+      }
     />
   );
 };

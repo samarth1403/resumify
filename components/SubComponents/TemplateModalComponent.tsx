@@ -1,17 +1,18 @@
 import { RenderHtmlContent } from "@/components/SubComponents";
-import { coverLetterType, templateType } from "@/constants";
+import { dataType, templateType } from "@/constants";
 import React, { forwardRef } from "react";
 
 type PathWithTypePropertyBaseType = {
   template: templateType;
-  sampleData: coverLetterType;
+  sampleData: dataType;
   ref?: React.RefObject<HTMLDivElement>;
+  type?: string;
 };
 
 const TemplateModalComponent = forwardRef<
   HTMLDivElement,
   PathWithTypePropertyBaseType
->(function TemplateModalComponent({ template, sampleData }, ref) {
+>(function TemplateModalComponent({ template, sampleData, type }, ref) {
   return (
     <RenderHtmlContent
       className="scale-100"
@@ -19,6 +20,8 @@ const TemplateModalComponent = forwardRef<
       sampleData={sampleData}
       html={template.html}
       ref={ref}
+      isModalOpen={true}
+      type={type}
     />
   );
 });

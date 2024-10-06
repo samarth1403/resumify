@@ -1,7 +1,7 @@
 import {
   GlobalContextType,
-  coverLetterType,
-  initialCoverLetterData,
+  dataType,
+  initialData,
   initialGlobalContext,
   initialUserInfo,
   userInfoType,
@@ -24,19 +24,16 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const [user, setUser] = useState<userInfoType>(initialUserInfo);
   const [selectedTemplateId, setSelectedTemplateId] = useState<string>("");
-  const [coverLetterData, setCoverLetterData] = useState<coverLetterType>(
-    initialCoverLetterData
-  );
+  const [data, setData] = useState<dataType>(initialData);
 
   useEffect(() => {
     const savedTemplateId = localStorage.getItem("selectedTemplateId");
-    const coverLetterDataFromLocalStorage =
-      localStorage.getItem("coverLetterData");
+    const dataFromLocalStorage = localStorage.getItem("data");
     if (savedTemplateId) {
       setSelectedTemplateId(savedTemplateId);
     }
-    if (coverLetterDataFromLocalStorage) {
-      setCoverLetterData(JSON.parse(coverLetterDataFromLocalStorage));
+    if (dataFromLocalStorage) {
+      setData(JSON.parse(dataFromLocalStorage));
     }
   }, []);
 
@@ -49,8 +46,8 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
         setUser,
         selectedTemplateId,
         setSelectedTemplateId,
-        coverLetterData,
-        setCoverLetterData,
+        data,
+        setData,
       }}
     >
       {children}

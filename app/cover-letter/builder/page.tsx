@@ -3,12 +3,10 @@ import {
   Faq,
   Features,
   Hero,
-  OthersIntro,
   Ratings,
   Reviews,
   Steps,
 } from "@/components/CoverLetter/CoverLetterBuilder";
-import React from "react";
 
 const ConverLetterBuilder = () => {
   return (
@@ -16,7 +14,7 @@ const ConverLetterBuilder = () => {
       <Hero />
       <Steps />
       <Features />
-      <OthersIntro />
+      {/* <OthersIntro /> */}
       <Ratings />
       <Reviews />
       <Blogs />

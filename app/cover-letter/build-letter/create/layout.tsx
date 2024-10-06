@@ -10,8 +10,10 @@ import useGetTemplateData from "@/utils/useGetTemplateData";
 import { ReactNode } from "react";
 
 const CoverLetterCreateLayout = ({ children }: { children: ReactNode }) => {
-  const { coverLetterData } = useGlobalContext();
+  const { data } = useGlobalContext();
   const { isLoading, templateData } = useGetTemplateData();
+
+  console.log({ data, templateData });
 
   return (
     <Section
@@ -27,10 +29,11 @@ const CoverLetterCreateLayout = ({ children }: { children: ReactNode }) => {
         </div>
         <div className="flex-1">{children}</div>
         <TemplateShowCard
-          templateContentData={coverLetterData}
+          templateContentData={data}
           isLoading={isLoading}
           template={templateData}
           cardTitle={templateData.name}
+          type="cover-letter"
         />
       </div>
     </Section>

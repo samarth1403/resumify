@@ -1,6 +1,7 @@
 "use client";
 import { Button, FormHeading, TextAreaField } from "@/components/SubComponents";
 import { validateCoverLetter } from "@/components/Validation/Validation";
+import { dataType } from "@/constants";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import axios, { isAxiosError } from "axios";
 import { useRouter } from "next/navigation";
@@ -12,21 +13,20 @@ const Closer = () => {
   const router = useRouter();
 
   const [isFormSubmitting, setFormIsSubmitting] = useState<boolean>(false);
-  const { coverLetterData, setCoverLetterData, selectedTemplateId, user } =
-    useGlobalContext();
+  const { data, setData, selectedTemplateId, user } = useGlobalContext();
   const [errors, setErrors] = useState<Record<string, { message: string }>>({});
 
   const setFormDataKey = (
     key: string,
     value: string | number | boolean | readonly string[]
   ) => {
-    setCoverLetterData((prev) => ({ ...prev, [key]: value }));
+    setData((prev) => ({ ...prev, [key]: value }));
   };
 
   console.log(user);
 
   const handleContinue = async () => {
-    const { errors, errorTab } = validateCoverLetter(coverLetterData);
+    const { errors, errorTab } = validateCoverLetter(data as dataType);
     console.log(errors, errorTab);
     if (Object.keys(errors).length > 0) {
       toast.error("Please fill required field");
@@ -35,19 +35,19 @@ const Closer = () => {
       return;
     }
     router.push("/cover-letter/build-letter/preview");
-    localStorage.setItem("coverLetterData", JSON.stringify(coverLetterData));
+    localStorage.setItem("data", JSON.stringify(data));
     setErrors({});
 
     setFormIsSubmitting(true);
     try {
-      const { data, status } = await axios.post("/api/document/create", {
+      const res = await axios.post("/api/document/create", {
         type: "cover-letter",
-        userData: coverLetterData,
+        userData: data,
         user: user?.userId,
         template: selectedTemplateId,
       });
-      if (status === 201) {
-        toast.success(data.message);
+      if (res.status === 201) {
+        toast.success(res.data.message);
         // router.push("/");
       }
     } catch (error: unknown) {
@@ -69,7 +69,7 @@ const Closer = () => {
         <div className="w-full">
           <TextAreaField
             name="coverLetterCloser"
-            value={coverLetterData.coverLetterCloser!}
+            value={data.coverLetterCloser! || ""}
             setValue={setFormDataKey}
             rows={6}
             label="Closer"
@@ -77,6 +77,7 @@ const Closer = () => {
             className={`w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none`}
             isRequired
             error={errors.coverLetterCloser}
+            iconPath="/assets/images/comment.svg"
           />
         </div>
         <div className="mt-4 flex w-full flex-row flex-wrap items-center justify-between">

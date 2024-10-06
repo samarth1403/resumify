@@ -5,7 +5,7 @@ import {
   Section,
   TemplateModalComponent,
 } from "@/components/SubComponents";
-import { templateType } from "@/constants";
+import { dataType, templateType } from "@/constants";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -14,9 +14,13 @@ import { MdOutlineZoomIn } from "react-icons/md";
 const TemplateCard = ({
   template,
   forOtherTemplatesChoose = false,
+  type,
+  forOtherTemplatesChooseData,
 }: {
   template: templateType;
   forOtherTemplatesChoose?: boolean;
+  type?: string;
+  forOtherTemplatesChooseData?: dataType;
 }) => {
   const router = useRouter();
   const { setSelectedTemplateId } = useGlobalContext();
@@ -29,7 +33,11 @@ const TemplateCard = ({
 
   const handleTemplateChoose = () => {
     if (!forOtherTemplatesChoose) {
-      router.push(`/cover-letter/build-letter/create/header`);
+      router.push(
+        type === "cover-letter"
+          ? `/cover-letter/build-letter/create/header`
+          : "/resume/build-resume/create/header"
+      );
     }
     setSelectedTemplateId(template._id);
     localStorage.setItem("selectedTemplateId", template._id);
@@ -49,8 +57,13 @@ const TemplateCard = ({
           <RenderHtmlContent
             className={` rounded-xl shadow-2xl shadow-gray-400 duration-500 ${!forOtherTemplatesChoose ? "hover:-translate-y-4" : ""} `}
             dynamicFields={template.dynamicFields}
-            sampleData={template.sampleData}
+            sampleData={
+              forOtherTemplatesChoose
+                ? forOtherTemplatesChooseData
+                : template.sampleData
+            }
             html={template.htmlOption}
+            type={type}
           />
           <div
             onClick={handleModalOpen}
@@ -65,17 +78,11 @@ const TemplateCard = ({
           >
             Use this Template
           </button>
-          {/* <Button>Use this Template</Button> */}
         </div>
         <p className="h6">{template.name}</p>
 
         {isModalOpen && (
-          // <TemplateModalComponent
-          //   template={template}
-          //   setIsModalOpen={setIsModalOpen}
-          //   sampleData={template.sampleData}
-          // />
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-gray-500 bg-opacity-75">
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-gray-500/75">
             <div className="absolute inset-0 flex flex-col items-center justify-start  overflow-auto">
               <div className="flex-start mt-24 max-w-[1000px] flex-col flex-wrap gap-4 rounded-2xl bg-white px-8 pb-8 ">
                 <div className="flex w-full items-start justify-between px-4 pt-10">
@@ -99,6 +106,7 @@ const TemplateCard = ({
                     <TemplateModalComponent
                       sampleData={template.sampleData}
                       template={template}
+                      type={type}
                     />
                   </div>
                 </Section>

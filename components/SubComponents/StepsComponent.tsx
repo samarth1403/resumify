@@ -36,15 +36,13 @@ const StepsComponent = ({
         <div className="flex w-full flex-wrap items-start justify-around gap-8 lg:gap-8 ">
           {stepsData?.map((step, index) => (
             <div key={step?.id} className="flex-center w-60 flex-col gap-4 ">
-              <div className="flex-center h-32 w-16">
-                <Image
-                  src={step?.logo}
-                  alt={step.title}
-                  width={100}
-                  height={100}
-                  className="size-full object-contain"
-                />
-              </div>
+              <Image
+                src={step?.logo}
+                alt={step.title}
+                width={100}
+                height={100}
+                className="object-contain"
+              />
               <p className="h6 text-center">
                 {index + 1}. {step.title}
               </p>

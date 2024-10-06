@@ -38,11 +38,11 @@ export const navLinks = [
         title: "Resume Templates",
         uri: "/resume/all-templates",
       },
-      {
-        id: "1",
-        title: "Resume Examples",
-        uri: "/resume/examples",
-      },
+      // {
+      //   id: "1",
+      //   title: "Resume Examples",
+      //   uri: "/resume/examples",
+      // },
       {
         id: "2",
         title: "Resume Builder",
@@ -55,33 +55,33 @@ export const navLinks = [
       },
     ],
   },
-  {
-    id: "1",
-    title: "CV",
-    url: "/cv/maker",
-    subLinks: [
-      {
-        id: "0",
-        title: "CV Templates",
-        uri: "/cv/all-templates",
-      },
-      {
-        id: "1",
-        title: "CV Examples",
-        uri: "/cv/examples",
-      },
-      {
-        id: "2",
-        title: "CV Maker",
-        uri: "/cv/maker",
-      },
-      {
-        id: "3",
-        title: "How to Write a CV",
-        uri: "/cv/how-to-write-a-cv",
-      },
-    ],
-  },
+  // {
+  //   id: "1",
+  //   title: "CV",
+  //   url: "/cv/maker",
+  //   subLinks: [
+  //     {
+  //       id: "0",
+  //       title: "CV Templates",
+  //       uri: "/cv/all-templates",
+  //     },
+  //     {
+  //       id: "1",
+  //       title: "CV Examples",
+  //       uri: "/cv/examples",
+  //     },
+  //     {
+  //       id: "2",
+  //       title: "CV Maker",
+  //       uri: "/cv/maker",
+  //     },
+  //     {
+  //       id: "3",
+  //       title: "How to Write a CV",
+  //       uri: "/cv/how-to-write-a-cv",
+  //     },
+  //   ],
+  // },
   {
     id: "2",
     title: "Cover Letter",
@@ -92,11 +92,11 @@ export const navLinks = [
         title: "Cover Letter Templates",
         uri: "/cover-letter/all-templates",
       },
-      {
-        id: "1",
-        title: "Cover Letter Examples",
-        uri: "/cover-letter/examples",
-      },
+      // {
+      //   id: "1",
+      //   title: "Cover Letter Examples",
+      //   uri: "/cover-letter/examples",
+      // },
       {
         id: "2",
         title: "Cover Letter Builder",
@@ -277,34 +277,6 @@ export type userInfoType = {
   userId: string;
 };
 
-export type coverLetterType = {
-  name: string;
-  initials: string;
-  email: string;
-  phone: string;
-  address: string;
-  date: string;
-  recruiterName?: string;
-  recruiterPosition?: string;
-  hiringCompanyName?: string;
-  hiringCompanyAddress?: string;
-  coverLetterOpener?: string;
-  coverLetterBody1?: string;
-  coverLetterBody2?: string;
-  coverLetterCloser?: string;
-};
-
-export type GlobalContextType = {
-  isUserLoggedIn: boolean;
-  user: userInfoType | null;
-  setIsUserLoggedIn: (isLoggedIn: boolean) => void;
-  setUser: (user: userInfoType) => void;
-  selectedTemplateId: string;
-  setSelectedTemplateId: (id: string) => void;
-  coverLetterData: coverLetterType;
-  setCoverLetterData: React.Dispatch<React.SetStateAction<coverLetterType>>;
-};
-
 export interface experienceType {
   jobTitle: string;
   company: string;
@@ -331,6 +303,76 @@ export interface projectType {
   description: string;
   link: string;
 }
+
+export type coverLetterType = {
+  name: string;
+  initials: string;
+  email: string;
+  phone: string;
+  address: string;
+  date: string;
+  recruiterName?: string;
+  recruiterPosition?: string;
+  hiringCompanyName?: string;
+  hiringCompanyAddress?: string;
+  coverLetterOpener?: string;
+  coverLetterBody1?: string;
+  coverLetterBody2?: string;
+  coverLetterCloser?: string;
+};
+
+export type resumeType = {
+  name: string;
+  initials: string;
+  email: string;
+  phone: string;
+  address: string;
+  date?: string;
+  experience?: experienceType[];
+  education?: educationType[];
+  skills?: string[];
+  profiles?: profileType[];
+  projects?: projectType[];
+  profilePicture?: string;
+  summary?: string;
+  color?: string;
+};
+
+export type dataType = {
+  name: string;
+  initials: string;
+  email: string;
+  phone: string;
+  address: string;
+  date: string;
+  recruiterName?: string;
+  recruiterPosition?: string;
+  hiringCompanyName?: string;
+  hiringCompanyAddress?: string;
+  coverLetterOpener?: string;
+  coverLetterBody1?: string;
+  coverLetterBody2?: string;
+  coverLetterCloser?: string;
+  experience?: experienceType[];
+  education?: educationType[];
+  skills?: string[];
+  profiles?: profileType[];
+  projects?: projectType[];
+  profilePicture?: string;
+  summary?: string;
+  color?: string;
+};
+
+export type GlobalContextType = {
+  isUserLoggedIn: boolean;
+  user: userInfoType | null;
+  setIsUserLoggedIn: (isLoggedIn: boolean) => void;
+  setUser: (user: userInfoType) => void;
+  selectedTemplateId: string;
+  setSelectedTemplateId: (id: string) => void;
+  data: dataType;
+  setData: React.Dispatch<React.SetStateAction<dataType>>;
+};
 
 export type templateType = {
   sampleData: {
@@ -397,6 +439,23 @@ export const initialCoverLetterData: coverLetterType = {
   coverLetterCloser: "",
 };
 
+export const initialResumeData: resumeType = {
+  name: "",
+  initials: "",
+  email: "",
+  phone: "",
+  address: "",
+  date: "",
+  experience: [],
+  education: [],
+  skills: [],
+  profiles: [],
+  projects: [],
+  profilePicture: "",
+  summary: "",
+  color: "",
+};
+
 export const initialTemplateData: templateType = {
   sampleData: initialCoverLetterData,
   _id: "",
@@ -407,6 +466,31 @@ export const initialTemplateData: templateType = {
   html: "",
   htmlOption: "",
   dynamicFields: [],
+};
+
+export const initialData: dataType = {
+  name: "",
+  initials: "",
+  email: "",
+  phone: "",
+  address: "",
+  date: `${moment()?.format("Do MMM YYYY")}`,
+  recruiterName: "",
+  recruiterPosition: "",
+  hiringCompanyName: "",
+  hiringCompanyAddress: "",
+  coverLetterOpener: "",
+  coverLetterBody1: "",
+  coverLetterBody2: "",
+  coverLetterCloser: "",
+  experience: [],
+  education: [],
+  skills: [],
+  profiles: [],
+  projects: [],
+  profilePicture: "",
+  summary: "",
+  color: "",
 };
 
 export interface documentType {
@@ -440,8 +524,8 @@ export const initialGlobalContext: GlobalContextType = {
   setUser: () => {},
   selectedTemplateId: "",
   setSelectedTemplateId: () => {},
-  coverLetterData: initialCoverLetterData,
-  setCoverLetterData: () => {},
+  data: initialData,
+  setData: () => {},
 };
 
 export const initialDocumentsData: documentsDataType = {

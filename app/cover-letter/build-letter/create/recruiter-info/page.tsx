@@ -9,18 +9,18 @@ import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 
 const RecruiterInfo = () => {
   const router = useRouter();
-  const { coverLetterData, setCoverLetterData } = useGlobalContext();
+  const { data, setData } = useGlobalContext();
   const [errors, setErrors] = useState<Record<string, { message: string }>>({});
 
   const setFormDataKey = (
     key: string,
     value: string | number | boolean | readonly string[]
   ) => {
-    setCoverLetterData((prev) => ({ ...prev, [key]: value }));
+    setData((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleContinue = () => {
-    const errors = validateCoverLetterRecruiterInfo(coverLetterData);
+    const errors = validateCoverLetterRecruiterInfo(data);
     if (Object.keys(errors).length > 0) {
       toast.error("Please fill all required fields");
       setErrors(errors);
@@ -28,7 +28,7 @@ const RecruiterInfo = () => {
     }
     toast.success("Recruiter Info Saved Successfully");
     router.push("/cover-letter/build-letter/create/opener");
-    localStorage.setItem("coverLetterData", JSON.stringify(coverLetterData));
+    localStorage.setItem("data", JSON.stringify(data));
     setErrors({});
   };
 
@@ -46,23 +46,25 @@ const RecruiterInfo = () => {
             label="Name"
             type="text"
             name="recruiterName"
-            value={coverLetterData.recruiterName!}
+            value={data.recruiterName! || ""}
             setValue={setFormDataKey}
             placeholder="Recruiter Name"
             className="w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none"
             error={errors.recruiterName}
             isRequired
+            iconPath="/assets/images/person.svg"
           />
         </div>
-        <div className="w-48">
+        <div className="w-48 sm:w-64">
           <FormField
             label="Position"
             type="text"
             name="recruiterPosition"
-            value={coverLetterData.recruiterPosition!}
+            value={data.recruiterPosition! || ""}
             setValue={setFormDataKey}
             placeholder="Designation of Recruiter"
             className="w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none"
+            iconPath="/assets/images/rocket.svg"
           />
         </div>
         <div className="w-full">
@@ -70,12 +72,13 @@ const RecruiterInfo = () => {
             label="Company"
             type="text"
             name="hiringCompanyName"
-            value={coverLetterData.hiringCompanyName!}
+            value={data.hiringCompanyName! || ""}
             setValue={setFormDataKey}
             placeholder="Enter Hiring Company Name"
             className="w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none"
             error={errors.hiringCompanyName}
             isRequired
+            iconPath="/assets/images/company.svg"
           />
         </div>
         <div className="w-full">
@@ -83,12 +86,13 @@ const RecruiterInfo = () => {
             label="Comapny Address"
             type="text"
             name="hiringCompanyAddress"
-            value={coverLetterData.hiringCompanyAddress!}
+            value={data.hiringCompanyAddress! || ""}
             setValue={setFormDataKey}
             placeholder="Enter Hiring Company's Address"
             className="w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none "
             error={errors.hiringCompanyAddress}
             isRequired
+            iconPath="/assets/images/location.svg"
           />
         </div>
         <div className="mt-4 flex w-full flex-row flex-wrap items-center justify-between">

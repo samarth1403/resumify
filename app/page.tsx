@@ -1,18 +1,17 @@
 "use client";
-import Blogs from "@/components/Resume/ResumeBuilder/Blogs";
 import {
+  Faq,
   Features,
   Hero,
-  OthersIntro,
   Ratings,
-  Faq,
   Reviews,
   Steps,
   Video,
 } from "@/components/Resume/ResumeBuilder";
+import Blogs from "@/components/Resume/ResumeBuilder/Blogs";
 import Templates from "@/components/Resume/Templates";
-import { useGlobalContext } from "@/context/GlobalProvider";
 import { UserDocuments } from "@/components/SubComponents";
+import { useGlobalContext } from "@/context/GlobalProvider";
 
 const Homepage = () => {
   const { isUserLoggedIn } = useGlobalContext();
@@ -23,7 +22,7 @@ const Homepage = () => {
       <Templates />
       <Video />
       <Features />
-      <OthersIntro />
+      {/* <OthersIntro /> */}
       <Ratings />
       <Blogs />
       <Reviews />

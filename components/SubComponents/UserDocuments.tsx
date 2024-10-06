@@ -32,19 +32,19 @@ const UserDocuments = () => {
               </Link>
             </div>
             {!isLoading ? (
-              <div className="flex-start flex-col">
+              <div className="flex-start flex-col gap-1">
                 <div className="flex-between w-96">
                   <p className="body-3 text-blue-500">Your Resumes</p>
                   <p className="body-3 font-bold text-blue-500">
                     {documentsData?.resumes?.length}
                   </p>
                 </div>
-                <div className="flex-between w-96">
+                {/* <div className="flex-between w-96">
                   <p className="body-3 text-blue-500">Your CVs</p>
                   <p className="body-3 font-bold text-blue-500">
                     {documentsData?.cvs?.length}
                   </p>
-                </div>
+                </div> */}
                 <div className="flex-between w-96">
                   <p className="body-3 text-blue-500">Your Cover Letters</p>
                   <p className="body-3 font-bold text-blue-500">

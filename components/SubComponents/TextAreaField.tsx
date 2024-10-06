@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface propTypes {
@@ -10,6 +11,7 @@ interface propTypes {
   error?: { message: string };
   isRequired?: boolean;
   rows: number;
+  iconPath?: string;
 }
 
 const TextAreaField = ({
@@ -22,9 +24,10 @@ const TextAreaField = ({
   error,
   isRequired,
   rows,
+  iconPath,
 }: propTypes) => {
   return (
-    <div className={`flex-start w-full flex-col gap-[5px] `}>
+    <div className={`flex-start relative w-full flex-col gap-[5px] `}>
       {label && (
         <label htmlFor={name}>
           {label}
@@ -38,9 +41,18 @@ const TextAreaField = ({
           setValue(name, e.target.value);
         }}
         placeholder={placeholder}
-        className={`${className}`}
+        className={`${className} ${iconPath ? "pl-10" : ""} `}
         rows={rows}
       />
+      {iconPath && (
+        <Image
+          src={iconPath}
+          alt={""}
+          width={25}
+          height={25}
+          className={`absolute left-2 top-10 object-contain`}
+        />
+      )}
       {error && (
         <span className="text-[0.85rem] text-red-700">{error.message}</span>
       )}

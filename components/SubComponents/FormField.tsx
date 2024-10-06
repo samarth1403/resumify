@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface propTypes {
@@ -14,6 +15,8 @@ interface propTypes {
   divClassName?: string;
   error?: { message: string };
   isRequired?: boolean;
+  iconPath?: string;
+  iconFromTop?: string;
 }
 
 const FormField = ({
@@ -27,9 +30,13 @@ const FormField = ({
   divClassName,
   error,
   isRequired,
+  iconPath,
+  iconFromTop,
 }: propTypes) => {
   return (
-    <div className={`flex-start w-full flex-col gap-[5px] ${divClassName} `}>
+    <div
+      className={`flex-start w-full flex-col gap-[5px] ${divClassName} relative `}
+    >
       {label && (
         <label htmlFor={name}>
           {label}
@@ -48,8 +55,17 @@ const FormField = ({
           );
         }}
         placeholder={placeholder}
-        className={`${className}`}
+        className={`${className} ${iconPath ? "pl-10" : ""} `}
       />
+      {iconPath && (
+        <Image
+          src={iconPath}
+          alt={""}
+          width={25}
+          height={25}
+          className={`absolute left-2 ${iconFromTop || "top-1/2"} object-contain`}
+        />
+      )}
       {error && (
         <span className="text-[0.85rem] text-red-700">{error.message}</span>
       )}

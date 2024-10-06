@@ -17,6 +17,7 @@ const Hero = () => {
         </Button>
       }
       orderReverse
+      showUnderLineImage={false}
     />
   );
 };

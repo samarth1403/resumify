@@ -249,8 +249,8 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #fb923c;
-    border-radius: 6px;
+    background-color: #8d8d8d;
+    border-radius: 2px;
 }
 
 .app {

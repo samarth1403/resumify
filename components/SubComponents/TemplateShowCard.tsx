@@ -5,14 +5,14 @@ import {
   RenderHtmlContent,
   TemplateModalComponent,
 } from "@/components/SubComponents";
-import { coverLetterType, templateType } from "@/constants";
+import { dataType, templateType } from "@/constants";
 import { useRef, useState } from "react";
 
 import { useGlobalContext } from "@/context/GlobalProvider";
+import html2canvas from "html2canvas";
+import { jsPDF as JsPDF } from "jspdf";
 import { useRouter } from "next/navigation";
 import { MdOutlineDownload, MdOutlineZoomIn } from "react-icons/md";
-import { jsPDF as JsPDF } from "jspdf";
-import html2canvas from "html2canvas";
 
 const TemplateShowCard = ({
   templateContentData,
@@ -21,13 +21,15 @@ const TemplateShowCard = ({
   selfDocument = false,
   cardTitle,
   isExample = false,
+  type,
 }: {
-  templateContentData: coverLetterType;
+  templateContentData: dataType;
   isLoading?: boolean;
   template: templateType;
   selfDocument?: boolean;
   isExample?: boolean;
   cardTitle: string;
+  type?: string;
 }) => {
   const router = useRouter();
   const { setSelectedTemplateId } = useGlobalContext();
@@ -48,12 +50,13 @@ const TemplateShowCard = ({
     setSelectedTemplateId(template._id);
     localStorage.setItem("selectedTemplateId", template._id);
     if (isExample || selfDocument) {
-      localStorage.setItem(
-        "coverLetterData",
-        JSON.stringify(templateContentData)
-      );
+      localStorage.setItem("data", JSON.stringify(templateContentData));
     }
-    router.push(`/cover-letter/build-letter/create/header`);
+    router.push(
+      type === "resume"
+        ? `/resume/build-resume/create/header`
+        : `/cover-letter/build-letter/create/header`
+    );
   };
 
   const downloadPdf = () => {
@@ -87,6 +90,7 @@ const TemplateShowCard = ({
               sampleData={templateContentData}
               html={template?.htmlOption}
               ref={componentRef}
+              type={type}
             />
             {selfDocument && (
               <div
@@ -117,7 +121,7 @@ const TemplateShowCard = ({
           </div>
 
           {isModalOpen && (
-            <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-gray-500 bg-opacity-75">
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-gray-500/75">
               <div className="absolute inset-0 flex flex-col items-center justify-start  overflow-auto">
                 <div className="flex-start mt-24 max-w-[1000px] flex-col flex-wrap gap-4 rounded-2xl bg-white px-8 pb-8 ">
                   <div className="flex w-full items-start justify-between px-4 pt-10">
@@ -129,6 +133,7 @@ const TemplateShowCard = ({
                   <TemplateModalComponent
                     sampleData={templateContentData}
                     template={template}
+                    type={type}
                   />
                 </div>
               </div>

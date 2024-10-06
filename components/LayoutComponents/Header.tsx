@@ -71,16 +71,12 @@ const Header = () => {
   return (
     <div className="fixed left-0 top-0 z-50 mb-4 w-full border-b border-shades-4  lg:mb-6 lg:backdrop-blur-lg ">
       <nav className="flex-between px-5 py-4 lg:px-8 lg:py-5 xl:px-10">
-        <Link
-          href={"/"}
-          className="flex-center gap-4"
-          onClick={() => setActive("")}
-        >
+        <Link href={"/"} className="flex-center" onClick={() => setActive("")}>
           <Image
-            src={"/assets/icons/resumify-logo.svg"}
-            alt="Resumify Logo"
-            width={30}
-            height={30}
+            src={"/assets/images/logo.svg"}
+            alt=""
+            width={50}
+            height={50}
             className="object-contain"
           />
           <p className="logo_text">Resumify</p>
