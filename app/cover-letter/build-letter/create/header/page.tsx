@@ -45,10 +45,10 @@ const Header = () => {
             setValue={(key, value) => {
               setFormDataKey(
                 "initials",
-                value
-                  .split(" ")
-                  .map((n) => n[0]?.toUpperCase())
-                  .join("")
+                (value as string)
+                  ?.split(" ")
+                  ?.map((n) => n[0]?.toUpperCase())
+                  ?.join("")
               );
               setFormDataKey(key, value);
             }}

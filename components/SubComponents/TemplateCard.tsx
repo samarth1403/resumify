@@ -59,8 +59,8 @@ const TemplateCard = ({
             dynamicFields={template.dynamicFields}
             sampleData={
               forOtherTemplatesChoose
-                ? forOtherTemplatesChooseData
-                : template.sampleData
+                ? (forOtherTemplatesChooseData as dataType)
+                : (template.sampleData as dataType)
             }
             html={template.htmlOption}
             type={type}
@@ -104,7 +104,7 @@ const TemplateCard = ({
                 >
                   <div className="rounded-xl shadow-2xl shadow-gray-400">
                     <TemplateModalComponent
-                      sampleData={template.sampleData}
+                      sampleData={template.sampleData as dataType}
                       template={template}
                       type={type}
                     />
