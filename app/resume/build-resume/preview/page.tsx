@@ -18,6 +18,7 @@ import React, { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import { jsPDF as JsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import { dataType } from "@/constants";
 
 const Preview = () => {
   const { data, selectedTemplateId } = useGlobalContext();
@@ -42,7 +43,7 @@ const Preview = () => {
               //     ...data,
               //     color: templateData?.sampleData?.color,
               //   }}
-              forOtherTemplatesChooseData={template?.sampleData}
+              forOtherTemplatesChooseData={template?.sampleData as dataType}
               type="resume"
             />
           );
