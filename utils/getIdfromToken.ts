@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 
 export const getIdfromToken = (request: NextRequest) => {
   try {
-    const token = request.cookies.get("token")?.value || "";
+    const token = request.cookies.get("resumify-token")?.value || "";
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET!) as {
       userId: string;
     };

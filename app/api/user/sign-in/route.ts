@@ -41,7 +41,7 @@ export const POST = async (request: NextRequest) => {
       { status: 200 }
     );
 
-    response.cookies.set("token", token, {
+    response.cookies.set("resumify-token", token, {
       httpOnly: true,
       sameSite: "strict",
       secure: true,

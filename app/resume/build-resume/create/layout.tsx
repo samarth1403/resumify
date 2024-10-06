@@ -1,0 +1,41 @@
+"use client";
+import {
+  Section,
+  StepperComponent,
+  TemplateShowCard,
+} from "@/components/SubComponents";
+import { stepperData } from "@/constants/Resume";
+import { useGlobalContext } from "@/context/GlobalProvider";
+import useGetTemplateData from "@/utils/useGetTemplateData";
+import { ReactNode } from "react";
+
+const ResumeCreateLayout = ({ children }: { children: ReactNode }) => {
+  const { data } = useGlobalContext();
+  const { isLoading, templateData } = useGetTemplateData();
+
+  return (
+    <Section
+      className="mt-[4.25rem] size-full "
+      crosses
+      crossesOffset="lg:translate-y-[5.25rem]"
+      customPaddings
+      id="steps"
+    >
+      <div className="flex-start gap-4 lg:gap-8 ">
+        <div className="w-48 p-4">
+          <StepperComponent stepperData={stepperData} />
+        </div>
+        <div className="flex-1">{children}</div>
+        <TemplateShowCard
+          templateContentData={data}
+          isLoading={isLoading}
+          template={templateData}
+          cardTitle={templateData.name}
+          type={"resume"}
+        />
+      </div>
+    </Section>
+  );
+};
+
+export default ResumeCreateLayout;

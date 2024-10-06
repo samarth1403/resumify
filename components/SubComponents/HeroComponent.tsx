@@ -12,6 +12,7 @@ interface propTypes {
   importBtn?: ReactNode;
   createBtn: ReactNode;
   orderReverse?: boolean;
+  showUnderLineImage?: boolean;
 }
 
 const HeroComponent = ({
@@ -24,6 +25,7 @@ const HeroComponent = ({
   importBtn,
   createBtn,
   orderReverse,
+  showUnderLineImage = true,
 }: propTypes) => {
   return (
     <Section
@@ -41,22 +43,25 @@ const HeroComponent = ({
             <h1 className="h1">
               {preTitle}
               {heroWord && heroWordUnderlineImg && (
-                <span className="relative mb-4 inline-block ">
+                <span className={`relative  inline-block `}>
                   {heroWord}
-                  <Image
-                    src={heroWordUnderlineImg}
-                    alt=""
-                    className="pointer-events-none absolute left-0  w-full "
-                    width={100}
-                    height={100}
-                  />
+                  {showUnderLineImage && (
+                    <Image
+                      src={heroWordUnderlineImg}
+                      alt=""
+                      className="pointer-events-none absolute left-0  w-full "
+                      width={100}
+                      height={100}
+                      style={{ objectFit: "contain" }}
+                    />
+                  )}
                 </span>
               )}
               {postTitle}
             </h1>
             <p className="body-1">{text}</p>
             <div className="flex-center gap-4 lg:gap-8">
-              {importBtn && importBtn}
+              {/* {importBtn && importBtn} */}
               {createBtn && createBtn}
             </div>
           </div>

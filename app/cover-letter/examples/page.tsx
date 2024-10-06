@@ -1,7 +1,12 @@
+import { ExampleHero } from "@/components/CoverLetter/CoverLetterExamples";
 import React from "react";
 
 const ConverLetterExamples = () => {
-  return <div>ConverLetterExamples</div>;
+  return (
+    <>
+      <ExampleHero />
+    </>
+  );
 };
 
 export default ConverLetterExamples;

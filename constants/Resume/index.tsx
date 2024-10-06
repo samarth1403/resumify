@@ -3,25 +3,25 @@ export const resumeStepsData = [
     id: "0",
     title: "Pick your favorite template",
     text: "Choose a template that suits your style and industry.",
-    logo: "/assets/images/step1.svg",
+    logo: "/assets/images/choose.svg",
   },
   {
     id: "1",
     title: "Choose text to tell your story",
     text: "Fill in your details and download your resume.",
-    logo: "/assets/images/step2.svg",
+    logo: "/assets/images/keyboard.svg",
   },
   {
     id: "2",
     title: "Customize Your Resume",
     text: "Customize your resume to match your style and profession.",
-    logo: "/assets/images/step3.svg",
+    logo: "/assets/images/customize.svg",
   },
   {
     id: "3",
     title: "Download Your Resume",
     text: "Download your resume and start applying for jobs.",
-    logo: "/assets/images/step4.svg",
+    logo: "/assets/images/download.svg",
   },
 ];
 
@@ -267,5 +267,38 @@ export const resumeTemplateData = [
         image: "/assets/images/hero-resume-example.svg",
       },
     ],
+  },
+];
+
+export const stepperData = [
+  {
+    id: "0",
+    title: "Header",
+    uri: "/resume/build-resume/create/header",
+  },
+  {
+    id: "1",
+    title: "Experience",
+    uri: "/resume/build-resume/create/experience",
+  },
+  {
+    id: "2",
+    title: "Education",
+    uri: "/resume/build-resume/create/education",
+  },
+  {
+    id: "3",
+    title: "Projects",
+    uri: "/resume/build-resume/create/projects",
+  },
+  {
+    id: "4",
+    title: "Skills",
+    uri: "/resume/build-resume/create/skills",
+  },
+  {
+    id: "5",
+    title: "Profiles",
+    uri: "/resume/build-resume/create/profiles",
   },
 ];

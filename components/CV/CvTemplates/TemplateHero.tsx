@@ -1,12 +1,11 @@
-import TemplateHeroComponent from "@/components/SubComponents/TemplateHeroComponent";
-import { resumeTemplateData } from "@/constants/Resume";
 import React from "react";
+import { ChooseTemplateComponent } from "@/components/SubComponents";
 
 const TemplateHero = () => {
   return (
-    <TemplateHeroComponent
+    <ChooseTemplateComponent
       title="Explore our Professional CV Templates"
-      templateData={resumeTemplateData}
+      type="cv"
     />
   );
 };

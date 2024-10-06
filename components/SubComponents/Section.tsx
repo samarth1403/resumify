@@ -7,6 +7,7 @@ const Section = ({
   crosses,
   crossesOffset,
   children,
+  childrenClassName,
   customPaddings,
 }: {
   className: string;
@@ -15,12 +16,17 @@ const Section = ({
   crossesOffset: string;
   children: ReactNode;
   customPaddings: boolean;
+  childrenClassName?: string;
 }) => {
   return (
     <section className={className}>
       <div className="flex">
         <div className="ml-1.5 h-auto w-px bg-shades-4" />
-        <div className="mb-4 flex-1 px-4 lg:mb-8 lg:px-8">{children}</div>
+        <div
+          className={`mb-4 flex-1 px-4 lg:mb-8 lg:px-8 ${childrenClassName}`}
+        >
+          {children}
+        </div>
         <div className="mr-1.5 h-auto w-px bg-shades-4" />
       </div>
       <div className="flex items-center">

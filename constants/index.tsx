@@ -1,3 +1,6 @@
+import moment from "moment";
+import React from "react";
+
 export const VERIFY = "VERIFY";
 export const RESET_PASSWORD = "RESET_PASSWORD";
 export const SIGN_IN_SUCCESS_MESSAGE = "Signed in successfully";
@@ -5,6 +8,24 @@ export const USER_DOES_NOT_EXIST = "User does not exist";
 export const USER_ALREADY_EXISTS = "User already exists";
 export const INVALID_CREDENTIALS = "Invalid Credentials";
 export const UNKNOW_ERROR = "Unknown error occurred";
+
+export const masterDocumentTypes = [
+  {
+    id: "resume",
+    title: "Resume",
+    uri: "/resume",
+  },
+  {
+    id: "cover-letter",
+    title: "Cover Letter",
+    uri: "/cover-letter",
+  },
+  {
+    id: "cv",
+    title: "CV",
+    uri: "/cv",
+  },
+];
 
 export const navLinks = [
   {
@@ -17,11 +38,11 @@ export const navLinks = [
         title: "Resume Templates",
         uri: "/resume/all-templates",
       },
-      {
-        id: "1",
-        title: "Resume Examples",
-        uri: "/resume/examples",
-      },
+      // {
+      //   id: "1",
+      //   title: "Resume Examples",
+      //   uri: "/resume/examples",
+      // },
       {
         id: "2",
         title: "Resume Builder",
@@ -34,33 +55,33 @@ export const navLinks = [
       },
     ],
   },
-  {
-    id: "1",
-    title: "CV",
-    url: "/cv/maker",
-    subLinks: [
-      {
-        id: "0",
-        title: "CV Templates",
-        uri: "/cv/all-templates",
-      },
-      {
-        id: "1",
-        title: "CV Examples",
-        uri: "/cv/examples",
-      },
-      {
-        id: "2",
-        title: "CV Maker",
-        uri: "/cv/maker",
-      },
-      {
-        id: "3",
-        title: "How to Write a CV",
-        uri: "/cv/how-to-write-a-cv",
-      },
-    ],
-  },
+  // {
+  //   id: "1",
+  //   title: "CV",
+  //   url: "/cv/maker",
+  //   subLinks: [
+  //     {
+  //       id: "0",
+  //       title: "CV Templates",
+  //       uri: "/cv/all-templates",
+  //     },
+  //     {
+  //       id: "1",
+  //       title: "CV Examples",
+  //       uri: "/cv/examples",
+  //     },
+  //     {
+  //       id: "2",
+  //       title: "CV Maker",
+  //       uri: "/cv/maker",
+  //     },
+  //     {
+  //       id: "3",
+  //       title: "How to Write a CV",
+  //       uri: "/cv/how-to-write-a-cv",
+  //     },
+  //   ],
+  // },
   {
     id: "2",
     title: "Cover Letter",
@@ -71,11 +92,11 @@ export const navLinks = [
         title: "Cover Letter Templates",
         uri: "/cover-letter/all-templates",
       },
-      {
-        id: "1",
-        title: "Cover Letter Examples",
-        uri: "/cover-letter/examples",
-      },
+      // {
+      //   id: "1",
+      //   title: "Cover Letter Examples",
+      //   uri: "/cover-letter/examples",
+      // },
       {
         id: "2",
         title: "Cover Letter Builder",
@@ -148,32 +169,7 @@ export const footerLinks = [
       },
     ],
   },
-  {
-    id: "3",
-    title: "Resources",
-    subLinks: [
-      {
-        id: "0",
-        title: "Blogs",
-        uri: "/blogs",
-      },
-      {
-        id: "1",
-        title: "FAQ",
-        uri: "/faq",
-      },
-      {
-        id: "2",
-        title: "Contact",
-        uri: "/contact",
-      },
-      {
-        id: "3",
-        title: "About",
-        uri: "/about",
-      },
-    ],
-  },
+
   {
     id: "2",
     title: "CV",
@@ -200,7 +196,32 @@ export const footerLinks = [
       },
     ],
   },
-
+  {
+    id: "3",
+    title: "Resources",
+    subLinks: [
+      {
+        id: "0",
+        title: "Blogs",
+        uri: "/blogs",
+      },
+      {
+        id: "1",
+        title: "FAQ",
+        uri: "/faq",
+      },
+      {
+        id: "2",
+        title: "Contact",
+        uri: "/contact",
+      },
+      {
+        id: "3",
+        title: "About",
+        uri: "/about",
+      },
+    ],
+  },
   {
     id: "4",
     title: "Legal",
@@ -247,3 +268,268 @@ export const resumeTemplateTypes = [
     uri: "/",
   },
 ];
+
+export type userInfoType = {
+  username: string;
+  email: string;
+  isAdmin: boolean;
+  isVerified: boolean;
+  userId: string;
+};
+
+export interface experienceType {
+  jobTitle: string;
+  company: string;
+  startDate: string;
+  endDate: string;
+  jobDescription: string;
+}
+
+export interface educationType {
+  degree: string;
+  institution: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+}
+
+export interface profileType {
+  profile: string;
+  link: string;
+}
+
+export interface projectType {
+  title: string;
+  description: string;
+  link: string;
+}
+
+export type coverLetterType = {
+  name: string;
+  initials: string;
+  email: string;
+  phone: string;
+  address: string;
+  date: string;
+  recruiterName?: string;
+  recruiterPosition?: string;
+  hiringCompanyName?: string;
+  hiringCompanyAddress?: string;
+  coverLetterOpener?: string;
+  coverLetterBody1?: string;
+  coverLetterBody2?: string;
+  coverLetterCloser?: string;
+};
+
+export type resumeType = {
+  name: string;
+  initials: string;
+  email: string;
+  phone: string;
+  address: string;
+  date?: string;
+  experience?: experienceType[];
+  education?: educationType[];
+  skills?: string[];
+  profiles?: profileType[];
+  projects?: projectType[];
+  profilePicture?: string;
+  summary?: string;
+  color?: string;
+};
+
+export type dataType = {
+  name: string;
+  initials: string;
+  email: string;
+  phone: string;
+  address: string;
+  date: string;
+  recruiterName?: string;
+  recruiterPosition?: string;
+  hiringCompanyName?: string;
+  hiringCompanyAddress?: string;
+  coverLetterOpener?: string;
+  coverLetterBody1?: string;
+  coverLetterBody2?: string;
+  coverLetterCloser?: string;
+  experience?: experienceType[];
+  education?: educationType[];
+  skills?: string[];
+  profiles?: profileType[];
+  projects?: projectType[];
+  profilePicture?: string;
+  summary?: string;
+  color?: string;
+};
+
+export type GlobalContextType = {
+  isUserLoggedIn: boolean;
+  user: userInfoType | null;
+  setIsUserLoggedIn: (isLoggedIn: boolean) => void;
+  setUser: (user: userInfoType) => void;
+  selectedTemplateId: string;
+  setSelectedTemplateId: (id: string) => void;
+  data: dataType;
+  setData: React.Dispatch<React.SetStateAction<dataType>>;
+};
+
+export type templateType = {
+  sampleData: {
+    name: string;
+    initials: string;
+    email: string;
+    phone: string;
+    address: string;
+    date?: string;
+    recruiterName?: string;
+    recruiterPosition?: string;
+    hiringCompanyName?: string;
+    hiringCompanyAddress?: string;
+    coverLetterOpener?: string;
+    coverLetterBody1?: string;
+    coverLetterBody2?: string;
+    coverLetterCloser?: string;
+    experience?: experienceType[];
+    education?: educationType[];
+    skills?: string[];
+    profiles?: profileType[];
+    projects?: projectType[];
+    profilePicture?: string;
+    summary?: string;
+    color?: string;
+  };
+  _id: string;
+  name: string;
+  description: string;
+  type: string;
+  subtype: string;
+  html: string;
+  htmlOption: string;
+  dynamicFields: string[];
+};
+
+export const initialUserInfo: userInfoType = {
+  username: "",
+  email: "",
+  isAdmin: false,
+  isVerified: false,
+  userId: "",
+};
+export interface formDataTypes {
+  username?: string;
+  email: string;
+  password: string;
+}
+
+export const initialCoverLetterData: coverLetterType = {
+  name: "",
+  initials: "",
+  email: "",
+  phone: "",
+  address: "",
+  date: `${moment()?.format("Do MMM YYYY")}`,
+  recruiterName: "",
+  recruiterPosition: "",
+  hiringCompanyName: "",
+  hiringCompanyAddress: "",
+  coverLetterOpener: "",
+  coverLetterBody1: "",
+  coverLetterBody2: "",
+  coverLetterCloser: "",
+};
+
+export const initialResumeData: resumeType = {
+  name: "",
+  initials: "",
+  email: "",
+  phone: "",
+  address: "",
+  date: "",
+  experience: [],
+  education: [],
+  skills: [],
+  profiles: [],
+  projects: [],
+  profilePicture: "",
+  summary: "",
+  color: "",
+};
+
+export const initialTemplateData: templateType = {
+  sampleData: initialCoverLetterData,
+  _id: "",
+  name: "",
+  description: "",
+  type: "",
+  subtype: "",
+  html: "",
+  htmlOption: "",
+  dynamicFields: [],
+};
+
+export const initialData: dataType = {
+  name: "",
+  initials: "",
+  email: "",
+  phone: "",
+  address: "",
+  date: `${moment()?.format("Do MMM YYYY")}`,
+  recruiterName: "",
+  recruiterPosition: "",
+  hiringCompanyName: "",
+  hiringCompanyAddress: "",
+  coverLetterOpener: "",
+  coverLetterBody1: "",
+  coverLetterBody2: "",
+  coverLetterCloser: "",
+  experience: [],
+  education: [],
+  skills: [],
+  profiles: [],
+  projects: [],
+  profilePicture: "",
+  summary: "",
+  color: "",
+};
+
+export interface documentType {
+  _id: string;
+  type: string;
+  userData: coverLetterType;
+  user: string;
+  templateId: templateType;
+  createdAt: string;
+}
+
+export interface exampleType {
+  _id: string;
+  title: string;
+  type: string;
+  userData: coverLetterType;
+  templateId: templateType;
+  createdAt: string;
+}
+
+export interface documentsDataType {
+  resumes: documentType[];
+  coverLetters: documentType[];
+  cvs: documentType[];
+}
+
+export const initialGlobalContext: GlobalContextType = {
+  isUserLoggedIn: false,
+  user: initialUserInfo,
+  setIsUserLoggedIn: () => {},
+  setUser: () => {},
+  selectedTemplateId: "",
+  setSelectedTemplateId: () => {},
+  data: initialData,
+  setData: () => {},
+};
+
+export const initialDocumentsData: documentsDataType = {
+  resumes: [],
+  coverLetters: [],
+  cvs: [],
+};

@@ -11,7 +11,7 @@ const ButtonLoader = ({ fillColor, applyLoader }: propTypes) => {
     <svg
       aria-hidden="true"
       role="status"
-      className="me-3 inline size-4 animate-spin text-gray-200 dark:text-gray-600"
+      className="me-3 inline size-4 animate-spin text-gray-200 dark:text-gray-600 mx-2"
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

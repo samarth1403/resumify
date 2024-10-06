@@ -17,7 +17,12 @@ interface propTypes {
   createBtn: ReactNode;
 }
 
-const Steps = ({ title, stepsData, showText, createBtn }: propTypes) => {
+const StepsComponent = ({
+  title,
+  stepsData,
+  showText,
+  createBtn,
+}: propTypes) => {
   return (
     <Section
       className="w-full"
@@ -30,16 +35,14 @@ const Steps = ({ title, stepsData, showText, createBtn }: propTypes) => {
         <Heading title={title} />
         <div className="flex w-full flex-wrap items-start justify-around gap-8 lg:gap-8 ">
           {stepsData?.map((step, index) => (
-            <div key={step?.id} className="flex-center w-48 flex-col gap-4 ">
-              <div className="flex-center h-32 w-16">
-                <Image
-                  src={step?.logo}
-                  alt={step.title}
-                  width={100}
-                  height={100}
-                  className="size-full object-contain"
-                />
-              </div>
+            <div key={step?.id} className="flex-center w-60 flex-col gap-4 ">
+              <Image
+                src={step?.logo}
+                alt={step.title}
+                width={100}
+                height={100}
+                className="object-contain"
+              />
               <p className="h6 text-center">
                 {index + 1}. {step.title}
               </p>
@@ -53,4 +56,4 @@ const Steps = ({ title, stepsData, showText, createBtn }: propTypes) => {
   );
 };
 
-export default Steps;
+export default StepsComponent;

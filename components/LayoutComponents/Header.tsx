@@ -1,26 +1,82 @@
 "use client";
+import { GlobalContextType, navLinks, userInfoType } from "@/constants";
+import { useGlobalContext } from "@/context/GlobalProvider";
+import axios, { isAxiosError } from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
-import { navLinks } from "@/constants";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { Button } from "../SubComponents";
 
 const Header = () => {
+  const {
+    isUserLoggedIn,
+    user,
+    setIsUserLoggedIn,
+    setUser,
+  }: GlobalContextType = useGlobalContext();
+  const router = useRouter();
+  const [isFormSubmitting, setFormIsSubmitting] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState("");
   const [active, setActive] = useState("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const getCurrentUser = async () => {
+      try {
+        const { data, status } = await axios.post("/api/user/me");
+        if (status === 200) {
+          setUser({
+            username: data.user.username,
+            email: data.user.email,
+            isAdmin: data.user.isAdmin,
+            isVerified: data.user.isVerified,
+            userId: data.user._id,
+          });
+          setIsUserLoggedIn(true);
+        }
+      } catch (error: unknown) {
+        setIsUserLoggedIn(false);
+        setUser({} as userInfoType);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getCurrentUser();
+  }, [isUserLoggedIn, setUser, setIsUserLoggedIn]);
+
+  const handleLogout = async () => {
+    setFormIsSubmitting(true);
+    try {
+      const { data, status } = await axios.get("/api/user/sign-out");
+      if (status === 200) {
+        toast.success(data.message);
+        router.replace("/");
+        setIsUserLoggedIn(false);
+      }
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        toast.error(error.response?.data?.error || "An error occurred");
+      } else {
+        toast.error("An error occurred");
+      }
+      setIsUserLoggedIn(true);
+    } finally {
+      setFormIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="fixed left-0 top-0 z-50 mb-4 w-full border-b border-shades-4  lg:mb-6 lg:backdrop-blur-lg ">
       <nav className="flex-between px-5 py-4 lg:px-8 lg:py-5 xl:px-10">
-        <Link
-          href={"/"}
-          className="flex-center gap-4"
-          onClick={() => setActive("")}
-        >
+        <Link href={"/"} className="flex-center" onClick={() => setActive("")}>
           <Image
-            src={"/assets/icons/resumify-logo.svg"}
-            alt="Resumify Logo"
-            width={30}
-            height={30}
+            src={"/assets/images/logo.svg"}
+            alt=""
+            width={50}
+            height={50}
             className="object-contain"
           />
           <p className="logo_text">Resumify</p>
@@ -67,21 +123,43 @@ const Header = () => {
                 )}
             </Link>
           ))}
-          {/* <Link href={"/sign-in"}>
-              <button
-                // key={provider?.name}
-                type="button"
-                // onClick={() => signIn(provider?.id)}
-                className="black_btn"
+          {!isUserLoggedIn ? (
+            <div className="flex-center gap-4">
+              <Link href={"/sign-in"}>
+                {!isLoading ? (
+                  <button type="button" className="black_btn">
+                    Sign In
+                  </button>
+                ) : (
+                  <div className="medium-loader" />
+                )}
+              </Link>
+              <Link href={"/sign-up"}>
+                <button type="button" className="black_btn">
+                  Sign Up
+                </button>
+              </Link>
+            </div>
+          ) : (
+            <div className="flex-center gap-4">
+              <Link href={"/profile"}>
+                {!isLoading ? (
+                  <button className="black_btn size-4 h-full rounded-full text-2xl ">
+                    {String(user?.username).charAt(0).toUpperCase()}
+                  </button>
+                ) : (
+                  <div className="medium-loader" />
+                )}
+              </Link>
+              <Button
+                isFormSubmitting={isFormSubmitting}
+                className="outline_btn"
+                onClick={() => handleLogout()}
               >
-                Sign in
-              </button>
-            </Link> */}
-          <Link href={"/sign-in"}>
-            <button type="button" className="black_btn">
-              Sign In
-            </button>
-          </Link>
+                {"Logout"}
+              </Button>
+            </div>
+          )}
         </div>
       </nav>
     </div>

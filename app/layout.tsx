@@ -1,3 +1,4 @@
+import { Providers } from "@/app/providers";
 import Footer from "@/components/LayoutComponents/Footer";
 import Header from "@/components/LayoutComponents/Header";
 import "@/styles/global.css";
@@ -7,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 export const metadata = {
   title: "Resumify",
   description: "Create Your Resume With Our Resume Builder",
+  icons: [{ rel: "icon", type: "image/svg", url: "/logo.svg" }],
 };
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
@@ -16,12 +18,14 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         <div className="main">
           <div className="gradient" />
         </div>
-        <main className="app">
-          <Header />
-          <Toaster />
-          {children}
-          <Footer />
-        </main>
+        <Providers>
+          <main className="app">
+            <Header />
+            <Toaster />
+            {children}
+            <Footer />
+          </main>
+        </Providers>
       </body>
     </html>
   );

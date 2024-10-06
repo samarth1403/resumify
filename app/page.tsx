@@ -1,25 +1,28 @@
-import Blogs from "@/components/Resume/ResumeBuilder/Blogs";
+"use client";
 import {
+  Faq,
   Features,
   Hero,
-  OthersIntro,
   Ratings,
-  Faq,
   Reviews,
   Steps,
   Video,
 } from "@/components/Resume/ResumeBuilder";
+import Blogs from "@/components/Resume/ResumeBuilder/Blogs";
 import Templates from "@/components/Resume/Templates";
+import { UserDocuments } from "@/components/SubComponents";
+import { useGlobalContext } from "@/context/GlobalProvider";
 
-const page = () => {
+const Homepage = () => {
+  const { isUserLoggedIn } = useGlobalContext();
   return (
     <>
-      <Hero />
+      {isUserLoggedIn ? <UserDocuments /> : <Hero />}
       <Steps />
       <Templates />
       <Video />
       <Features />
-      <OthersIntro />
+      {/* <OthersIntro /> */}
       <Ratings />
       <Blogs />
       <Reviews />
@@ -28,4 +31,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Homepage;
