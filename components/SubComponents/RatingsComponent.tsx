@@ -41,6 +41,7 @@ const RatingsComponent = ({ title, text, fiveStarReviews }: propTypes) => {
                       height={20}
                       width={20}
                       className="object-contain"
+                      loading="lazy"
                     />
                   </div>
                 ))}

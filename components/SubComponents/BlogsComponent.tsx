@@ -37,6 +37,7 @@ const BlogsComponent = ({ title, blogsData }: propTypes) => {
                 height={100}
                 width={100}
                 className="size-full rounded-xl object-contain"
+                loading="lazy"
               />
               <div className="flex-start flex-col gap-4">
                 <p className="body-1">{blog.title}</p>

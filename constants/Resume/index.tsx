@@ -34,7 +34,7 @@ export const resumeAlternateData = [
   },
   {
     id: "1",
-    title: "ATS-friendly",
+    title: "ATS friendly",
     text: "Employers use applicant tracking systems (ATS) to filter out candidates. With our templates, be confident knowing your ATS-friendly resume will reach the hiring manager successfully.",
     logo: "/assets/images/hero-resume-example.svg",
   },

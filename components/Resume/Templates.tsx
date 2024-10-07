@@ -13,7 +13,7 @@ const Templates = () => {
       customPaddings
       id="steps"
     >
-      <div className="flex-center mt-4 w-full flex-col lg:mt-8 xl:mt-12">
+      <div className="flex-center mt-4 w-[90%] flex-col py-8 lg:mt-8 lg:w-full lg:py-0  xl:mt-12">
         <Heading title="Start Building By Picking A Professional Template" />
         <p className="body-1 mb-4 text-center lg:mb-8 lg:max-w-2xl">
           Choose one of the resume templates below. Fill it in with
@@ -24,7 +24,7 @@ const Templates = () => {
           world and proven to bypass HR screening software. Rest easy knowing
           your resume is more likely to land in human hands.
         </p>
-        <div className="mt-4 flex w-full flex-wrap items-start justify-around gap-12 lg:mt-16 ">
+        <div className="mt-12 flex w-full flex-wrap items-start justify-around gap-12 lg:mt-16 ">
           {resumeTemplateTypes?.map((type, index) => (
             <div
               key={type?.id}
@@ -37,6 +37,7 @@ const Templates = () => {
                   width={100}
                   height={100}
                   className="size-full object-contain"
+                  loading="lazy"
                 />
               </div>
               <Link href={type?.uri}>

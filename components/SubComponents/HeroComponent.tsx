@@ -39,7 +39,7 @@ const HeroComponent = ({
         <div
           className={`col-span-12 md:col-span-8 ${orderReverse ? "order-2" : "order-1"} `}
         >
-          <div className="flex-start flex-col gap-4 md:gap-6 lg:gap-8 xl:gap-10">
+          <div className="flex-start flex-col gap-6 md:gap-6 lg:gap-8 xl:gap-10">
             <h1 className="h1">
               {preTitle}
               {heroWord && heroWordUnderlineImg && (
@@ -67,17 +67,16 @@ const HeroComponent = ({
           </div>
         </div>
         <div
-          className={`col-span-12 md:col-span-4 ${orderReverse ? "order-1" : "order-2"} `}
+          className={`col-span-12 sm:col-span-6  md:col-span-4 ${orderReverse ? "order-1" : "order-2"} my-6 sm:my-8 lg:my-0 `}
         >
-          <div className="flex-center rounded-lg shadow-2xl shadow-shades-6">
-            <Image
-              src={heroImage}
-              alt="Resume"
-              width={100}
-              height={100}
-              className="size-full object-contain"
-            />
-          </div>
+          <Image
+            src={heroImage}
+            alt="Resume"
+            width={100}
+            height={100}
+            className="size-full rounded-lg object-contain shadow-2xl shadow-shades-6"
+            loading="lazy"
+          />
         </div>
       </div>
     </Section>

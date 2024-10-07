@@ -116,6 +116,34 @@ export const navLinks = [
   },
 ];
 
+export const mobileNavLinks = [
+  {
+    id: "0",
+    title: "Resume Builder",
+    uri: "/",
+  },
+  {
+    id: "1",
+    title: "Resume Templates",
+    uri: "/resume/all-templates",
+  },
+  {
+    id: "2",
+    title: "Cover Letter",
+    url: "/cover-letter/builder",
+  },
+  {
+    id: "3",
+    title: "Cover Letter Templates",
+    uri: "/cover-letter/all-templates",
+  },
+  {
+    id: "4",
+    title: "Resources",
+    url: "/resources",
+  },
+];
+
 export const footerLinks = [
   {
     id: "0",

@@ -1,5 +1,10 @@
 "use client";
-import { GlobalContextType, navLinks, userInfoType } from "@/constants";
+import {
+  GlobalContextType,
+  mobileNavLinks,
+  navLinks,
+  userInfoType,
+} from "@/constants";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import axios, { isAxiosError } from "axios";
 import Image from "next/image";
@@ -21,6 +26,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState("");
   const [active, setActive] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -69,8 +75,8 @@ const Header = () => {
   };
 
   return (
-    <div className="fixed left-0 top-0 z-50 mb-4 w-full border-b border-shades-4  lg:mb-6 lg:backdrop-blur-lg ">
-      <nav className="flex-between px-5 py-4 lg:px-8 lg:py-5 xl:px-10">
+    <div className="fixed left-0 top-0 z-50 mb-4 w-full border-b border-shades-4  backdrop-blur-2xl lg:mb-6 ">
+      <nav className="flex-between px-5 py-4 lg:px-8 lg:py-5 xl:px-10 ">
         <Link href={"/"} className="flex-center" onClick={() => setActive("")}>
           <Image
             src={"/assets/images/logo.svg"}
@@ -81,7 +87,7 @@ const Header = () => {
           />
           <p className="logo_text">Resumify</p>
         </Link>
-        <div className="flex-center z-20 gap-4 lg:gap-8">
+        <div className="lg:flex-center z-20 hidden gap-4 lg:flex lg:gap-8">
           {navLinks?.map((link) => (
             <Link
               href={link.url}
@@ -160,6 +166,45 @@ const Header = () => {
               </Button>
             </div>
           )}
+        </div>
+        <Link
+          href={"/"}
+          className="flex-center lg:hidden"
+          onClick={() => setActive("")}
+        >
+          <Image
+            src={toggle ? "/assets/icons/close.svg" : "/assets/icons/menu.svg"}
+            alt=""
+            width={35}
+            height={35}
+            className="object-contain transition-all duration-200 ease-linear lg:hidden "
+            onClick={() => setToggle(!toggle)}
+          />
+        </Link>
+      </nav>
+      <nav
+        className={`fixed inset-x-0 bottom-0 top-20 bg-white  ${
+          toggle ? "flex" : "hidden"
+        } h-screen w-full lg:hidden`}
+      >
+        <div className="relative z-10 m-auto flex h-screen w-full flex-col items-center justify-start gap-2 bg-white py-4 ">
+          {mobileNavLinks?.map((link, index) => (
+            <Link
+              href={link.url || ""}
+              key={link.id}
+              className="relative mt-2 h-8"
+              onClick={() => {
+                setActive(link.id);
+                setToggle(false);
+              }}
+            >
+              <p
+                className={`text-xl font-medium ${active === link.id ? "text-primary-orange" : "text-shades-12"} hover:text-primary-orange`}
+              >
+                {link.title}
+              </p>
+            </Link>
+          ))}
         </div>
       </nav>
     </div>

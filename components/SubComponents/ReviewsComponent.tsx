@@ -43,6 +43,7 @@ const ReviewsComponent = ({ title, fiveStarReviews }: propTypes) => {
                   height={70}
                   width={70}
                   className="rounded-full object-contain"
+                  loading="lazy"
                 />
               </div>
               <p className="text-[0.9rem]">{review.review}</p>

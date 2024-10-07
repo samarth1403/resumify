@@ -10,7 +10,7 @@ const Video = () => {
       customPaddings
       id="steps"
     >
-      <div className="flex-center mt-4 w-full flex-col lg:mt-8 xl:mt-12">
+      <div className="flex-center mt-4 w-full flex-col py-6 lg:mt-8 lg:py-0  xl:mt-12">
         <Heading title="How to Build Your Resume" />
         <div className="flex w-full flex-wrap items-start justify-between rounded-2xl  md:p-12 lg:px-8 lg:py-6 xl:rounded-3xl">
           <div className="grid grid-cols-12 lg:gap-12">
