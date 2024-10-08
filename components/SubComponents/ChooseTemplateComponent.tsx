@@ -35,7 +35,7 @@ const ChooseTemplateComponent = ({ title, type, text }: propTypes) => {
       customPaddings
       id="steps"
     >
-      <div className="flex-center mt-4 w-full flex-col lg:mt-8 xl:mt-16">
+      <div className="flex-center mt-6 w-full flex-col lg:mt-8">
         <Heading title={title} text={text} />
         <div className="flex-center  w-full flex-col">
           <div className="flex-center flex-wrap gap-6 lg:gap-8 xl:gap-16">

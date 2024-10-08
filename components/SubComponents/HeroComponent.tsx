@@ -40,7 +40,7 @@ const HeroComponent = ({
           className={`col-span-12 md:col-span-8 ${orderReverse ? "order-2" : "order-1"} `}
         >
           <div className="flex-start flex-col gap-6 md:gap-6 lg:gap-8 xl:gap-10">
-            <h1 className="h1">
+            <h1 className="h3 md:h1 text-center font-bold">
               {preTitle}
               {heroWord && heroWordUnderlineImg && (
                 <span className={`relative  inline-block `}>
@@ -59,15 +59,15 @@ const HeroComponent = ({
               )}
               {postTitle}
             </h1>
-            <p className="body-1">{text}</p>
-            <div className="flex-center gap-4 lg:gap-8">
+            <p className="body-1 text-center">{text}</p>
+            <div className="flex-center w-full gap-4 lg:gap-8">
               {/* {importBtn && importBtn} */}
               {createBtn && createBtn}
             </div>
           </div>
         </div>
         <div
-          className={`col-span-12 sm:col-span-6  md:col-span-4 ${orderReverse ? "order-1" : "order-2"} my-6 sm:my-8 lg:my-0 `}
+          className={`col-span-12 sm:col-span-6  md:col-span-4 ${orderReverse ? "order-2 lg:order-1" : "order-1 lg:order-2"} my-6 sm:my-8 lg:my-0 `}
         >
           <Image
             src={heroImage}

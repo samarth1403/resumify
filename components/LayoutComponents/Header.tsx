@@ -76,7 +76,7 @@ const Header = () => {
 
   return (
     <div className="fixed left-0 top-0 z-50 mb-4 w-full border-b border-shades-4  backdrop-blur-2xl lg:mb-6 ">
-      <nav className="flex-between px-5 py-4 lg:px-8 lg:py-5 xl:px-10 ">
+      <nav className="flex-between px-5 py-4 lg:px-8 lg:py-3 xl:px-10 ">
         <Link href={"/"} className="flex-center" onClick={() => setActive("")}>
           <Image
             src={"/assets/images/logo.svg"}
@@ -98,7 +98,7 @@ const Header = () => {
               onMouseLeave={() => setIsMenuOpen("")}
             >
               <p
-                className={`text-lg font-medium ${active === link.id ? "text-primary-green" : "text-shades-12"} hover:text-primary-green`}
+                className={`text-lg font-medium ${active === link.id ? "text-primary-orange" : "text-shades-12"} hover:text-primary-orange`}
               >
                 {link.title}
               </p>
