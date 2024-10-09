@@ -8,7 +8,11 @@ const Steps = () => {
     <StepsComponent
       title="Get your Cover Letter in 3 easy steps"
       stepsData={coverLetterStepsData}
-      createBtn={<Button href="/">Get Your Cover Letter</Button>}
+      createBtn={
+        <Button href="/resume/build-resume/choose-template">
+          Get Your Cover Letter
+        </Button>
+      }
     />
   );
 };

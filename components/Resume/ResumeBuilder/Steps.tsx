@@ -7,7 +7,11 @@ const Steps = () => {
     <StepsComponent
       stepsData={resumeStepsData}
       title={`Create Your Resume In ${resumeStepsData?.length} Simple Steps`}
-      createBtn={<Button href="/">Create your Resume</Button>}
+      createBtn={
+        <Button href="/resume/build-resume/choose-template">
+          Create your Resume
+        </Button>
+      }
     />
   );
 };
