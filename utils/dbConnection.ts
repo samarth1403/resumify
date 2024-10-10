@@ -2,7 +2,7 @@ import mongoose, { Connection } from "mongoose";
 
 export const dbConnection = async (): Promise<void> => {
   try {
-    await mongoose.connect(process.env.MONGODB_URL!);
+    await mongoose.connect(process.env.MONGODB_URL! || "");
 
     const connection: Connection = mongoose.connection;
 
