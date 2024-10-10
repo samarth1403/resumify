@@ -31,7 +31,7 @@ const StepsComponent = ({
       customPaddings
       id="steps"
     >
-      <div className="flex-center mt-4 w-full flex-col lg:mt-8 xl:mt-12">
+      <div className="flex-center mt-6 w-full flex-col py-6 lg:mt-8 lg:py-0 xl:mt-12">
         <Heading title={title} />
         <div className="flex w-full flex-wrap items-start justify-around gap-8 lg:gap-8 ">
           {stepsData?.map((step, index) => (
@@ -42,6 +42,7 @@ const StepsComponent = ({
                 width={100}
                 height={100}
                 className="object-contain"
+                loading="lazy"
               />
               <p className="h6 text-center">
                 {index + 1}. {step.title}

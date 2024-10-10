@@ -30,11 +30,11 @@ const ReviewsComponent = ({ title, fiveStarReviews }: propTypes) => {
           {fiveStarReviews?.map((review, index) => (
             <div
               key={review.id}
-              className="flex-start flex w-72 flex-col gap-4 rounded-xl bg-white p-4 shadow-2xl shadow-shades-2 lg:w-[21rem] lg:gap-8 lg:p-8"
+              className="flex-start flex w-60 flex-col gap-4 rounded-xl bg-white p-4 shadow-2xl shadow-shades-2 lg:w-[21rem] lg:gap-8 lg:p-8"
             >
               <div className="flex-between w-full flex-nowrap">
-                <div className="flex-start flex-col gap-4">
-                  <p className="h5">{review.name}</p>
+                <div className="flex-start flex-col gap-2 lg:gap-4">
+                  <p className="h6 lg:h5">{review.name}</p>
                   <p className="body-2">{review.designation}</p>
                 </div>
                 <Image
@@ -43,9 +43,10 @@ const ReviewsComponent = ({ title, fiveStarReviews }: propTypes) => {
                   height={70}
                   width={70}
                   className="rounded-full object-contain"
+                  loading="lazy"
                 />
               </div>
-              <p className="text-[0.9rem]">{review.review}</p>
+              <p className="text-[0.8rem] lg:text-[0.9rem]">{review.review}</p>
             </div>
           ))}
         </div>

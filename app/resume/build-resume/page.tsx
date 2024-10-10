@@ -4,13 +4,17 @@ import { resumeStepsData } from "@/constants/Resume";
 
 const page = () => {
   return (
-    <StepsComponent
-      stepsData={resumeStepsData}
-      title={`How to Create a Job-Winning Resume`}
-      createBtn={
-        <Button href="/resume/build-resume/choose-template">Get Started</Button>
-      }
-    />
+    <div className="mt-6 w-full lg:mt-6 xl:mt-6">
+      <StepsComponent
+        stepsData={resumeStepsData}
+        title={`How to Create a Job-Winning Resume`}
+        createBtn={
+          <Button href="/resume/build-resume/choose-template">
+            Get Started
+          </Button>
+        }
+      />
+    </div>
   );
 };
 

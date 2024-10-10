@@ -23,7 +23,7 @@ const CoverLetterCreateLayout = ({ children }: { children: ReactNode }) => {
       customPaddings
       id="steps"
     >
-      <div className="flex-start gap-4 lg:gap-8 ">
+      <div className="flex w-full flex-wrap items-start justify-start gap-4 lg:gap-8 ">
         <div className="w-48 p-4">
           <StepperComponent stepperData={stepperData} />
         </div>

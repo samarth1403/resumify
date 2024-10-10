@@ -51,11 +51,11 @@ const TemplateCard = ({
   return (
     <>
       <div
-        className={` ${isModalOpen ? "overflow-hidden" : ""} flex-center group relative  max-w-80 cursor-pointer flex-col gap-10  `}
+        className={` ${isModalOpen ? "overflow-hidden" : ""} flex-center group relative w-64 cursor-pointer flex-col gap-10 lg:w-80  `}
       >
         <div className="relative">
           <RenderHtmlContent
-            className={` rounded-xl shadow-2xl shadow-gray-400 duration-500 ${!forOtherTemplatesChoose ? "hover:-translate-y-4" : ""} `}
+            className={` rounded-xl shadow-2xl shadow-gray-400 duration-500 ${!forOtherTemplatesChoose ? "hover:-translate-y-4" : ""} max-[320px]:scale-90 min-[375px]:scale-100 `}
             dynamicFields={template.dynamicFields}
             sampleData={
               forOtherTemplatesChoose
@@ -67,7 +67,7 @@ const TemplateCard = ({
           />
           <div
             onClick={handleModalOpen}
-            className="flex-center absolute bottom-[20px] right-[14px] z-10 size-10 cursor-pointer rounded-full bg-gray-600 px-2 duration-500 hover:scale-125 hover:bg-gray-800"
+            className="lg:flex-center absolute bottom-[20px] right-[14px] z-10 hidden size-10 cursor-pointer rounded-full bg-gray-600 px-2 duration-500 hover:scale-125 hover:bg-gray-800 lg:flex"
           >
             <MdOutlineZoomIn className="size-8 rounded-full text-white " />
           </div>

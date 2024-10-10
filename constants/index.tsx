@@ -116,6 +116,34 @@ export const navLinks = [
   },
 ];
 
+export const mobileNavLinks = [
+  {
+    id: "0",
+    title: "Resume Builder",
+    uri: "/",
+  },
+  {
+    id: "1",
+    title: "Resume Templates",
+    uri: "/resume/all-templates",
+  },
+  {
+    id: "2",
+    title: "Cover Letter",
+    url: "/cover-letter/builder",
+  },
+  {
+    id: "3",
+    title: "Cover Letter Templates",
+    uri: "/cover-letter/all-templates",
+  },
+  {
+    id: "4",
+    title: "Resources",
+    url: "/resources",
+  },
+];
+
 export const footerLinks = [
   {
     id: "0",
@@ -126,16 +154,16 @@ export const footerLinks = [
         title: "Resume Templates",
         uri: "/resume/all-templates",
       },
-      {
-        id: "1",
-        title: "Resume Examples",
-        uri: "/resume/examples",
-      },
-      {
-        id: "2",
-        title: "Resume Builder",
-        uri: "/",
-      },
+      // {
+      //   id: "1",
+      //   title: "Resume Examples",
+      //   uri: "/resume/examples",
+      // },
+      // {
+      //   id: "2",
+      //   title: "Resume Builder",
+      //   uri: "/",
+      // },
       {
         id: "3",
         title: "How to Write a Resume",
@@ -152,16 +180,16 @@ export const footerLinks = [
         title: "Cover Letter Templates",
         uri: "/cover-letter/all-templates",
       },
-      {
-        id: "1",
-        title: "Cover Letter Examples",
-        uri: "/cover-letter/examples",
-      },
-      {
-        id: "2",
-        title: "Cover Letter Builder",
-        uri: "/cover-letter/builder",
-      },
+      // {
+      //   id: "1",
+      //   title: "Cover Letter Examples",
+      //   uri: "/cover-letter/examples",
+      // },
+      // {
+      //   id: "2",
+      //   title: "Cover Letter Builder",
+      //   uri: "/cover-letter/builder",
+      // },
       {
         id: "3",
         title: "How to Write a Cover Letter",
@@ -170,32 +198,32 @@ export const footerLinks = [
     ],
   },
 
-  {
-    id: "2",
-    title: "CV",
-    subLinks: [
-      {
-        id: "0",
-        title: "CV Templates",
-        uri: "/cv/all-templates",
-      },
-      {
-        id: "1",
-        title: "CV Examples",
-        uri: "/cv/examples",
-      },
-      {
-        id: "2",
-        title: "CV Maker",
-        uri: "/cv/maker",
-      },
-      {
-        id: "3",
-        title: "How to Write a CV",
-        uri: "/cv/how-to-write-a-cv",
-      },
-    ],
-  },
+  // {
+  //   id: "2",
+  //   title: "CV",
+  //   subLinks: [
+  //     {
+  //       id: "0",
+  //       title: "CV Templates",
+  //       uri: "/cv/all-templates",
+  //     },
+  //     {
+  //       id: "1",
+  //       title: "CV Examples",
+  //       uri: "/cv/examples",
+  //     },
+  //     {
+  //       id: "2",
+  //       title: "CV Maker",
+  //       uri: "/cv/maker",
+  //     },
+  //     {
+  //       id: "3",
+  //       title: "How to Write a CV",
+  //       uri: "/cv/how-to-write-a-cv",
+  //     },
+  //   ],
+  // },
   {
     id: "3",
     title: "Resources",

@@ -3,7 +3,6 @@ import {
   Faq,
   Features,
   Hero,
-  Ratings,
   Reviews,
   Steps,
   Video,
@@ -23,7 +22,7 @@ const Homepage = () => {
       <Video />
       <Features />
       {/* <OthersIntro /> */}
-      <Ratings />
+      {/* <Ratings /> */}
       <Blogs />
       <Reviews />
       <Faq />

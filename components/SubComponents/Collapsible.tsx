@@ -24,12 +24,16 @@ const Collapsible = ({
     <>
       <div>
         <div className={questionStyle}>
-          <h6>{title}</h6>
+          {window.innerWidth > 768 ? (
+            <h6>{title}</h6>
+          ) : (
+            <p className="text-sm">{title}</p>
+          )}
           <button onClick={handleFilterOpening}>
             {!isOpen ? (
-              <p className="text-[1.6rem]">+</p>
+              <p className=" text-[1rem] lg:text-[1.6rem]">+</p>
             ) : (
-              <p className="text-[1.6rem]">-</p>
+              <p className=" text-[1rem]  lg:text-[1.6rem]">-</p>
             )}
           </button>
         </div>

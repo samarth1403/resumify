@@ -318,7 +318,7 @@
 
 /* Nav Component */
 .logo_text {
-    @apply max-sm:hidden font-bold text-2xl text-black;
+    @apply font-bold text-2xl text-black;
 }
 
 .dropdown {

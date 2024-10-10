@@ -41,6 +41,7 @@ const OthersIntroComponent = ({ title, text, othersIntroData }: propTypes) => {
                   width={100}
                   height={100}
                   className="size-full object-contain"
+                  loading="lazy"
                 />
               </div>
               <Link href={data?.uri}>

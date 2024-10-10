@@ -10,7 +10,7 @@ const Video = () => {
       customPaddings
       id="steps"
     >
-      <div className="flex-center mt-4 w-full flex-col lg:mt-8 xl:mt-12">
+      <div className="flex-center mt-4 w-full flex-col py-6 lg:mt-8 lg:py-0  xl:mt-12">
         <Heading title="How to Build Your Resume" />
         <div className="flex w-full flex-wrap items-start justify-between rounded-2xl  md:p-12 lg:px-8 lg:py-6 xl:rounded-3xl">
           <div className="grid grid-cols-12 lg:gap-12">
@@ -27,10 +27,10 @@ const Video = () => {
             </div>
             <div className="col-span-12 lg:col-span-6">
               <div className="flex-start flex-col gap-6 px-4 lg:px-0 ">
-                <p className=" text-[2.2rem] font-bold leading-relaxed ">
+                <p className="text-[1.6rem] font-bold leading-relaxed lg:text-[2.2rem] ">
                   Ready to create your resume ?
                 </p>
-                <p className="text-[1.1rem] font-semibold leading-8">
+                <p className="text-[1rem] font-semibold leading-8 lg:text-[1.1rem]">
                   See how easy it is with our professional Resume Maker. Get
                   job-specific text and choose from a wide range of designs to
                   build a mistake-free resume that helps you land the job.

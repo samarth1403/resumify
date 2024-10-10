@@ -39,8 +39,8 @@ const HeroComponent = ({
         <div
           className={`col-span-12 md:col-span-8 ${orderReverse ? "order-2" : "order-1"} `}
         >
-          <div className="flex-start flex-col gap-4 md:gap-6 lg:gap-8 xl:gap-10">
-            <h1 className="h1">
+          <div className="flex-start flex-col gap-6 md:gap-6 lg:gap-8 xl:gap-10">
+            <h1 className="h3 md:h1 text-center font-bold">
               {preTitle}
               {heroWord && heroWordUnderlineImg && (
                 <span className={`relative  inline-block `}>
@@ -59,25 +59,24 @@ const HeroComponent = ({
               )}
               {postTitle}
             </h1>
-            <p className="body-1">{text}</p>
-            <div className="flex-center gap-4 lg:gap-8">
+            <p className="body-1 text-center">{text}</p>
+            <div className="flex-center w-full gap-4 lg:gap-8">
               {/* {importBtn && importBtn} */}
               {createBtn && createBtn}
             </div>
           </div>
         </div>
         <div
-          className={`col-span-12 md:col-span-4 ${orderReverse ? "order-1" : "order-2"} `}
+          className={`col-span-12 sm:col-span-6  md:col-span-4 ${orderReverse ? "order-2 lg:order-1" : "order-1 lg:order-2"} my-6 sm:my-8 lg:my-0 `}
         >
-          <div className="flex-center rounded-lg shadow-2xl shadow-shades-6">
-            <Image
-              src={heroImage}
-              alt="Resume"
-              width={100}
-              height={100}
-              className="size-full object-contain"
-            />
-          </div>
+          <Image
+            src={heroImage}
+            alt="Resume"
+            width={100}
+            height={100}
+            className="size-full rounded-lg object-contain shadow-2xl shadow-shades-6"
+            loading="lazy"
+          />
         </div>
       </div>
     </Section>
