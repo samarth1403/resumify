@@ -2,7 +2,19 @@ import mongoose, { Connection } from "mongoose";
 
 export const dbConnection = async (): Promise<void> => {
   try {
-    await mongoose.connect(process.env.MONGODB_URL! || "");
+    const url = process.env.MONGODB_URL;
+
+    if (!url) {
+      throw new Error("MONGODB_URL environment variable is not defined.");
+    }
+
+    console.log(`Attempting to connect to MongoDB with URL: ${url}`);
+
+    await mongoose.connect(url, {
+      // Optional: Add mongoose connection options if needed
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
+    });
 
     const connection: Connection = mongoose.connection;
 
@@ -11,9 +23,9 @@ export const dbConnection = async (): Promise<void> => {
     });
 
     connection.on("error", (error: Error) => {
-      console.log("Error connecting to database");
-      console.log(error.message);
-      process.exit();
+      console.error("Error connecting to database");
+      console.error(error.message);
+      process.exit(1); // Use non-zero exit code for errors
     });
 
     process.on("SIGINT", async () => {
@@ -29,10 +41,11 @@ export const dbConnection = async (): Promise<void> => {
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.log("Error connecting to database");
-      console.log(error.message);
+      console.error("Error connecting to database");
+      console.error(error.message);
     } else {
-      console.log("Unknown error occurred");
+      console.error("Unknown error occurred");
     }
+    process.exit(1); // Exit with failure
   }
 };
