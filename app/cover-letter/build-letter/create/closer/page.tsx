@@ -80,16 +80,14 @@ const Closer = () => {
             iconPath="/assets/images/comment.svg"
           />
         </div>
-        <div className="mt-4 flex w-full flex-row flex-wrap items-center justify-between">
+        <div className="mt-4 flex w-full flex-row flex-wrap items-center justify-center gap-2 max-[320px]:gap-4 min-[375px]:justify-between">
           <Button
             onClick={() =>
               router.push("/cover-letter/build-letter/create/body")
             }
             iconBefore={<IoIosArrowRoundBack size={24} />}
             className="pl-3"
-          >
-            Previous
-          </Button>
+          ></Button>
           <Button
             onClick={handleContinue}
             iconAfter={<IoIosArrowRoundForward size={24} />}

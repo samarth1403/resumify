@@ -34,9 +34,9 @@ const Header = () => {
 
   return (
     <div className="h-auto w-full ">
-      <span className="h6">{`[ Personal Info ]`}</span>
-      <div className="flex-start mt-6 w-full flex-wrap gap-4 ">
-        <div className="w-48 sm:w-72">
+      <span className="h6 w-full text-center lg:text-start ">{`[ Personal Info ]`}</span>
+      <div className=" flex-start mt-6 w-full flex-wrap gap-4 ">
+        <div className="w-64 sm:w-72">
           <FormField
             label="Name"
             type="text"
@@ -59,7 +59,7 @@ const Header = () => {
             iconPath="/assets/images/person.svg"
           />
         </div>
-        <div className="w-48 sm:w-64">
+        <div className="w-64 sm:w-64">
           <FormField
             label="Phone"
             type="number"
@@ -101,7 +101,7 @@ const Header = () => {
             iconPath="/assets/images/location.svg"
           />
         </div>
-        <div className="mt-4 flex w-full flex-row flex-wrap items-center justify-end">
+        <div className="mt-4 flex w-full flex-row flex-wrap items-center justify-center lg:justify-end">
           <Button onClick={handleContinue}>
             Save &nbsp; & &nbsp; Continue
           </Button>

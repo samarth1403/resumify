@@ -40,7 +40,7 @@ const HeroComponent = ({
           className={`col-span-12 md:col-span-8 ${orderReverse ? "order-2" : "order-1"} `}
         >
           <div className="flex-start flex-col gap-6 md:gap-6 lg:gap-8 xl:gap-10">
-            <h1 className="h3 md:h1 text-center font-bold">
+            <h1 className="h3 md:h1 text-center font-bold xl:text-[3rem]">
               {preTitle}
               {heroWord && heroWordUnderlineImg && (
                 <span className={`relative  inline-block `}>
@@ -49,7 +49,7 @@ const HeroComponent = ({
                     <Image
                       src={heroWordUnderlineImg}
                       alt=""
-                      className="pointer-events-none absolute left-0  w-full "
+                      className=" pointer-events-none absolute  left-0 w-full"
                       width={100}
                       height={100}
                       style={{ objectFit: "contain" }}
@@ -74,7 +74,7 @@ const HeroComponent = ({
             alt="Resume"
             width={100}
             height={100}
-            className="size-full rounded-lg object-contain shadow-2xl shadow-shades-6"
+            className="hero-image size-full rounded-lg object-contain shadow-2xl shadow-shades-6"
             loading="lazy"
           />
         </div>

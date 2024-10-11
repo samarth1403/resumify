@@ -101,7 +101,7 @@ const Header = () => {
             iconPath="/assets/images/location.svg"
           />
         </div>
-        <div className="mt-4 flex w-full flex-row flex-wrap items-center justify-end">
+        <div className="mt-4 flex w-full flex-row flex-wrap items-center justify-center lg:justify-end">
           <Button onClick={handleContinue}>
             Save &nbsp; & &nbsp; Continue
           </Button>

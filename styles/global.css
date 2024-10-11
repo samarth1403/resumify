@@ -401,3 +401,8 @@
 .body-5 {
     @apply font-medium text-[0.7rem] leading-6
 }
+
+.hero-image {
+    /* To Make A Reflection of image at its below */
+    /* -webkit-box-reflect: below 0 linear-gradient(transparent, #fff5) */
+}

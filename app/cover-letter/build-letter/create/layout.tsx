@@ -23,18 +23,21 @@ const CoverLetterCreateLayout = ({ children }: { children: ReactNode }) => {
       customPaddings
       id="steps"
     >
-      <div className="flex w-full flex-wrap items-start justify-start gap-4 lg:gap-8 ">
-        <div className="w-48 p-4">
+      <div className="flex w-full flex-wrap items-start justify-start gap-8 lg:gap-8 ">
+        <div className="w-48 py-4">
           <StepperComponent stepperData={stepperData} />
         </div>
-        <div className="flex-1">{children}</div>
-        <TemplateShowCard
-          templateContentData={data}
-          isLoading={isLoading}
-          template={templateData}
-          cardTitle={templateData.name}
-          type="cover-letter"
-        />
+        <div className="hidden lg:flex lg:flex-1">{children}</div>
+        <div className="flex-center lg:flex-start">
+          <TemplateShowCard
+            templateContentData={data}
+            isLoading={isLoading}
+            template={templateData}
+            cardTitle={templateData.name}
+            type="cover-letter"
+          />
+        </div>
+        <div className="flex flex-1 lg:hidden">{children}</div>
       </div>
     </Section>
   );

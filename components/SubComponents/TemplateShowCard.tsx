@@ -78,14 +78,14 @@ const TemplateShowCard = ({
   };
 
   return (
-    <div className="w-80">
+    <div className="w-80 max-[320px]:w-64">
       {!isLoading ? (
         <div
           className={` ${isModalOpen ? "overflow-hidden" : ""} flex-center group relative w-full cursor-pointer flex-col gap-6  `}
         >
           <div className="relative w-full">
             <RenderHtmlContent
-              className="rounded-xl shadow-2xl shadow-gray-400 duration-500 hover:-translate-y-4 "
+              className={` rounded-xl shadow-2xl shadow-gray-400 duration-500 max-[320px]:scale-90 min-[375px]:scale-100 `}
               dynamicFields={template?.dynamicFields}
               sampleData={templateContentData}
               html={template?.htmlOption}
@@ -102,7 +102,7 @@ const TemplateShowCard = ({
             )}
             <div
               onClick={handleModalOpen}
-              className="flex-center absolute bottom-[20px] right-[14px] z-10 size-10 cursor-pointer rounded-full bg-gray-600 px-2 duration-500 hover:scale-125 hover:bg-gray-800"
+              className="lg:flex-center absolute bottom-[20px] right-[14px] z-10 hidden size-10 cursor-pointer rounded-full bg-gray-600 px-2 duration-500 hover:scale-125 hover:bg-gray-800 lg:flex"
             >
               <MdOutlineZoomIn className="size-8 rounded-full text-white " />
             </div>
@@ -141,7 +141,7 @@ const TemplateShowCard = ({
           )}
         </div>
       ) : (
-        <div className="flex-center size-full ">
+        <div className="flex-center size-full py-4 ">
           <Loader />
         </div>
       )}
