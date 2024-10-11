@@ -8,7 +8,7 @@ export const dbConnection = async (): Promise<void> => {
       throw new Error("MONGODB_URL environment variable is not defined.");
     }
 
-    console.log(` Attempting to connect to MongoDB with URL: ${url}`);
+    console.log(`Attempting to connect to MongoDB with URL: ${url}`);
 
     await mongoose.connect(url, {
       // Optional: Add mongoose connection options if needed
