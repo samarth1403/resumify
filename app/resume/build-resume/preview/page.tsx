@@ -96,12 +96,23 @@ const Preview = () => {
       <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
         {!isLoading ? (
           <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
-            <TemplateModalComponent
-              template={templateData}
-              sampleData={{ ...data, color: templateData?.sampleData?.color }}
-              ref={resumeDivRef}
-              type="resume"
-            />
+            <div className="hidden lg:flex">
+              <TemplateModalComponent
+                template={templateData}
+                sampleData={{ ...data, color: templateData?.sampleData?.color }}
+                ref={resumeDivRef}
+                type="resume"
+              />
+            </div>
+            <div className="hidden lg:flex">
+              <TemplateModalComponent
+                template={templateData}
+                sampleData={{ ...data, color: templateData?.sampleData?.color }}
+                ref={resumeDivRef}
+                type="resume"
+                renderHtmlOption={true}
+              />
+            </div>
           </div>
         ) : (
           <div className="flex-center size-full ">

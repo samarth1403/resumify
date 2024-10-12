@@ -41,7 +41,7 @@ const RecruiterInfo = () => {
       /> */}
       <span className="h6">{`[ Recruiter Info ]`}</span>
       <div className="flex-start mt-6 w-full flex-wrap gap-4 ">
-        <div className="w-64 sm:w-72">
+        <div className="w-full sm:w-72">
           <FormField
             label="Name"
             type="text"
@@ -55,7 +55,7 @@ const RecruiterInfo = () => {
             iconPath="/assets/images/person.svg"
           />
         </div>
-        <div className="w-64 sm:w-64">
+        <div className="w-full sm:w-64">
           <FormField
             label="Position"
             type="text"
@@ -106,7 +106,7 @@ const RecruiterInfo = () => {
             onClick={handleContinue}
             iconAfter={<IoIosArrowRoundForward size={24} />}
           >
-            Save &nbsp; & &nbsp; Continue
+            Continue
           </Button>
         </div>
       </div>

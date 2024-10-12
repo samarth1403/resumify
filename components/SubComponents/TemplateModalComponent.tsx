@@ -7,20 +7,24 @@ type PathWithTypePropertyBaseType = {
   sampleData: dataType;
   ref?: React.RefObject<HTMLDivElement>;
   type?: string;
+  renderHtmlOption?: boolean;
 };
 
 const TemplateModalComponent = forwardRef<
   HTMLDivElement,
   PathWithTypePropertyBaseType
->(function TemplateModalComponent({ template, sampleData, type }, ref) {
+>(function TemplateModalComponent(
+  { template, sampleData, type, renderHtmlOption = false },
+  ref
+) {
   return (
     <RenderHtmlContent
       className="scale-100"
       dynamicFields={template.dynamicFields}
       sampleData={sampleData}
-      html={template.html}
+      html={renderHtmlOption ? template.htmlOption : template.html}
       ref={ref}
-      isModalOpen={true}
+      isModalOpen={!renderHtmlOption}
       type={type}
     />
   );

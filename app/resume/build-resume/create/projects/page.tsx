@@ -112,7 +112,7 @@ const Projects = () => {
               />
             </div>
             <div className="flex-start w-full flex-wrap gap-4 " key={index}>
-              <div className="w-48 sm:w-72">
+              <div className="w-full sm:w-72">
                 <FormField
                   // label="Designation Name"
                   type="text"
@@ -127,7 +127,7 @@ const Projects = () => {
                   iconFromTop="top-3"
                 />
               </div>
-              <div className="w-48 sm:w-64">
+              <div className="w-full sm:w-64">
                 <FormField
                   // label="Company Name"
                   type="text"
@@ -165,7 +165,7 @@ const Projects = () => {
       <div className="flex w-full items-center justify-between ">
         <Button onClick={handleAddOneMore}>Add +</Button>
         {data?.projects!?.length > 0 && (
-          <Button onClick={handleContinue}>Save & Continue</Button>
+          <Button onClick={handleContinue}>Continue</Button>
         )}
       </div>
     </div>

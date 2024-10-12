@@ -35,7 +35,7 @@ const FormField = ({
 }: propTypes) => {
   return (
     <div
-      className={`flex-start w-full flex-col gap-[5px] max-[320px]:w-[90%] ${divClassName} relative `}
+      className={`flex-start w-full flex-col gap-[5px] ${divClassName} relative `}
     >
       {label && (
         <label htmlFor={name}>

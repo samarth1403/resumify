@@ -64,7 +64,7 @@ const Opener = () => {
             iconAfter={<IoIosArrowRoundForward size={24} />}
             className="pr-3"
           >
-            Save &nbsp; & &nbsp; Continue
+            Continue
           </Button>
         </div>
       </div>

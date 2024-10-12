@@ -194,19 +194,19 @@ export const buildCoverLetterIntroData = [
     id: "0",
     title: "Choose a professionally designed template",
     text: "",
-    logo: "/assets/images/step1.svg",
+    logo: "/assets/images/choose.svg",
   },
   {
     id: "1",
     title: "Fill out each section using our expert suggestions",
     text: "",
-    logo: "/assets/images/step2.svg",
+    logo: "/assets/images/keyboard.svg",
   },
   {
     id: "2",
     title: "Tailor your cover letter with a few clicks for any job",
     text: "",
-    logo: "/assets/images/step3.svg",
+    logo: "/assets/images/customize.svg",
   },
 ];
 

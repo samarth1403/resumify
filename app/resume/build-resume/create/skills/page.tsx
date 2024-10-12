@@ -43,7 +43,7 @@ const Skills = () => {
       <div className="flex-start w-full flex-wrap gap-4 ">
         <div className="w-full">
           <div
-            className="flex w-full cursor-pointer items-center justify-end"
+            className="mt-2 flex w-full cursor-pointer items-center justify-end"
             onClick={() => setData((prev) => ({ ...prev, skills: [] }))}
           >
             <p>Clear</p>
@@ -60,7 +60,7 @@ const Skills = () => {
           />
         </div>
       </div>
-      <div className="flex w-full items-center justify-end ">
+      <div className="mt-4 flex w-full items-center justify-center lg:justify-end">
         <Button onClick={handleContinue}>Save & Continue</Button>
       </div>
     </div>

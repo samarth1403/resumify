@@ -89,18 +89,28 @@ const Preview = () => {
       <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
         {!isLoading ? (
           <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
-            <TemplateModalComponent
-              template={templateData}
-              sampleData={data}
-              ref={coverLetterDivRef}
-            />
+            <div className="hidden lg:flex">
+              <TemplateModalComponent
+                template={templateData}
+                sampleData={data}
+                ref={coverLetterDivRef}
+              />
+            </div>
+            <div className="flex lg:hidden">
+              <TemplateModalComponent
+                template={templateData}
+                sampleData={data}
+                ref={coverLetterDivRef}
+                renderHtmlOption={true}
+              />
+            </div>
           </div>
         ) : (
           <div className="flex-center size-full ">
             <Loader />
           </div>
         )}
-        <div className="flex-start w-auto flex-col gap-4 ">
+        <div className="flex-start w-full flex-col gap-4 lg:w-auto ">
           <div className="flex-start  gap-2">
             <Button
               onClick={handlePrint}
@@ -141,7 +151,7 @@ const Preview = () => {
           </div>
           {!showOtherTemplates ? null : showOtherTemplates &&
             !allTemplatesLoading ? (
-            <div className="flex-start h-[850px] max-w-full flex-col gap-8 overflow-y-scroll pr-2 ">
+            <div className="flex-center lg:flex-start h-[850px] w-full flex-col gap-8 overflow-y-scroll pr-2 lg:max-w-full ">
               {templateList()}
             </div>
           ) : (

@@ -58,9 +58,7 @@ const TemplateCard = ({
             className={` rounded-xl shadow-2xl shadow-gray-400 duration-500 ${!forOtherTemplatesChoose ? "hover:-translate-y-4" : ""} max-[320px]:scale-90 min-[375px]:scale-100 `}
             dynamicFields={template.dynamicFields}
             sampleData={
-              forOtherTemplatesChoose
-                ? (forOtherTemplatesChooseData as dataType)
-                : (template.sampleData as dataType)
+              template.sampleData as dataType
             }
             html={template.htmlOption}
             type={type}
