@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export const resumeStepsData = [
   {
     id: "0",
@@ -30,37 +31,37 @@ export const resumeAlternateData = [
     id: "0",
     title: "New, professional designs",
     text: "Choose from a wide range of styles for every job level and type. From fun and creative to simple and modern, there’s a perfect design for everyone.",
-    logo: "/assets/images/hero-resume-example.svg",
+    logo: "/assets/svg/professional-design.svg",
   },
   {
     id: "1",
     title: "ATS friendly",
     text: "Employers use applicant tracking systems (ATS) to filter out candidates. With our templates, be confident knowing your ATS-friendly resume will reach the hiring manager successfully.",
-    logo: "/assets/images/hero-resume-example.svg",
+    logo: "/assets/svg/ats.svg",
   },
   {
     id: "2",
     title: "Download and print",
     text: "Download your resume in PDF format or print it directly from the builder. Share it with potential employers and get ready to land your dream job.",
-    logo: "/assets/images/hero-resume-example.svg",
+    logo: "/assets/svg/download-man.svg",
   },
   {
     id: "3",
     title: "Step-by-step support",
     text: "Our Resume Creator provides detailed tips and advice throughout the process, with customer support ready to assist you anytime.",
-    logo: "/assets/images/hero-resume-example.svg",
+    logo: "/assets/svg/step-by-step.svg",
   },
   {
     id: "4",
     title: "Matching cover letter",
     text: "Easily create a memorable cover letter with customizable suggested text in our Cover Letter Builder. Then, choose a design that aligns with your resume for a cohesive professional look.",
-    logo: "/assets/images/hero-resume-example.svg",
+    logo: "/assets/svg/matching-cover-letter.svg",
   },
   {
     id: "5",
     title: "Unlimited resumes",
     text: "Make and edit unlimited resumes, experiment with multiple templates and download your resumes in various file formats.",
-    logo: "/assets/images/hero-resume-example.svg",
+    logo: "/assets/svg/unlimited-access.svg",
   },
 ];
 
@@ -302,3 +303,92 @@ export const stepperData = [
     uri: "/resume/build-resume/create/profiles",
   },
 ];
+
+export const resumeHeroTemplate = {
+  sampleData: {
+    name: "John Doe",
+    profilePicture: "profile-picture-url",
+    email: "john.doe@example.com",
+    phone: "+1234567890",
+    address: "123 Main Street, City, Country",
+    summary:
+      "An experienced software developer with a strong background in building scalable web applications and a passion for solving complex problems.",
+    experience: [
+      {
+        jobTitle: "Senior Software Engineer",
+        company: "XYZ Corporation",
+        startDate: "2018-01-01",
+        endDate: "2021-12-31",
+        jobDescription:
+          "Led a team of developers to build and maintain a suite of web applications, improving efficiency and user experience.",
+      },
+      {
+        jobTitle: "Software Engineer",
+        company: "ABC Company",
+        startDate: "2015-06-01",
+        endDate: "2017-12-31",
+        jobDescription:
+          "Developed new features and optimized existing ones, contributing to a 30% increase in overall system performance.",
+      },
+    ],
+    color: "black",
+    education: [
+      {
+        degree: "Bachelor of Science in Computer Science",
+        institution: "University of Technology",
+        startDate: "2011-09-01",
+        endDate: "2015-06-01",
+        description:
+          "Graduated with honors, specializing in software development and algorithms.",
+      },
+    ],
+    initials: "JD",
+    profiles: [
+      {
+        profile: "LinkedIn",
+        link: "https://www.linkedin.com",
+      },
+      {
+        profile: "GitHub",
+        link: "https://www.github.com",
+      },
+    ],
+    skills: ["JavaScript", "React", "Node.js", "CSS", "HTML"],
+    projects: [
+      {
+        title: "Project 1",
+        description: "A web application for managing tasks and deadlines.",
+        link: "project1.com",
+      },
+      {
+        title: "Project 2",
+        description:
+          "An e-commerce platform with real-time inventory tracking.",
+        link: "project2.com",
+      },
+    ],
+  },
+  _id: "66fd863a3da30311051c56a2",
+  name: "Trendy",
+  type: "resume",
+  subtype: "simple",
+  description:
+    "A clean and professional resume template with a well-organized layout to highlight your skills and experiences effectively.",
+  html: '<div style="min-height: 1000px; height: 100%; width: 800px; display: flex; flex-direction: column; align-items: start; justify-content: start; background-color: white; border-radius: 20px;">\n      <div style="height: auto; background-color: rgb(55, 65, 81); border-radius: 20px 20px 0 0; width: 100%; padding: 20px;">\n        <div style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; gap: 8px;">\n          <div style="display: flex; width: 100%; height: auto; flex-direction: column; gap: 1rem; color: white; align-items: center; justify-content: center;">\n            <p style="font-size: 2.5rem;">{name}</p>\n            <div style="display: flex; flex-direction: row; justify-content: start; align-items: start; gap: 4px; font-size: 0.9rem;">\n              <p>{email} &nbsp; | &nbsp;</p>\n              <p>{phone} &nbsp; | &nbsp;</p>\n              <p>{address}</p>\n            </div>\n          </div>\n        </div>\n      </div>\n      <div style="width: 100%; height: 100%; background-color: white; border-radius: 0 0 20px 20px; padding: 2rem;">\n        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.35rem; text-align: justify; width: 100%; height: 100%;">\n          <div>\n            <p>{experience}</p>\n          </div>\n          <div>\n            <p>{education}</p>\n          </div>\n          <div>\n            <p>{projects}</p>\n          </div>\n          <div>\n            <p>{skills}</p>\n          </div>\n          <div>\n            <p>{profiles}</p>\n          </div>\n        </div>\n      </div>\n    </div>',
+  dynamicFields: [
+    "name",
+    "profilePicture",
+    "email",
+    "phone",
+    "address",
+    "summary",
+    "experience",
+    "education",
+    "skills",
+    "initials",
+    "profiles",
+    "projects",
+  ],
+  htmlOption:
+    ' <div style="min-height: 420px; height: 100%; width: 320px; display: flex; flex-direction: column; align-items: start; justify-content: start; background-color: white; border-radius: 20px;">\n      <div style="height: auto; background-color: rgb(55, 65, 81); border-radius: 20px 20px 0 0; width: 100%; padding: 10px 10px 0px 10px;">\n        <div style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; gap: 8px; padding-bottom : 10px;">\n          <div style="display: flex; width: 100%; height: auto; flex-direction: column; gap: 4px; color: white; align-items: center; justify-content: center;">\n            <p style="font-size: 1.2rem;">{name}</p>\n            <div style="display: flex; flex-direction: row; justify-content: start; align-items: start; gap: 4px; font-size: 0.40rem;">\n              <p>{email} &nbsp; | &nbsp;</p>\n              <p>{phone} &nbsp; | &nbsp;</p>\n              <p>{address}</p>\n            </div>\n          </div>\n        </div>\n      </div>\n      <div style="width: 100%; height: 100%; background-color: white; border-radius: 0 0 20px 20px; padding: 15px;">\n        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.35rem; text-align: justify; width: 100%; height: 100%;">\n          <div>\n            <p>{experience}</p>\n          </div>\n          <div>\n            <p>{education}</p>\n          </div>\n          <div>\n            <p>{projects}</p>\n          </div>\n          <div>\n            <p>{skills}</p>\n          </div>\n          <div>\n            <p>{profiles}</p>\n          </div>\n        </div>\n      </div>\n    </div>',
+};

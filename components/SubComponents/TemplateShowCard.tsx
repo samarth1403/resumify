@@ -9,10 +9,11 @@ import { dataType, templateType } from "@/constants";
 import { useRef, useState } from "react";
 
 import { useGlobalContext } from "@/context/GlobalProvider";
-import html2canvas from "html2canvas";
-import { jsPDF as JsPDF } from "jspdf";
+// import html2canvas from "html2canvas";
+// import { jsPDF as JsPDF } from "jspdf";
 import { useRouter } from "next/navigation";
-import { MdOutlineDownload, MdOutlineZoomIn } from "react-icons/md";
+import { MdOutlinePrint, MdOutlineZoomIn } from "react-icons/md";
+import { useReactToPrint } from "react-to-print";
 
 const TemplateShowCard = ({
   templateContentData,
@@ -59,23 +60,28 @@ const TemplateShowCard = ({
     );
   };
 
-  const downloadPdf = () => {
-    const input = componentRef.current!;
+  // const downloadPdf = () => {
+  //   const input = componentRef.current!;
 
-    html2canvas(input, { scale: 2 })
-      .then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new JsPDF("p", "pt", "a4");
+  //   html2canvas(input, { scale: 2 })
+  //     .then((canvas) => {
+  //       const imgData = canvas.toDataURL("image/png");
+  //       const pdf = new JsPDF("p", "pt", "a4");
 
-        const margin = 20;
-        const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+  //       const margin = 20;
+  //       const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
+  //       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-        pdf.addImage(imgData, "PNG", margin, margin, pdfWidth, pdfHeight);
-        pdf.save("download.pdf");
-      })
-      .catch((err) => console.log(err));
-  };
+  //       pdf.addImage(imgData, "PNG", margin, margin, pdfWidth, pdfHeight);
+  //       pdf.save("download.pdf");
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    bodyClass: "bg-white",
+  });
 
   return (
     <div className="w-80 max-[320px]:w-64">
@@ -94,10 +100,10 @@ const TemplateShowCard = ({
             />
             {selfDocument && (
               <div
-                onClick={downloadPdf}
+                onClick={handlePrint}
                 className="flex-center absolute bottom-[20px] left-[14px] z-10 size-10 cursor-pointer rounded-full bg-gray-600 px-2 duration-500 hover:scale-125 hover:bg-gray-800"
               >
-                <MdOutlineDownload className="size-8 rounded-full text-white " />
+                <MdOutlinePrint className="size-8 rounded-full text-white " />
               </div>
             )}
             <div

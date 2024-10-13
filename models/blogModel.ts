@@ -1,19 +1,29 @@
 import mongoose from "mongoose";
 
-const documentSchema = new mongoose.Schema(
+const blogSchema = new mongoose.Schema(
   {
-    type: {
+    title: {
       type: String,
       required: true,
     },
-    userData: {},
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+    content: {
+      type: String,
+      required: true,
     },
-    templateId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Template",
+    author: {
+      type: String,
+      required: true,
+    },
+    tags: {
+      type: [String], // Array of tags for the blog
+    },
+    views: {
+      type: Number,
+      default: 0,
+    },
+    published: {
+      type: Boolean,
+      default: false,
     },
   },
   {
@@ -21,6 +31,5 @@ const documentSchema = new mongoose.Schema(
   }
 );
 
-const Document =
-  mongoose.models.Document || mongoose.model("Document", documentSchema);
-export default Document;
+const Blog = mongoose.models.Blog || mongoose.model("Blog", blogSchema);
+export default Blog;

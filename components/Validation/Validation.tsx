@@ -73,6 +73,21 @@ export const validateSignUp = (formData: signUpPropTypes) => {
   return { ...usernameV.errors, ...emailV.errors, ...passwordV.errors };
 };
 
+export const validateReview = (formData: { name: string; star: number }) => {
+  const { name, star } = formData;
+  const nameV = new Validator({
+    value: name!,
+    key: "name",
+    field: "Name",
+  }).required();
+  const starV = new Validator({
+    value: star,
+    key: "star",
+    field: "Rating",
+  }).numberRequired();
+  return { ...nameV.errors, ...starV.errors };
+};
+
 export const validateCoverLetterPersonalInfo = (formData: coverLetterType) => {
   const { email, name, phone, address } = formData;
   const usernameV = new Validator({

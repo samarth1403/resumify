@@ -27,6 +27,15 @@ export class Validator {
     return this;
   };
 
+  numberRequired = () => {
+    if (this.value === 0) {
+      this.errors[this.key] = {
+        message: `${this.field} is required`,
+      };
+    }
+    return this;
+  };
+
   email = () => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailRegex.test(this.value.toString())) {

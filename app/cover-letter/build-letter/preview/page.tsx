@@ -10,14 +10,14 @@ import {
 import { useGlobalContext } from "@/context/GlobalProvider";
 import useGetTemplateData from "@/utils/useGetTemplateData";
 import { FaPrint } from "react-icons/fa";
-import { LuDownload } from "react-icons/lu";
 // import { MdMailOutline } from "react-icons/md";
 import useGetAllTemplates from "@/utils/useGetAllTemplates";
 import { usePathname } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
-import { jsPDF as JsPDF } from "jspdf";
-import html2canvas from "html2canvas";
+// import { LuDownload } from "react-icons/lu";
+// import { jsPDF as JsPDF } from "jspdf";
+// import html2canvas from "html2canvas";
 
 const Preview = () => {
   const { data, selectedTemplateId } = useGlobalContext();
@@ -56,23 +56,23 @@ const Preview = () => {
     setShowOtherTemplates(event.target.checked);
   };
 
-  const downloadPdf = () => {
-    const input = coverLetterDivRef.current!;
+  // const downloadPdf = () => {
+  //   const input = coverLetterDivRef.current!;
 
-    html2canvas(input, { scale: 2 })
-      .then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new JsPDF("p", "pt", "a4");
+  //   html2canvas(input, { scale: 2 })
+  //     .then((canvas) => {
+  //       const imgData = canvas.toDataURL("image/png");
+  //       const pdf = new JsPDF("p", "pt", "a4");
 
-        const margin = 20;
-        const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+  //       const margin = 20;
+  //       const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
+  //       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-        pdf.addImage(imgData, "PNG", margin, margin, pdfWidth, pdfHeight);
-        pdf.save("download.pdf");
-      })
-      .catch((err) => console.log(err));
-  };
+  //       pdf.addImage(imgData, "PNG", margin, margin, pdfWidth, pdfHeight);
+  //       pdf.save("download.pdf");
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   return (
     <Section
@@ -119,13 +119,13 @@ const Preview = () => {
             >
               Print
             </Button>
-            <Button
+            {/* <Button
               onClick={downloadPdf}
               className=""
               iconBefore={<LuDownload className="mr-1" />}
             >
               Download
-            </Button>
+            </Button> */}
             {/* <Button
               // onClick={handleContinue}/
               className="w-full"

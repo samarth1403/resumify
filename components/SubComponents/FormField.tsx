@@ -63,7 +63,7 @@ const FormField = ({
           alt={""}
           width={25}
           height={25}
-          className={`absolute left-2 ${iconFromTop || "top-1/2"} object-contain`}
+          className={`absolute left-2 ${iconFromTop || error ? "top-10" : "top-1/2"} object-contain`}
         />
       )}
       {error && (

@@ -42,7 +42,7 @@ const Alternate = ({ title, resumeAlternateData }: propTypes) => {
                   alt={data.title}
                   width={50}
                   height={50}
-                  className="w-48 object-contain shadow-2xl shadow-shades-4 lg:w-64"
+                  className=" aspect-square w-48 object-contain lg:w-64 "
                   loading="lazy"
                 />
               </div>

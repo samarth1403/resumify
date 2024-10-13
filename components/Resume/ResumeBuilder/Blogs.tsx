@@ -1,11 +1,11 @@
 import BlogsComponent from "@/components/SubComponents/BlogsComponent";
-import { resumeBlogsData } from "@/constants/Resume";
+import { AllBlogs } from "@/constants";
 
 const Blogs = () => {
   return (
     <BlogsComponent
       title="Latest advice from our job search experts"
-      blogsData={resumeBlogsData}
+      blogsData={AllBlogs?.filter((blog) => blog.type === "resume")}
     />
   );
 };

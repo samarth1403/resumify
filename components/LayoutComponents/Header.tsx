@@ -119,7 +119,7 @@ const Header = () => {
                         }}
                       >
                         <p
-                          className={`text-[1rem] text-shades-12 hover:text-primary-green`}
+                          className={`text-[1rem] text-shades-12 hover:text-primary-orange`}
                         >
                           {subLink.title}
                         </p>
@@ -129,49 +129,56 @@ const Header = () => {
                 )}
             </Link>
           ))}
-          {!isUserLoggedIn ? (
-            <div className="flex-center gap-4">
-              <Link href={"/sign-in"}>
-                {!isLoading ? (
-                  <button type="button" className="black_btn">
-                    Sign In
-                  </button>
-                ) : (
-                  <div className="medium-loader" />
-                )}
-              </Link>
-              <Link href={"/sign-up"}>
+        </div>
+        {!isUserLoggedIn ? (
+          <div className="lg:flex-center hidden lg:flex lg:gap-4">
+            <Link href={"/sign-in"}>
+              {!isLoading ? (
                 <button type="button" className="black_btn">
-                  Sign Up
+                  Sign In
                 </button>
-              </Link>
+              ) : (
+                <div className="medium-loader" />
+              )}
+            </Link>
+            <Link href={"/sign-up"}>
+              <button type="button" className="black_btn">
+                Sign Up
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <div className="lg:flex-center hidden lg:flex lg:gap-4">
+            <div>
+              {!isLoading ? (
+                <button className="black_btn size-4 h-full rounded-full text-2xl ">
+                  {String(user?.username).charAt(0).toUpperCase()}
+                </button>
+              ) : (
+                <div className="medium-loader" />
+              )}
             </div>
-          ) : (
-            <div className="flex-center gap-4">
-              <Link href={"/profile"}>
-                {!isLoading ? (
-                  <button className="black_btn size-4 h-full rounded-full text-2xl ">
-                    {String(user?.username).charAt(0).toUpperCase()}
-                  </button>
-                ) : (
-                  <div className="medium-loader" />
-                )}
-              </Link>
-              <Button
-                isFormSubmitting={isFormSubmitting}
-                className="outline_btn"
-                onClick={() => handleLogout()}
-              >
-                {"Logout"}
-              </Button>
+            <Button
+              isFormSubmitting={isFormSubmitting}
+              className="outline_btn"
+              onClick={() => handleLogout()}
+            >
+              {"Logout"}
+            </Button>
+          </div>
+        )}
+        <div className="flex-center gap-2  lg:hidden">
+          {isUserLoggedIn && (
+            <div className="flex lg:hidden">
+              {!isLoading ? (
+                <button className="black_btn size-4 h-full rounded-full text-2xl ">
+                  {String(user?.username).charAt(0).toUpperCase()}
+                </button>
+              ) : (
+                <div className="medium-loader" />
+              )}
             </div>
           )}
-        </div>
-        <Link
-          href={"/"}
-          className="flex-center lg:hidden"
-          onClick={() => setActive("")}
-        >
           <Image
             src={toggle ? "/assets/icons/close.svg" : "/assets/icons/menu.svg"}
             alt=""
@@ -180,7 +187,7 @@ const Header = () => {
             className="object-contain transition-all duration-200 ease-linear lg:hidden "
             onClick={() => setToggle(!toggle)}
           />
-        </Link>
+        </div>
       </nav>
       <nav
         className={`fixed inset-x-0 bottom-0 top-20 bg-white  ${
@@ -205,6 +212,25 @@ const Header = () => {
               </p>
             </Link>
           ))}
+          {!isUserLoggedIn && (
+            <button type="button" className="black_btn my-2">
+              Sign In
+            </button>
+          )}
+          {!isUserLoggedIn && (
+            <button type="button" className="black_btn my-2">
+              Sign Up
+            </button>
+          )}
+          {isUserLoggedIn && (
+            <Button
+              isFormSubmitting={isFormSubmitting}
+              className="outline_btn my-2"
+              onClick={() => handleLogout()}
+            >
+              {"Logout"}
+            </Button>
+          )}
         </div>
       </nav>
     </div>

@@ -30,37 +30,37 @@ export const coverLetterAlternateData = [
     id: "0",
     title: "Created by real career specialists",
     text: "Our Cover Letter Builder is the brainchild of seasoned career counselors and professional cover letter writers who have deep insights into the job-hunting landscape.",
-    logo: "/assets/images/hero-resume-example.svg",
+    logo: "/assets/svg/experts.svg",
   },
   {
     id: "1",
     title: "Templates come in every style",
     text: "From the structured formality of corporate boardrooms to the vibrant, boundless energy of creative studios, there’s a design tailored to your job industry.",
-    logo: "/assets/images/hero-resume-example.svg",
+    logo: "/assets/svg/templates.svg",
   },
   {
     id: "2",
     title: "Content suggestions written by experts",
     text: "The expertise of our knowledgeable career aficionados and certified writers is clear in every prewritten content suggestion made for your cover letter — and they’re customized to each role.",
-    logo: "/assets/images/hero-resume-example.svg",
+    logo: "/assets/svg/another-expert.svg",
   },
   {
     id: "3",
     title: "Guided experience every step of the way",
     text: "Our builder helps in transforming confusion into clarity. Navigate through template selection, content creation and formatting with ease thanks to our well-organized feedback and user-friendly interface.",
-    logo: "/assets/images/hero-resume-example.svg",
+    logo: "/assets/svg/steps-cl.svg",
   },
   {
     id: "4",
     title: "Easily create a matching resume",
     text: "Give your application a professional sheen with matching resume and cover letter templates. Create your cover letter, then use the same template to make a resume.",
-    logo: "/assets/images/hero-resume-example.svg",
+    logo: "/assets/svg/resume.svg",
   },
   {
     id: "5",
     title: "Unlimited access and downloads",
     text: "Embrace the freedom to experiment, modify and perfect your documents. Adapt your content and style for various applications and export your polished product in your preferred format, be it PDF, DOC or text.",
-    logo: "/assets/images/hero-resume-example.svg",
+    logo: "/assets/svg/download-cl.svg",
   },
 ];
 
