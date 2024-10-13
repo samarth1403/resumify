@@ -1,12 +1,12 @@
 import ReviewsComponent from "@/components/SubComponents/ReviewsComponent";
-import { cvFiveStarReviews } from "@/constants/CV";
+import { ReviewType } from "@/constants";
 import React from "react";
 
 const Reviews = () => {
   return (
     <ReviewsComponent
       title="What users say about our CV Maker"
-      fiveStarReviews={cvFiveStarReviews}
+      fiveStarReviews={[] as ReviewType[]}
     />
   );
 };
