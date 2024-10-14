@@ -3,7 +3,6 @@ import {
   Faq,
   Features,
   Hero,
-  Reviews,
   Steps,
 } from "@/components/CoverLetter/CoverLetterBuilder";
 import WriteReview from "@/components/SubComponents/WriteReview";
@@ -16,7 +15,7 @@ const ConverLetterBuilder = () => {
       <Features />
       {/* <OthersIntro /> */}
       {/* <Ratings /> */}
-      <Reviews />
+      {/* <Reviews /> */}
       <Blogs />
       <Faq />
       <WriteReview type="cover-letter" />
