@@ -23,7 +23,7 @@ const useGetAllReviews = ({ type }: { type: string }) => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [type]);
 
   useEffect(() => {
     getAllReviews();
