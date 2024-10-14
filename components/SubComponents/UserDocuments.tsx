@@ -61,7 +61,7 @@ const UserDocuments = () => {
                   </p>
                 </div> */}
                   <div
-                    className="flex-between cursor-pointers w-72 lg:w-96"
+                    className="flex-between w-72 cursor-pointer lg:w-96"
                     onClick={() => router.push("/documents")}
                   >
                     <p className="body-3 text-blue-500">Your Cover Letters</p>

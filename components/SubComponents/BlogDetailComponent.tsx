@@ -20,7 +20,7 @@ const BlogDetailComponent = ({ blog }: { blog: BlogType }) => {
             alt=""
             height={250}
             width={250}
-            className="my-6 lg:my-8 rounded-xl object-contain"
+            className="my-6 rounded-xl object-contain lg:my-8"
             loading="lazy"
           />
         </div>
