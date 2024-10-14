@@ -27,7 +27,7 @@ const Homepage = () => {
       <Blogs />
       <Reviews />
       <Faq />
-      <WriteReview type="resume" />
+      {/* <WriteReview type="resume" /> */}
     </>
   );
 };
