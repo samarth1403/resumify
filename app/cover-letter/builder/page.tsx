@@ -1,23 +1,23 @@
-import {
-  Blogs,
-  Faq,
-  Features,
-  Hero,
-  Reviews,
-  Steps,
-} from "@/components/CoverLetter/CoverLetterBuilder";
+// import {
+//   Blogs,
+//   Faq,
+//   Features,
+//   Hero,
+//   Reviews,
+//   Steps,
+// } from "@/components/CoverLetter/CoverLetterBuilder";
 
 const ConverLetterBuilder = () => {
   return (
     <>
-      <Hero />
+      {/* <Hero />
       <Steps />
-      <Features />
+      <Features /> */}
       {/* <OthersIntro /> */}
       {/* <Ratings /> */}
-      <Reviews />
+      {/* <Reviews />
       <Blogs />
-      <Faq />
+      <Faq /> */}
       {/* <WriteReview type="cover-letter" /> */}
     </>
   );

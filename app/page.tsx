@@ -10,6 +10,7 @@ import {
 import Blogs from "@/components/Resume/ResumeBuilder/Blogs";
 import Templates from "@/components/Resume/Templates";
 import { UserDocuments } from "@/components/SubComponents";
+import WriteReview from "@/components/SubComponents/WriteReview";
 import { useGlobalContext } from "@/context/GlobalProvider";
 
 const Homepage = () => {
@@ -26,7 +27,7 @@ const Homepage = () => {
       <Blogs />
       <Reviews />
       <Faq />
-      {/* <WriteReview type="resume" /> */}
+      <WriteReview type="resume" />
     </>
   );
 };
