@@ -1,12 +1,12 @@
 import {
   Blogs,
-  // Faq,
+  Faq,
   Features,
   Reviews,
   Steps,
   Hero,
 } from "@/components/CoverLetter/CoverLetterBuilder";
-import WriteReview from "@/components/SubComponents/WriteReview";
+// import WriteReview from "@/components/SubComponents/WriteReview";
 
 const ConverLetterBuilder = () => {
   return (
@@ -18,8 +18,8 @@ const ConverLetterBuilder = () => {
       {/* <Ratings /> */}
       <Reviews />
       <Blogs />
-      {/* <Faq /> */}
-      <WriteReview type="cover-letter" />
+      <Faq />
+      {/* <WriteReview type="cover-letter" /> */}
     </>
   );
 };
