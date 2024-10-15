@@ -2,7 +2,6 @@ import {
   Blogs,
   Faq,
   Features,
-  Hero,
   Reviews,
   Steps,
 } from "@/components/CoverLetter/CoverLetterBuilder";
@@ -11,7 +10,7 @@ import WriteReview from "@/components/SubComponents/WriteReview";
 const ConverLetterBuilder = () => {
   return (
     <>
-      <Hero />
+      {/* <Hero /> */}
       <Steps />
       <Features />
       {/* <OthersIntro /> */}
