@@ -1,8 +1,8 @@
 import {
-  Blogs,
+  // Blogs,
   Faq,
   Features,
-  // Reviews,
+  Reviews,
   Steps,
   Hero,
 } from "@/components/CoverLetter/CoverLetterBuilder";
@@ -16,8 +16,8 @@ const ConverLetterBuilder = () => {
       <Features />
       {/* <OthersIntro /> */}
       {/* <Ratings /> */}
-      {/* <Reviews /> */}
-      <Blogs />
+      <Reviews />
+      {/* <Blogs /> */}
       <Faq />
       <WriteReview type="cover-letter" />
     </>
