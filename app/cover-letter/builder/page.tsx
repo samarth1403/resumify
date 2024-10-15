@@ -1,6 +1,6 @@
 import {
-  // Blogs,
-  Faq,
+  Blogs,
+  // Faq,
   Features,
   Reviews,
   Steps,
@@ -17,8 +17,8 @@ const ConverLetterBuilder = () => {
       {/* <OthersIntro /> */}
       {/* <Ratings /> */}
       <Reviews />
-      {/* <Blogs /> */}
-      <Faq />
+      <Blogs />
+      {/* <Faq /> */}
       <WriteReview type="cover-letter" />
     </>
   );
