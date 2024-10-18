@@ -36,7 +36,7 @@ const Header = () => {
     <div className="h-auto w-full ">
       <span className="h6">{`[ Personal Info ]`}</span>
       <div className="flex-start mt-6 w-full flex-wrap gap-4 ">
-        <div className="w-48 sm:w-72">
+        <div className="w-full sm:w-72">
           <FormField
             label="Name"
             type="text"
@@ -59,7 +59,7 @@ const Header = () => {
             iconPath="/assets/images/person.svg"
           />
         </div>
-        <div className="w-48">
+        <div className="w-full">
           <FormField
             label="Phone"
             type="number"

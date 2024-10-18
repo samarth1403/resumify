@@ -57,9 +57,7 @@ const TemplateCard = ({
           <RenderHtmlContent
             className={` rounded-xl shadow-2xl shadow-gray-400 duration-500 ${!forOtherTemplatesChoose ? "hover:-translate-y-4" : ""} max-[320px]:scale-90 min-[375px]:scale-100 `}
             dynamicFields={template.dynamicFields}
-            sampleData={
-              template.sampleData as dataType
-            }
+            sampleData={template.sampleData as dataType}
             html={template.htmlOption}
             type={type}
           />
@@ -72,7 +70,14 @@ const TemplateCard = ({
           <button
             onClick={handleTemplateChoose}
             // eslint-disable-next-line max-len, tailwindcss/enforces-negative-arbitrary-values
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-xl bg-shades-8 px-4 py-2 text-xs text-white opacity-0  transition-transform  duration-500 ease-in-out hover:bg-shades-10 group-hover:-translate-y-[200px] group-hover:opacity-100"
+            className="hidden lg:flex absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-xl bg-shades-8 px-4 py-2 text-xs text-white opacity-0  transition-transform  duration-500 ease-in-out hover:bg-shades-10 group-hover:-translate-y-[200px] group-hover:opacity-100"
+          >
+            Use this Template
+          </button>
+          <button
+            onClick={handleTemplateChoose}
+            // eslint-disable-next-line max-len, tailwindcss/enforces-negative-arbitrary-values
+            className="flex lg:hidden absolute top-0 left-1/2 -translate-x-1/2 translate-y-48 rounded-xl bg-shades-8 px-4 py-2 text-xs text-white transition-transform  duration-500 ease-in-out hover:bg-shades-10"
           >
             Use this Template
           </button>

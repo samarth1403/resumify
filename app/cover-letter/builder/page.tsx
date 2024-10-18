@@ -7,7 +7,7 @@ import {
   Steps,
   Hero,
 } from "@/components/CoverLetter/CoverLetterBuilder";
-// import WriteReview from "@/components/SubComponents/WriteReview";
+import WriteReview from "@/components/SubComponents/WriteReview";
 
 const ConverLetterBuilder = () => {
   return (
@@ -20,7 +20,7 @@ const ConverLetterBuilder = () => {
       <Reviews />
       <Blogs />
       <Faq />
-      {/* <WriteReview type="cover-letter" /> */}
+      <WriteReview type="cover-letter" />
     </>
   );
 };
