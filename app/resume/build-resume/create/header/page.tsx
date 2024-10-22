@@ -59,7 +59,7 @@ const Header = () => {
             iconPath="/assets/images/person.svg"
           />
         </div>
-        <div className="w-full">
+        <div className="w-full sm:w-64">
           <FormField
             label="Phone"
             type="number"

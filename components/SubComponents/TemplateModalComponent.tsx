@@ -8,13 +8,14 @@ type PathWithTypePropertyBaseType = {
   ref?: React.RefObject<HTMLDivElement>;
   type?: string;
   renderHtmlOption?: boolean;
+  isPreview?: boolean;
 };
 
 const TemplateModalComponent = forwardRef<
   HTMLDivElement,
   PathWithTypePropertyBaseType
 >(function TemplateModalComponent(
-  { template, sampleData, type, renderHtmlOption = false },
+  { template, sampleData, type, renderHtmlOption = false, isPreview },
   ref
 ) {
   return (
@@ -26,6 +27,7 @@ const TemplateModalComponent = forwardRef<
       ref={ref}
       isModalOpen={!renderHtmlOption}
       type={type}
+      isPreview={isPreview}
     />
   );
 });

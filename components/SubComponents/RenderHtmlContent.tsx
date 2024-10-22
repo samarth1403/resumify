@@ -14,11 +14,20 @@ interface RenderHtmlContentProps {
   html: string;
   type?: string;
   isModalOpen?: boolean;
+  isPreview?: boolean;
 }
 
 const RenderHtmlContent = forwardRef<HTMLDivElement, RenderHtmlContentProps>(
   function RenderHtmlContent(
-    { dynamicFields, sampleData, html, className, type, isModalOpen },
+    {
+      dynamicFields,
+      sampleData,
+      html,
+      className,
+      type,
+      isModalOpen,
+      isPreview = false,
+    },
     ref
   ) {
     let renderedTemplate = html;
@@ -44,7 +53,7 @@ const RenderHtmlContent = forwardRef<HTMLDivElement, RenderHtmlContentProps>(
               </div>
             `;
             } else if (field === "skills") {
-              listString += `<li key={${index}} style="font-size: 0.9rem;">${item}</li>`;
+              listString += `<li key={${index}} style="font-size: 0.9rem; mt ">${item}</li>`;
             } else if (field === "profiles") {
               listString += `<li key={${index}} style="font-size: 0.9rem;"><a href=${(item as profileType).link} target="_blank" >${(item as profileType).profile}</a></li>`;
             } else if (field === "projects") {

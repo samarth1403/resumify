@@ -15,9 +15,9 @@ import useGetAllTemplates from "@/utils/useGetAllTemplates";
 import { usePathname } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
-// import { LuDownload } from "react-icons/lu";
-// import { jsPDF as JsPDF } from "jspdf";
-// import html2canvas from "html2canvas";
+import { LuDownload } from "react-icons/lu";
+import { jsPDF as JsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 import { dataType } from "@/constants";
 
 const Preview = () => {
@@ -63,23 +63,23 @@ const Preview = () => {
     setShowOtherTemplates(event.target.checked);
   };
 
-  // const downloadPdf = () => {
-  //   const input = resumeDivRef.current!;
+  const downloadPdf = () => {
+    const input = resumeDivRef.current!;
 
-  //   html2canvas(input, { scale: 2 })
-  //     .then((canvas) => {
-  //       const imgData = canvas.toDataURL("image/png");
-  //       const pdf = new JsPDF("p", "pt", "a4");
+    html2canvas(input, { scale: 10 })
+      .then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new JsPDF("p", "px", "a4");
 
-  //       const margin = 20;
-  //       const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
-  //       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+        const margin = 0;
+        const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-  //       pdf.addImage(imgData, "PNG", margin, margin, pdfWidth, pdfHeight);
-  //       pdf.save("download.pdf");
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
+        pdf.addImage(imgData, "PNG", margin, margin, pdfWidth, pdfHeight);
+        pdf.save("download.pdf");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <Section
@@ -102,15 +102,17 @@ const Preview = () => {
                 sampleData={{ ...data, color: templateData?.sampleData?.color }}
                 ref={resumeDivRef}
                 type="resume"
+                isPreview={true}
               />
             </div>
-            <div className="hidden lg:flex">
+            <div className="flex lg:hidden">
               <TemplateModalComponent
                 template={templateData}
                 sampleData={{ ...data, color: templateData?.sampleData?.color }}
                 ref={resumeDivRef}
                 type="resume"
                 renderHtmlOption={true}
+                isPreview={true}
               />
             </div>
           </div>
@@ -128,13 +130,13 @@ const Preview = () => {
             >
               Print
             </Button>
-            {/* <Button
+            <Button
               onClick={downloadPdf}
               className=""
               iconBefore={<LuDownload className="mr-1" />}
             >
               Download
-            </Button> */}
+            </Button>
             {/* <Button
               // onClick={handleContinue}/
               className="w-full"
