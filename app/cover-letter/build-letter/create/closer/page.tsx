@@ -40,15 +40,17 @@ const Closer = () => {
 
     setFormIsSubmitting(true);
     try {
-      const res = await axios.post("/api/document/create", {
-        type: "cover-letter",
-        userData: data,
-        user: user?.userId,
-        template: selectedTemplateId,
-      });
-      if (res.status === 201) {
-        toast.success(res.data.message);
-        // router.push("/");
+      if (user?.userId) {
+        const res = await axios.post("/api/document/create", {
+          type: "cover-letter",
+          userData: data,
+          user: user?.userId,
+          template: selectedTemplateId,
+        });
+        if (res.status === 201) {
+          toast.success(res.data.message);
+          // router.push("/");
+        }
       }
     } catch (error: unknown) {
       if (isAxiosError(error)) {
