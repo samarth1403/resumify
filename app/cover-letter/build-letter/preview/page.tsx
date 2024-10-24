@@ -18,34 +18,33 @@ import { useReactToPrint } from "react-to-print";
 import { LuDownload } from "react-icons/lu";
 import { jsPDF as JsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-import { sampleCoverLetterTemplate } from "@/constants/CoverLetter";
 
 const Preview = () => {
   const { data, selectedTemplateId } = useGlobalContext();
-  // const { templateData, isLoading } = useGetTemplateData();
+  const { templateData, isLoading } = useGetTemplateData();
   const [showOtherTemplates, setShowOtherTemplates] = useState<boolean>(false);
   const coverLetterDivRef = useRef<HTMLDivElement>(null);
-  // const pathname = usePathname();
-  // const { isLoading: allTemplatesLoading, templates: otherTemplates } =
-  //   useGetAllTemplates({ type: pathname?.split("/")?.[1] });
+  const pathname = usePathname();
+  const { isLoading: allTemplatesLoading, templates: otherTemplates } =
+    useGetAllTemplates({ type: pathname?.split("/")?.[1] });
 
-  // const templateList = () => {
-  //   if (otherTemplates?.length > 0) {
-  //     return otherTemplates
-  //       ?.filter((template) => template?._id !== selectedTemplateId)
-  //       ?.map((template, index) => {
-  //         return (
-  //           <TemplateCard
-  //             key={index}
-  //             template={template}
-  //             forOtherTemplatesChoose
-  //           />
-  //         );
-  //       });
-  //   } else {
-  //     return null;
-  //   }
-  // };
+  const templateList = () => {
+    if (otherTemplates?.length > 0) {
+      return otherTemplates
+        ?.filter((template) => template?._id !== selectedTemplateId)
+        ?.map((template, index) => {
+          return (
+            <TemplateCard
+              key={index}
+              template={template}
+              forOtherTemplatesChoose
+            />
+          );
+        });
+    } else {
+      return null;
+    }
+  };
 
   const handlePrint = useReactToPrint({
     content: () => coverLetterDivRef.current,
@@ -88,25 +87,29 @@ const Preview = () => {
         <FormHeading title={`[ Preview of Cover Letter ]`} />
       </div>
       <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
-        {true ? (
+        {!isLoading ? (
           <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
             <div
-            // ref={coverLetterDivRef}
+              // style={{ position: "absolute", left: "-9999px" }}
+              ref={coverLetterDivRef}
+              className="absolute left-[-9999px] flex lg:static lg:left-0"
             >
               <TemplateModalComponent
-                template={sampleCoverLetterTemplate}
-                sampleData={sampleCoverLetterTemplate.sampleData}
-                ref={coverLetterDivRef}
+                template={templateData}
+                sampleData={{ ...data, color: templateData?.sampleData?.color }}
+                type="cover-letter"
+                isPreview={true}
               />
             </div>
-            {/* <div className="flex lg:hidden" ref={coverLetterDivRef}>
+            <div className="flex lg:hidden">
               <TemplateModalComponent
-                template={sampleCoverLetterTemplate}
-                sampleData={sampleCoverLetterTemplate.sampleData}
-                ref={coverLetterDivRef}
+                template={templateData}
+                sampleData={{ ...data, color: templateData?.sampleData?.color }}
+                type="cover-letter"
                 renderHtmlOption={true}
+                isPreview={true}
               />
-            </div> */}
+            </div>
           </div>
         ) : (
           <div className="flex-center size-full ">
@@ -129,13 +132,6 @@ const Preview = () => {
             >
               Download
             </Button>
-            {/* <Button
-              // onClick={handleContinue}/
-              className="w-full"
-              iconBefore={<MdMailOutline className="mr-1" size={20} />}
-            >
-              Email
-            </Button> */}
           </div>
           <div className="flex w-full items-center gap-4 p-4 font-bold text-black">
             <input
@@ -152,7 +148,7 @@ const Preview = () => {
               Choose Other Template
             </label>
           </div>
-          {/* {!showOtherTemplates ? null : showOtherTemplates &&
+          {!showOtherTemplates ? null : showOtherTemplates &&
             !allTemplatesLoading ? (
             <div className="flex-center lg:flex-start h-[850px] w-full flex-col gap-8 overflow-y-scroll pr-2 lg:max-w-full ">
               {templateList()}
@@ -161,7 +157,7 @@ const Preview = () => {
             <div className="flex-center size-full">
               <Loader />
             </div>
-          )} */}
+          )}
         </div>
       </div>
     </Section>
