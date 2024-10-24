@@ -15,36 +15,37 @@ import useGetAllTemplates from "@/utils/useGetAllTemplates";
 import { usePathname } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
-// import { LuDownload } from "react-icons/lu";
-// import { jsPDF as JsPDF } from "jspdf";
-// import html2canvas from "html2canvas";
+import { LuDownload } from "react-icons/lu";
+import { jsPDF as JsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+import { sampleCoverLetterTemplate } from "@/constants/CoverLetter";
 
 const Preview = () => {
   const { data, selectedTemplateId } = useGlobalContext();
-  const { templateData, isLoading } = useGetTemplateData();
+  // const { templateData, isLoading } = useGetTemplateData();
   const [showOtherTemplates, setShowOtherTemplates] = useState<boolean>(false);
   const coverLetterDivRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
-  const { isLoading: allTemplatesLoading, templates: otherTemplates } =
-    useGetAllTemplates({ type: pathname?.split("/")?.[1] });
+  // const pathname = usePathname();
+  // const { isLoading: allTemplatesLoading, templates: otherTemplates } =
+  //   useGetAllTemplates({ type: pathname?.split("/")?.[1] });
 
-  const templateList = () => {
-    if (otherTemplates?.length > 0) {
-      return otherTemplates
-        ?.filter((template) => template?._id !== selectedTemplateId)
-        ?.map((template, index) => {
-          return (
-            <TemplateCard
-              key={index}
-              template={template}
-              forOtherTemplatesChoose
-            />
-          );
-        });
-    } else {
-      return null;
-    }
-  };
+  // const templateList = () => {
+  //   if (otherTemplates?.length > 0) {
+  //     return otherTemplates
+  //       ?.filter((template) => template?._id !== selectedTemplateId)
+  //       ?.map((template, index) => {
+  //         return (
+  //           <TemplateCard
+  //             key={index}
+  //             template={template}
+  //             forOtherTemplatesChoose
+  //           />
+  //         );
+  //       });
+  //   } else {
+  //     return null;
+  //   }
+  // };
 
   const handlePrint = useReactToPrint({
     content: () => coverLetterDivRef.current,
@@ -56,23 +57,23 @@ const Preview = () => {
     setShowOtherTemplates(event.target.checked);
   };
 
-  // const downloadPdf = () => {
-  //   const input = coverLetterDivRef.current!;
+  const downloadPdf = () => {
+    const input = coverLetterDivRef.current!;
 
-  //   html2canvas(input, { scale: 2 })
-  //     .then((canvas) => {
-  //       const imgData = canvas.toDataURL("image/png");
-  //       const pdf = new JsPDF("p", "pt", "a4");
+    html2canvas(input, { scale: 2 })
+      .then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new JsPDF("p", "px", "a4");
 
-  //       const margin = 20;
-  //       const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
-  //       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+        const margin = 0;
+        const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-  //       pdf.addImage(imgData, "PNG", margin, margin, pdfWidth, pdfHeight);
-  //       pdf.save("download.pdf");
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
+        pdf.addImage(imgData, "PNG", margin, margin, pdfWidth, pdfHeight);
+        pdf.save("download.pdf");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <Section
@@ -87,23 +88,25 @@ const Preview = () => {
         <FormHeading title={`[ Preview of Cover Letter ]`} />
       </div>
       <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
-        {!isLoading ? (
+        {true ? (
           <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
-            <div className="hidden lg:flex">
+            <div
+            // ref={coverLetterDivRef}
+            >
               <TemplateModalComponent
-                template={templateData}
-                sampleData={data}
+                template={sampleCoverLetterTemplate}
+                sampleData={sampleCoverLetterTemplate.sampleData}
                 ref={coverLetterDivRef}
               />
             </div>
-            <div className="flex lg:hidden">
+            {/* <div className="flex lg:hidden" ref={coverLetterDivRef}>
               <TemplateModalComponent
-                template={templateData}
-                sampleData={data}
+                template={sampleCoverLetterTemplate}
+                sampleData={sampleCoverLetterTemplate.sampleData}
                 ref={coverLetterDivRef}
                 renderHtmlOption={true}
               />
-            </div>
+            </div> */}
           </div>
         ) : (
           <div className="flex-center size-full ">
@@ -119,13 +122,13 @@ const Preview = () => {
             >
               Print
             </Button>
-            {/* <Button
+            <Button
               onClick={downloadPdf}
               className=""
               iconBefore={<LuDownload className="mr-1" />}
             >
               Download
-            </Button> */}
+            </Button>
             {/* <Button
               // onClick={handleContinue}/
               className="w-full"
@@ -149,7 +152,7 @@ const Preview = () => {
               Choose Other Template
             </label>
           </div>
-          {!showOtherTemplates ? null : showOtherTemplates &&
+          {/* {!showOtherTemplates ? null : showOtherTemplates &&
             !allTemplatesLoading ? (
             <div className="flex-center lg:flex-start h-[850px] w-full flex-col gap-8 overflow-y-scroll pr-2 lg:max-w-full ">
               {templateList()}
@@ -158,7 +161,7 @@ const Preview = () => {
             <div className="flex-center size-full">
               <Loader />
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </Section>

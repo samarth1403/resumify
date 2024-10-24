@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export const coverLetterStepsData = [
   {
     id: "0",
@@ -237,3 +238,52 @@ export const stepperData = [
     uri: "/cover-letter/build-letter/create/closer",
   },
 ];
+
+export const sampleCoverLetterTemplate = {
+  _id: { $oid: "67195c14e1bbcb3748a5471d" },
+  name: "Iris",
+  type: "cover-letter",
+  subtype: "creative",
+  sampleData: {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    phone: "+1234567890",
+    address: "123 Main Street, City, Country",
+    date: "2022-01-01",
+    recruiterName: "Jane Smith",
+    recruiterPosition: "Hiring Manager",
+    hiringCompanyName: "ABC Company",
+    hiringCompanyAddress: "456 Oak Avenue, City, Country",
+    coverLetterOpener:
+      "I am writing to apply for the Software Engineer position at ABC Company, as advertised on your company's careers page. With a strong background in software development and a passion for creating innovative solutions, I am excited about the opportunity to contribute to your team.",
+    coverLetterCloser:
+      "Thank you for considering my application. I am eager to discuss how my background, skills, and enthusiasm align with the goals of ABC Company. I am available for an interview at your earliest convenience and can be reached at +1234567890 or john.doe@example.com.",
+    coverLetterBody1:
+      "In my previous role at XYZ Corporation, I led a team that developed a new software solution which increased efficiency by 30%. This experience has equipped me with the skills needed to tackle complex problems and deliver high-quality software solutions. Additionally, my attention to detail and strong communication skills make me a great fit for this role.",
+    coverLetterBody2:
+      "I am particularly impressed by ABC Company's commitment to innovation and its collaborative work environment. I am confident that my technical skills and team-oriented approach would make me a valuable asset to your team. I am excited about the opportunity to contribute to the success of ABC Company and look forward to the possibility of working together.",
+    initials: "JD",
+  },
+  dynamicFields: [
+    "name",
+    "initials",
+    "date",
+    "email",
+    "phone",
+    "address",
+    "recruiterName",
+    "recruiterPosition",
+    "hiringCompanyName",
+    "hiringCompanyAddress",
+    "recruiterName",
+    "coverLetterOpener",
+    "coverLetterBody1",
+    "coverLetterCloser",
+    "coverLetterBody2",
+  ],
+  description:
+    "With a strong header and a straightforward layout, this cover letter template would serve any job seeker’s goals.",
+  html: ' <div style="min-height: 1000px; height: 100%; width: 800px; display: flex; flex-direction: column; align-items: start; justify-content: start; background-color: white;">\n        <div style="height: auto; background-color: rgb(30, 58, 138); width: 100%; padding: 20px;">\n            <div style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center;">\n                <div style="display: flex; width: 100%; height: auto; flex-direction: column; gap: 16px; color: white; align-items: center; justify-content: center;">\n                    <p style="font-size: 2.5rem;">{name}</p>\n                    <div style="display: flex; flex-direction: row; justify-content: start; align-items: start; gap: 4px; font-size: 0.9rem;">\n                        <p>{email} &nbsp; | &nbsp;</p>\n                        <p>{phone} &nbsp; | &nbsp;</p>\n                        <p>{address}</p>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div style="width: 100%; height: 100%; background-color: white; border-radius: 0 0 20px 20px;">\n            <div style="font-size: 0.8rem; padding: 32px; gap: 36px; width: 100%; height: 100%; text-align: justify; display: flex; flex-direction: column; align-items: start; justify-content: start; gap: 1.8rem;">\n                <p>{date}</p>\n                <div style="display: flex; flex-direction: column; align-items: start; justify-content: start; gap: 4px;">\n                    <p>{recruiterName}, {recruiterPosition}</p>\n                    <p>{hiringCompanyName}</p>\n                    <p>{hiringCompanyAddress}</p>\n                </div>\n                <p>Dear Mr. {recruiterName},</p>\n                <p>{coverLetterOpener}</p>\n                <p>{coverLetterBody1}</p>\n                <p>{coverLetterBody2}</p>\n                <p>{coverLetterCloser}</p>\n                <div style="display: flex; flex-direction: column; align-items: start; justify-content: start; gap: 4px;">\n                    <p>Sincerely,</p>\n                    <p>{name}</p>\n                </div>\n            </div>\n        </div>\n    </div>',
+  htmlOption:
+    '<div style="min-height: 410px; height: 100%; width: 320px; display: flex; flex-direction: column; align-items: start; justify-content: start; background-color: white; border-radius: 20px;">\n      <div style="height: auto; background-color: #1e3a8a; width: 100%; padding: 20px;">\n        <div style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center;">\n          <div style="display: flex; width: 100%; height: auto; flex-direction: column; gap: 8px; color: white; align-items: center; justify-content: center;">\n            <p style="font-size: 1.5rem;">{name}</p>\n            <div style="display: flex; flex-direction: row; justify-content: start; align-items: start; gap: 4px; font-size: 0.38rem;">\n              <p>{email} &nbsp; | &nbsp;</p>\n              <p>{phone} &nbsp; | &nbsp;</p>\n              <p>{address}</p>\n            </div>\n          </div>\n        </div>\n      </div>\n      <div style="width: 100%; height: 100%; background-color: white; border-radius: 0 0 20px 20px;">\n        <div style="font-size: 0.35rem; padding: 20px; gap: 14px; width: 100%; height: 100%; text-align: justify; display: flex; flex-direction: column; align-items: start; justify-content: start;">\n          <p>{date}</p>\n          <div style="display: flex; flex-direction: column; align-items: start; justify-content: start; gap: 4px;">\n            <p>{recruiterName}, {recruiterPosition}</p>\n            <p>{hiringCompanyName}</p>\n            <p>{hiringCompanyAddress}</p>\n          </div>\n          <p>Dear Mr. {recruiterName},</p>\n          <p>{coverLetterOpener}</p>\n          <p>{coverLetterBody1}</p>\n          <p>{coverLetterBody2}</p>\n          <p>{coverLetterCloser}</p>\n          <div style="display: flex; flex-direction: column; align-items: start; justify-content: start; gap: 4px;">\n            <p>Sincerely,</p>\n            <p>{name}</p>\n          </div>\n        </div>\n      </div>\n    </div>',
+};
