@@ -15,8 +15,7 @@ import { dataType } from '@/constants';
 import useGetAllTemplates from '@/utils/useGetAllTemplates';
 import * as htmlToImage from 'html-to-image';
 import { jsPDF as JsPDF } from 'jspdf';
-import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react';
 import { LuDownload } from 'react-icons/lu';
 
