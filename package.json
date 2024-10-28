@@ -16,6 +16,7 @@
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-tailwindcss": "^3.15.1",
     "html-react-parser": "^5.1.10",
+    "html-to-image": "^1.11.11",
     "html2canvas": "^1.4.1",
     "jsonwebtoken": "^9.0.2",
     "jspdf": "^2.5.1",

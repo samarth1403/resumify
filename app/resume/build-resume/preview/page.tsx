@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import {
   Button,
   FormHeading,
@@ -6,28 +6,29 @@ import {
   Section,
   TemplateCard,
   TemplateModalComponent,
-} from "@/components/SubComponents";
-import { useGlobalContext } from "@/context/GlobalProvider";
-import useGetTemplateData from "@/utils/useGetTemplateData";
-import { FaPrint } from "react-icons/fa";
+} from '@/components/SubComponents';
+import { useGlobalContext } from '@/context/GlobalProvider';
+import useGetTemplateData from '@/utils/useGetTemplateData';
+import { FaEdit } from 'react-icons/fa';
 // import { MdMailOutline } from "react-icons/md";
-import useGetAllTemplates from "@/utils/useGetAllTemplates";
-import { usePathname } from "next/navigation";
-import React, { useRef, useState } from "react";
-import { useReactToPrint } from "react-to-print";
-import { LuDownload } from "react-icons/lu";
-import { jsPDF as JsPDF } from "jspdf";
-import html2canvas from "html2canvas";
-import { dataType } from "@/constants";
+import { dataType } from '@/constants';
+import useGetAllTemplates from '@/utils/useGetAllTemplates';
+import * as htmlToImage from 'html-to-image';
+import { jsPDF as JsPDF } from 'jspdf';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
+import React, { useRef, useState } from 'react';
+import { LuDownload } from 'react-icons/lu';
 
 const Preview = () => {
   const { data, selectedTemplateId } = useGlobalContext();
   const { templateData, isLoading } = useGetTemplateData();
   const [showOtherTemplates, setShowOtherTemplates] = useState<boolean>(false);
   const resumeDivRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const pathname = usePathname();
   const { isLoading: allTemplatesLoading, templates: otherTemplates } =
-    useGetAllTemplates({ type: pathname?.split("/")?.[1] });
+    useGetAllTemplates({ type: pathname?.split('/')?.[1] });
 
   const templateList = () => {
     if (otherTemplates?.length > 0) {
@@ -53,32 +54,50 @@ const Preview = () => {
     }
   };
 
-  const handlePrint = useReactToPrint({
-    content: () => resumeDivRef.current,
-    bodyClass: "bg-white",
-  });
+  // const handlePrint = useReactToPrint({
+  //   content: () => resumeDivRef.current,
+  //   bodyClass: 'bg-white',
+  // });
 
   // Handle change event
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setShowOtherTemplates(event.target.checked);
   };
 
-  const downloadPdf = () => {
-    const input = resumeDivRef.current!;
+  const downloadPdf = async () => {
+    if (!resumeDivRef.current) return;
 
-    html2canvas(input, { scale: 10 })
-      .then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new JsPDF("p", "px", "a4");
+    try {
+      const blob = await htmlToImage.toBlob(resumeDivRef.current, {
+        pixelRatio: 1.5,
+      });
+      if (!blob) return;
+      const imgUrl = URL.createObjectURL(blob);
+      const img = new Image();
+      img.src = imgUrl;
+      img.onload = () => {
+        // Create a new jsPDF instance
+        const pdf = new JsPDF({
+          unit: 'px',
+          format: 'a4',
+          putOnlyUsedFonts: true,
+        });
 
+        // Calculate width and height
         const margin = 0;
         const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+        const pdfHeight = (img.height * pdfWidth) / img.width;
 
-        pdf.addImage(imgData, "PNG", margin, margin, pdfWidth, pdfHeight);
-        pdf.save("download.pdf");
-      })
-      .catch((err) => console.log(err));
+        // Add the image to the PDF and save it
+        pdf.addImage(img, 'PNG', margin, margin, pdfWidth, pdfHeight);
+        pdf.save(`${data?.name}-resume.pdf`);
+
+        // Clean up the object URL
+        URL.revokeObjectURL(imgUrl);
+      };
+    } catch (error) {
+      console.error('Failed to generate PDF:', error);
+    }
   };
 
   return (
@@ -96,11 +115,13 @@ const Preview = () => {
       <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
         {!isLoading ? (
           <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
-            <div className="hidden lg:flex">
+            <div
+              ref={resumeDivRef}
+              className="absolute left-[-9999px] flex lg:static lg:left-0"
+            >
               <TemplateModalComponent
                 template={templateData}
                 sampleData={{ ...data, color: templateData?.sampleData?.color }}
-                ref={resumeDivRef}
                 type="resume"
                 isPreview={true}
               />
@@ -109,7 +130,6 @@ const Preview = () => {
               <TemplateModalComponent
                 template={templateData}
                 sampleData={{ ...data, color: templateData?.sampleData?.color }}
-                ref={resumeDivRef}
                 type="resume"
                 renderHtmlOption={true}
                 isPreview={true}
@@ -123,12 +143,19 @@ const Preview = () => {
         )}
         <div className="flex-start w-auto flex-col gap-4 ">
           <div className="flex-start  gap-2">
-            <Button
+            {/* <Button
               onClick={handlePrint}
               className=""
               iconBefore={<FaPrint className="mr-1" />}
             >
               Print
+            </Button> */}
+            <Button
+              onClick={() => router.push('/resume/build-resume/create/header')}
+              className=""
+              iconBefore={<FaEdit className="mr-1" />}
+            >
+              Edit
             </Button>
             <Button
               onClick={downloadPdf}

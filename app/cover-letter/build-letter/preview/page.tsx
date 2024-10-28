@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import {
   Button,
   FormHeading,
@@ -6,18 +6,17 @@ import {
   Section,
   TemplateCard,
   TemplateModalComponent,
-} from "@/components/SubComponents";
-import { useGlobalContext } from "@/context/GlobalProvider";
-import useGetTemplateData from "@/utils/useGetTemplateData";
-import { FaPrint } from "react-icons/fa";
+} from '@/components/SubComponents';
+import { useGlobalContext } from '@/context/GlobalProvider';
+import useGetTemplateData from '@/utils/useGetTemplateData';
+import { FaEdit } from 'react-icons/fa';
 // import { MdMailOutline } from "react-icons/md";
-import useGetAllTemplates from "@/utils/useGetAllTemplates";
-import { usePathname } from "next/navigation";
-import React, { useRef, useState } from "react";
-import { useReactToPrint } from "react-to-print";
-import { LuDownload } from "react-icons/lu";
-import { jsPDF as JsPDF } from "jspdf";
-import html2canvas from "html2canvas";
+import useGetAllTemplates from '@/utils/useGetAllTemplates';
+import * as htmlToImage from 'html-to-image';
+import { jsPDF as JsPDF } from 'jspdf';
+import { usePathname, useRouter } from 'next/navigation';
+import React, { useRef, useState } from 'react';
+import { LuDownload } from 'react-icons/lu';
 
 const Preview = () => {
   const { data, selectedTemplateId } = useGlobalContext();
@@ -25,8 +24,9 @@ const Preview = () => {
   const [showOtherTemplates, setShowOtherTemplates] = useState<boolean>(false);
   const coverLetterDivRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
   const { isLoading: allTemplatesLoading, templates: otherTemplates } =
-    useGetAllTemplates({ type: pathname?.split("/")?.[1] });
+    useGetAllTemplates({ type: pathname?.split('/')?.[1] });
 
   const templateList = () => {
     if (otherTemplates?.length > 0) {
@@ -46,32 +46,50 @@ const Preview = () => {
     }
   };
 
-  const handlePrint = useReactToPrint({
-    content: () => coverLetterDivRef.current,
-    bodyClass: "bg-white",
-  });
+  // const handlePrint = useReactToPrint({
+  //   content: () => coverLetterDivRef.current,
+  //   bodyClass: 'bg-white',
+  // });
 
   // Handle change event
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setShowOtherTemplates(event.target.checked);
   };
 
-  const downloadPdf = () => {
-    const input = coverLetterDivRef.current!;
+  const downloadPdf = async () => {
+    if (!coverLetterDivRef.current) return;
 
-    html2canvas(input, { scale: 2 })
-      .then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new JsPDF("p", "px", "a4");
+    try {
+      const blob = await htmlToImage.toBlob(coverLetterDivRef.current, {
+        pixelRatio: 1.5,
+      });
+      if (!blob) return;
+      const imgUrl = URL.createObjectURL(blob);
+      const img = new Image();
+      img.src = imgUrl;
+      img.onload = () => {
+        // Create a new jsPDF instance
+        const pdf = new JsPDF({
+          unit: 'px',
+          format: 'a4',
+          putOnlyUsedFonts: true,
+        });
 
+        // Calculate width and height
         const margin = 0;
         const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+        const pdfHeight = (img.height * pdfWidth) / img.width;
 
-        pdf.addImage(imgData, "PNG", margin, margin, pdfWidth, pdfHeight);
-        pdf.save("download.pdf");
-      })
-      .catch((err) => console.log(err));
+        // Add the image to the PDF and save it
+        pdf.addImage(img, 'PNG', margin, margin, pdfWidth, pdfHeight);
+        pdf.save(`${data?.name}-cover-letter.pdf`);
+
+        // Clean up the object URL
+        URL.revokeObjectURL(imgUrl);
+      };
+    } catch (error) {
+      console.error('Failed to generate PDF:', error);
+    }
   };
 
   return (
@@ -90,7 +108,6 @@ const Preview = () => {
         {!isLoading ? (
           <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
             <div
-              // style={{ position: "absolute", left: "-9999px" }}
               ref={coverLetterDivRef}
               className="absolute left-[-9999px] flex lg:static lg:left-0"
             >
@@ -117,14 +134,23 @@ const Preview = () => {
           </div>
         )}
         <div className="flex-start w-full flex-col gap-4 lg:w-auto ">
-          <div className="flex-start  gap-2">
+          <div className="flex-center lg:flex-start  gap-2">
             <Button
+              onClick={() =>
+                router.push('/cover-letter/build-letter/create/header')
+              }
+              className=""
+              iconBefore={<FaEdit className="mr-1" />}
+            >
+              Edit
+            </Button>
+            {/* <Button
               onClick={handlePrint}
               className=""
               iconBefore={<FaPrint className="mr-1" />}
             >
               Print
-            </Button>
+            </Button> */}
             <Button
               onClick={downloadPdf}
               className=""
@@ -150,7 +176,7 @@ const Preview = () => {
           </div>
           {!showOtherTemplates ? null : showOtherTemplates &&
             !allTemplatesLoading ? (
-            <div className="flex-center lg:flex-start h-[850px] w-full flex-col gap-8 overflow-y-scroll pr-2 lg:max-w-full ">
+            <div className="flex-start h-[850px] max-w-full flex-col gap-8 overflow-y-scroll pr-2 ">
               {templateList()}
             </div>
           ) : (
