@@ -1,13 +1,13 @@
-import Image from "next/image";
-import React from "react";
+import Image from 'next/image';
+import React from 'react';
 
 interface propTypes {
   label?: string;
-  type: "text" | "email" | "password" | "checkbox" | "number";
+  type: 'text' | 'email' | 'password' | 'checkbox' | 'number';
   value: string | number | boolean | readonly string[];
   setValue: (
     key: string,
-    value: string | number | boolean | readonly string[]
+    value: string | number | boolean | readonly string[],
   ) => void;
   name: string;
   placeholder?: string;
@@ -46,24 +46,24 @@ const FormField = ({
       <input
         id={name}
         type={type}
-        checked={type === "checkbox" ? (value as boolean) : undefined}
-        value={type !== "checkbox" ? (value as string | number) : undefined}
+        checked={type === 'checkbox' ? (value as boolean) : undefined}
+        value={type !== 'checkbox' ? (value as string | number) : undefined}
         onChange={(e) => {
           setValue(
             name,
-            type === "checkbox" ? e.target.checked : e.target.value
+            type === 'checkbox' ? e.target.checked : e.target.value,
           );
         }}
         placeholder={placeholder}
-        className={`${className} ${iconPath ? "pl-10" : ""} `}
+        className={`${className} ${iconPath ? 'pl-10' : ''} `}
       />
       {iconPath && (
         <Image
           src={iconPath}
-          alt={""}
+          alt={''}
           width={25}
           height={25}
-          className={`absolute left-2 ${iconFromTop ? iconFromTop : error ? "top-10" : "top-1/2"} object-contain`}
+          className={`absolute left-2 ${iconFromTop || (error ? 'top-10' : 'top-1/2')} object-contain`}
         />
       )}
       {error && (
