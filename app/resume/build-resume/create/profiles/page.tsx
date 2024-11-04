@@ -1,11 +1,11 @@
-"use client";
-import { Button, FormField } from "@/components/SubComponents";
-import { profileType } from "@/constants";
-import { useGlobalContext } from "@/context/GlobalProvider";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { MdDelete } from "react-icons/md";
+'use client';
+import { Button, FormField } from '@/components/SubComponents';
+import { profileType } from '@/constants';
+import { useGlobalContext } from '@/context/GlobalProvider';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { MdDelete } from 'react-icons/md';
 
 const Profiles = () => {
   const router = useRouter();
@@ -14,16 +14,16 @@ const Profiles = () => {
   const [profiles, setProfiles] = useState<profileType[]>(
     data?.profiles || [
       {
-        profile: "",
-        link: "",
+        profile: '',
+        link: '',
       },
-    ]
+    ],
   );
 
   const setFormDataKey = (
     key: string,
     value: string | number | boolean | readonly string[],
-    index: number
+    index: number,
   ) => {
     setData((prev) => ({
       ...prev,
@@ -41,9 +41,9 @@ const Profiles = () => {
   };
 
   const handleContinue = () => {
-    toast.success("Profiles Info Saved Successfully");
-    router.push("/resume/build-resume/preview");
-    localStorage.setItem("data", JSON.stringify(data));
+    toast.success('Profiles Info Saved Successfully');
+    router.push('/resume/build-resume/preview');
+    localStorage.setItem('data', JSON.stringify(data));
     setErrors({});
   };
 
@@ -51,8 +51,8 @@ const Profiles = () => {
     setProfiles((prev) => [
       ...prev,
       {
-        profile: "",
-        link: "",
+        profile: '',
+        link: '',
       },
     ]);
     setData((prev) => ({
@@ -60,8 +60,8 @@ const Profiles = () => {
       profiles: [
         ...prev.profiles!,
         {
-          profile: "",
-          link: "",
+          profile: '',
+          link: '',
         },
       ],
     }));
@@ -70,7 +70,7 @@ const Profiles = () => {
   const handleSkip = () => {
     setProfiles([]);
     setData((prev) => ({ ...prev, profiles: [] }));
-    router.push("/resume/build-resume/preview");
+    router.push('/resume/build-resume/preview');
   };
 
   const handleOnDeleteExperience = (index: number) => {
@@ -105,7 +105,7 @@ const Profiles = () => {
               <MdDelete
                 size={24}
                 onClick={() => handleOnDeleteExperience(index)}
-                cursor={"pointer"}
+                cursor={'pointer'}
               />
             </div>
             <div className="flex-start w-full flex-wrap gap-4 " key={index}>
@@ -131,7 +131,7 @@ const Profiles = () => {
                   name="link"
                   value={profile?.link}
                   setValue={(key, value) => setFormDataKey(key, value, index)}
-                  placeholder="Project Link"
+                  placeholder="Profile Link"
                   className="w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none"
                   error={errors?.link}
                   isRequired
