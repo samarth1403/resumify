@@ -1,18 +1,18 @@
-"use client";
+'use client';
 import {
   GlobalContextType,
   mobileNavLinks,
   navLinks,
   userInfoType,
-} from "@/constants";
-import { useGlobalContext } from "@/context/GlobalProvider";
-import axios, { isAxiosError } from "axios";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { Button } from "../SubComponents";
+} from '@/constants';
+import { useGlobalContext } from '@/context/GlobalProvider';
+import axios, { isAxiosError } from 'axios';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { Button } from '../SubComponents';
 
 const Header = () => {
   const {
@@ -23,8 +23,8 @@ const Header = () => {
   }: GlobalContextType = useGlobalContext();
   const router = useRouter();
   const [isFormSubmitting, setFormIsSubmitting] = useState<boolean>(false);
-  const [isMenuOpen, setIsMenuOpen] = useState("");
-  const [active, setActive] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState('');
+  const [active, setActive] = useState('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [toggle, setToggle] = useState(false);
 
@@ -32,7 +32,7 @@ const Header = () => {
     setIsLoading(true);
     const getCurrentUser = async () => {
       try {
-        const { data, status } = await axios.post("/api/user/me");
+        const { data, status } = await axios.post('/api/user/me');
         if (status === 200) {
           setUser({
             username: data.user.username,
@@ -56,30 +56,31 @@ const Header = () => {
   const handleLogout = async () => {
     setFormIsSubmitting(true);
     try {
-      const { data, status } = await axios.get("/api/user/sign-out");
+      const { data, status } = await axios.get('/api/user/sign-out');
       if (status === 200) {
         toast.success(data.message);
-        router.replace("/");
+        router.replace('/');
         setIsUserLoggedIn(false);
       }
     } catch (error: unknown) {
       if (isAxiosError(error)) {
-        toast.error(error.response?.data?.error || "An error occurred");
+        toast.error(error.response?.data?.error || 'An error occurred');
       } else {
-        toast.error("An error occurred");
+        toast.error('An error occurred');
       }
       setIsUserLoggedIn(true);
     } finally {
       setFormIsSubmitting(false);
+      setToggle(false);
     }
   };
 
   return (
     <div className="fixed left-0 top-0 z-50 mb-4 w-full border-b border-shades-4  backdrop-blur-2xl lg:mb-6 ">
       <nav className="flex-between px-5 py-4 lg:px-8 lg:py-3 xl:px-10 ">
-        <Link href={"/"} className="flex-center" onClick={() => setActive("")}>
+        <Link href={'/'} className="flex-center" onClick={() => setActive('')}>
           <Image
-            src={"/assets/images/logo.svg"}
+            src={'/assets/images/logo.svg'}
             alt=""
             width={50}
             height={50}
@@ -95,10 +96,10 @@ const Header = () => {
               className="relative mt-2 h-8"
               onMouseEnter={() => setIsMenuOpen(link.id)}
               onClick={() => setActive(link.id)}
-              onMouseLeave={() => setIsMenuOpen("")}
+              onMouseLeave={() => setIsMenuOpen('')}
             >
               <p
-                className={`text-lg font-medium ${active === link.id ? "text-primary-orange" : "text-shades-12"} hover:text-primary-orange`}
+                className={`text-lg font-medium ${active === link.id ? 'text-primary-orange' : 'text-shades-12'} hover:text-primary-orange`}
               >
                 {link.title}
               </p>
@@ -106,7 +107,7 @@ const Header = () => {
                 link.subLinks.length > 0 &&
                 isMenuOpen === link.id && (
                   <div
-                    onMouseLeave={() => setIsMenuOpen("")}
+                    onMouseLeave={() => setIsMenuOpen('')}
                     className="flex-start absolute left-0 top-full z-10 w-60 flex-col gap-3 rounded-lg bg-white p-4 shadow-2xl shadow-shades-6"
                   >
                     {link.subLinks.map((subLink) => (
@@ -114,7 +115,7 @@ const Header = () => {
                         href={subLink.uri}
                         key={subLink.id}
                         onClick={() => {
-                          setIsMenuOpen("");
+                          setIsMenuOpen('');
                           // setActive(subLink.id);
                         }}
                       >
@@ -132,7 +133,7 @@ const Header = () => {
         </div>
         {!isUserLoggedIn ? (
           <div className="lg:flex-center hidden lg:flex lg:gap-4">
-            <Link href={"/sign-in"}>
+            <Link href={'/sign-in'}>
               {!isLoading ? (
                 <button type="button" className="black_btn">
                   Sign In
@@ -141,7 +142,7 @@ const Header = () => {
                 <div className="medium-loader" />
               )}
             </Link>
-            <Link href={"/sign-up"}>
+            <Link href={'/sign-up'}>
               <button type="button" className="black_btn">
                 Sign Up
               </button>
@@ -163,7 +164,7 @@ const Header = () => {
               className="outline_btn"
               onClick={() => handleLogout()}
             >
-              {"Logout"}
+              {'Logout'}
             </Button>
           </div>
         )}
@@ -180,7 +181,7 @@ const Header = () => {
             </div>
           )}
           <Image
-            src={toggle ? "/assets/icons/close.svg" : "/assets/icons/menu.svg"}
+            src={toggle ? '/assets/icons/close.svg' : '/assets/icons/menu.svg'}
             alt=""
             width={35}
             height={35}
@@ -191,13 +192,13 @@ const Header = () => {
       </nav>
       <nav
         className={`fixed inset-x-0 bottom-0 top-20 bg-white  ${
-          toggle ? "flex" : "hidden"
+          toggle ? 'flex' : 'hidden'
         } h-screen w-full lg:hidden`}
       >
         <div className="relative z-10 m-auto flex h-screen w-full flex-col items-center justify-start gap-2 bg-white py-4 ">
           {mobileNavLinks?.map((link, index) => (
             <Link
-              href={link.url || ""}
+              href={link.url || ''}
               key={link.id}
               className="relative mt-2 h-8"
               onClick={() => {
@@ -206,21 +207,25 @@ const Header = () => {
               }}
             >
               <p
-                className={`text-xl font-medium ${active === link.id ? "text-primary-orange" : "text-shades-12"} hover:text-primary-orange`}
+                className={`text-xl font-medium ${active === link.id ? 'text-primary-orange' : 'text-shades-12'} hover:text-primary-orange`}
               >
                 {link.title}
               </p>
             </Link>
           ))}
           {!isUserLoggedIn && (
-            <button type="button" className="black_btn my-2">
-              Sign In
-            </button>
+            <Link href={'/sign-in'} onClick={() => setToggle(false)}>
+              <button type="button" className="black_btn my-2">
+                Sign In
+              </button>
+            </Link>
           )}
           {!isUserLoggedIn && (
-            <button type="button" className="black_btn my-2">
-              Sign Up
-            </button>
+            <Link href={'/sign-up'} onClick={() => setToggle(false)}>
+              <button type="button" className="black_btn my-2">
+                Sign Up
+              </button>
+            </Link>
           )}
           {isUserLoggedIn && (
             <Button
@@ -228,7 +233,7 @@ const Header = () => {
               className="outline_btn my-2"
               onClick={() => handleLogout()}
             >
-              {"Logout"}
+              {'Logout'}
             </Button>
           )}
         </div>
