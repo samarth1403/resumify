@@ -12,9 +12,8 @@ import useGetTemplateData from "@/utils/useGetTemplateData";
 import { FaEdit } from "react-icons/fa";
 // import { MdMailOutline } from "react-icons/md";
 import { dataType } from "@/constants";
+import { downloadPdf } from "@/utils/helpers/DownloadPdf";
 import useGetAllTemplates from "@/utils/useGetAllTemplates";
-import * as htmlToImage from "html-to-image";
-import { jsPDF as JsPDF } from "jspdf";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { LuDownload } from "react-icons/lu";
@@ -63,81 +62,11 @@ const Preview = () => {
     setShowOtherTemplates(event.target.checked);
   };
 
-  const downloadPdf = async () => {
-    if (!resumeDivRef.current) return;
-
-    try {
-      // Generate the image using html-to-image
-      const blob = await htmlToImage.toBlob(resumeDivRef.current, {
-        pixelRatio: 3,
-      });
-
-      if (!blob) return;
-
-      // Create an image object
-      const imgUrl = URL.createObjectURL(blob);
-      const img = new Image();
-      img.src = imgUrl;
-
-      img.onload = async () => {
-        // Initialize jsPDF
-        const pdf = new JsPDF({
-          unit: "px",
-          format: "a4",
-          putOnlyUsedFonts: true,
-        });
-        // Calculate PDF dimensions
-        const margin = 0;
-        const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
-        const pdfHeight = (img.height * pdfWidth) / img.width;
-        // Add the image to the PDF
-        pdf.addImage(
-          img,
-          "JPEG",
-          margin,
-          margin,
-          pdfWidth,
-          pdfHeight,
-          undefined,
-          "FAST"
-        );
-
-        if (resumeDivRef.current) {
-          // Get container and its dimensions
-          const rect = resumeDivRef.current.getBoundingClientRect(); // Container dimensions
-          const links = resumeDivRef.current.querySelectorAll("a");
-
-          links.forEach((link) => {
-            const linkRect = link.getBoundingClientRect(); // Get link position
-
-            // Calculate positions relative to the container
-            const left = linkRect.left - rect.left;
-            const top = linkRect.top - rect.top;
-
-            // Convert positions to PDF units
-            const x = (left / resumeDivRef.current!.offsetWidth) * pdfWidth;
-            const y = (top / resumeDivRef.current!.offsetHeight) * pdfHeight;
-            const w =
-              (linkRect.width / resumeDivRef.current!.offsetWidth) * pdfWidth;
-            const h =
-              (linkRect.height / resumeDivRef.current!.offsetHeight) *
-              pdfHeight;
-
-            // Apply manual adjustment to remove extra offset
-            const adjustedY = y; // Removed offset adjustment
-
-            // Add the clickable link to the PDF
-            pdf.link(x, adjustedY, w, h, { url: link.href });
-          });
-        }
-        // Save the PDF
-        pdf.save(`${data?.name}-resume.pdf`);
-        // Clean up the object URL
-        URL.revokeObjectURL(imgUrl);
-      };
-    } catch (error) {
-      console.error("Failed to generate PDF:", error);
-    }
+  const handlePdfDownload = async () => {
+    await downloadPdf({
+      componentRef: resumeDivRef,
+      fileName: `${data?.name}-resume`,
+    });
   };
 
   return (
@@ -154,11 +83,11 @@ const Preview = () => {
       </div>
       <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
         {!isLoading ? (
-          <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
-            <div
-              ref={resumeDivRef}
-              className="absolute left-[-9999px] flex lg:static lg:left-0"
-            >
+          <div
+            className="h-auto rounded-xl shadow-2xl shadow-gray-400"
+            ref={resumeDivRef}
+          >
+            <div className="absolute left-[-9999px] flex lg:static lg:left-0">
               <TemplateModalComponent
                 template={templateData}
                 sampleData={{ ...data, color: templateData?.sampleData?.color }}
@@ -166,7 +95,7 @@ const Preview = () => {
                 isPreview={true}
               />
             </div>
-            <div className="flex lg:hidden">
+            <div className="flex lg:hidden" ref={resumeDivRef}>
               <TemplateModalComponent
                 template={templateData}
                 sampleData={{ ...data, color: templateData?.sampleData?.color }}
@@ -198,7 +127,7 @@ const Preview = () => {
               Edit
             </Button>
             <Button
-              onClick={downloadPdf}
+              onClick={handlePdfDownload}
               className=""
               iconBefore={<LuDownload className="mr-1" />}
             >

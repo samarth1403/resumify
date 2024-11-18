@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   Button,
   FormHeading,
@@ -6,17 +6,16 @@ import {
   Section,
   TemplateCard,
   TemplateModalComponent,
-} from '@/components/SubComponents';
-import { useGlobalContext } from '@/context/GlobalProvider';
-import useGetTemplateData from '@/utils/useGetTemplateData';
-import { FaEdit } from 'react-icons/fa';
+} from "@/components/SubComponents";
+import { useGlobalContext } from "@/context/GlobalProvider";
+import useGetTemplateData from "@/utils/useGetTemplateData";
+import { FaEdit } from "react-icons/fa";
 // import { MdMailOutline } from "react-icons/md";
-import useGetAllTemplates from '@/utils/useGetAllTemplates';
-import * as htmlToImage from 'html-to-image';
-import { jsPDF as JsPDF } from 'jspdf';
-import { usePathname, useRouter } from 'next/navigation';
-import React, { useRef, useState } from 'react';
-import { LuDownload } from 'react-icons/lu';
+import { downloadPdf } from "@/utils/helpers/DownloadPdf";
+import useGetAllTemplates from "@/utils/useGetAllTemplates";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useRef, useState } from "react";
+import { LuDownload } from "react-icons/lu";
 
 const Preview = () => {
   const { data, selectedTemplateId } = useGlobalContext();
@@ -26,7 +25,7 @@ const Preview = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { isLoading: allTemplatesLoading, templates: otherTemplates } =
-    useGetAllTemplates({ type: pathname?.split('/')?.[1] });
+    useGetAllTemplates({ type: pathname?.split("/")?.[1] });
 
   const templateList = () => {
     if (otherTemplates?.length > 0) {
@@ -56,40 +55,11 @@ const Preview = () => {
     setShowOtherTemplates(event.target.checked);
   };
 
-  const downloadPdf = async () => {
-    if (!coverLetterDivRef.current) return;
-
-    try {
-      const blob = await htmlToImage.toBlob(coverLetterDivRef.current, {
-        pixelRatio: 1.5,
-      });
-      if (!blob) return;
-      const imgUrl = URL.createObjectURL(blob);
-      const img = new Image();
-      img.src = imgUrl;
-      img.onload = () => {
-        // Create a new jsPDF instance
-        const pdf = new JsPDF({
-          unit: 'px',
-          format: 'a4',
-          putOnlyUsedFonts: true,
-        });
-
-        // Calculate width and height
-        const margin = 0;
-        const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
-        const pdfHeight = (img.height * pdfWidth) / img.width;
-
-        // Add the image to the PDF and save it
-        pdf.addImage(img, 'PNG', margin, margin, pdfWidth, pdfHeight);
-        pdf.save(`${data?.name}-cover-letter.pdf`);
-
-        // Clean up the object URL
-        URL.revokeObjectURL(imgUrl);
-      };
-    } catch (error) {
-      console.error('Failed to generate PDF:', error);
-    }
+  const handleDownloadPdf = async () => {
+    await downloadPdf({
+      componentRef: coverLetterDivRef,
+      fileName: `${data?.name}-cover-letter`,
+    });
   };
 
   return (
@@ -106,11 +76,11 @@ const Preview = () => {
       </div>
       <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
         {!isLoading ? (
-          <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
-            <div
-              ref={coverLetterDivRef}
-              className="absolute left-[-9999px] flex lg:static lg:left-0"
-            >
+          <div
+            className="h-auto rounded-xl shadow-2xl shadow-gray-400"
+            ref={coverLetterDivRef}
+          >
+            <div className="absolute left-[-9999px] flex lg:static lg:left-0">
               <TemplateModalComponent
                 template={templateData}
                 sampleData={{ ...data, color: templateData?.sampleData?.color }}
@@ -118,7 +88,7 @@ const Preview = () => {
                 isPreview={true}
               />
             </div>
-            <div className="flex lg:hidden">
+            <div className="flex lg:hidden" ref={coverLetterDivRef}>
               <TemplateModalComponent
                 template={templateData}
                 sampleData={{ ...data, color: templateData?.sampleData?.color }}
@@ -137,7 +107,7 @@ const Preview = () => {
           <div className="flex-center lg:flex-start  gap-2">
             <Button
               onClick={() =>
-                router.push('/cover-letter/build-letter/create/header')
+                router.push("/cover-letter/build-letter/create/header")
               }
               className=""
               iconBefore={<FaEdit className="mr-1" />}
@@ -152,7 +122,7 @@ const Preview = () => {
               Print
             </Button> */}
             <Button
-              onClick={downloadPdf}
+              onClick={handleDownloadPdf}
               className=""
               iconBefore={<LuDownload className="mr-1" />}
             >
