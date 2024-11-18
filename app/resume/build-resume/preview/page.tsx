@@ -69,7 +69,7 @@ const Preview = () => {
     try {
       // Generate the image using html-to-image
       const blob = await htmlToImage.toBlob(resumeDivRef.current, {
-        pixelRatio: 1.5,
+        pixelRatio: 3,
       });
 
       if (!blob) return;
@@ -79,21 +79,28 @@ const Preview = () => {
       const img = new Image();
       img.src = imgUrl;
 
-      img.onload = () => {
+      img.onload = async () => {
         // Initialize jsPDF
         const pdf = new JsPDF({
           unit: "px",
           format: "a4",
           putOnlyUsedFonts: true,
         });
-
         // Calculate PDF dimensions
         const margin = 0;
         const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
         const pdfHeight = (img.height * pdfWidth) / img.width;
-
         // Add the image to the PDF
-        pdf.addImage(img, "PNG", margin, margin, pdfWidth, pdfHeight);
+        pdf.addImage(
+          img,
+          "JPEG",
+          margin,
+          margin,
+          pdfWidth,
+          pdfHeight,
+          undefined,
+          "FAST"
+        );
 
         if (resumeDivRef.current) {
           // Get container and its dimensions
@@ -123,10 +130,8 @@ const Preview = () => {
             pdf.link(x, adjustedY, w, h, { url: link.href });
           });
         }
-
         // Save the PDF
         pdf.save(`${data?.name}-resume.pdf`);
-
         // Clean up the object URL
         URL.revokeObjectURL(imgUrl);
       };
