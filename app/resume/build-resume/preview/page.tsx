@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   Button,
   FormHeading,
@@ -6,18 +6,18 @@ import {
   Section,
   TemplateCard,
   TemplateModalComponent,
-} from '@/components/SubComponents';
-import { useGlobalContext } from '@/context/GlobalProvider';
-import useGetTemplateData from '@/utils/useGetTemplateData';
-import { FaEdit } from 'react-icons/fa';
+} from "@/components/SubComponents";
+import { useGlobalContext } from "@/context/GlobalProvider";
+import useGetTemplateData from "@/utils/useGetTemplateData";
+import { FaEdit } from "react-icons/fa";
 // import { MdMailOutline } from "react-icons/md";
-import { dataType } from '@/constants';
-import useGetAllTemplates from '@/utils/useGetAllTemplates';
-import * as htmlToImage from 'html-to-image';
-import { jsPDF as JsPDF } from 'jspdf';
-import { usePathname, useRouter } from 'next/navigation';
-import React, { useRef, useState } from 'react';
-import { LuDownload } from 'react-icons/lu';
+import { dataType } from "@/constants";
+import useGetAllTemplates from "@/utils/useGetAllTemplates";
+import * as htmlToImage from "html-to-image";
+import { jsPDF as JsPDF } from "jspdf";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useRef, useState } from "react";
+import { LuDownload } from "react-icons/lu";
 
 const Preview = () => {
   const { data, selectedTemplateId } = useGlobalContext();
@@ -27,7 +27,7 @@ const Preview = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { isLoading: allTemplatesLoading, templates: otherTemplates } =
-    useGetAllTemplates({ type: pathname?.split('/')?.[1] });
+    useGetAllTemplates({ type: pathname?.split("/")?.[1] });
 
   const templateList = () => {
     if (otherTemplates?.length > 0) {
@@ -67,35 +67,71 @@ const Preview = () => {
     if (!resumeDivRef.current) return;
 
     try {
+      // Generate the image using html-to-image
       const blob = await htmlToImage.toBlob(resumeDivRef.current, {
         pixelRatio: 1.5,
       });
+
       if (!blob) return;
+
+      // Create an image object
       const imgUrl = URL.createObjectURL(blob);
       const img = new Image();
       img.src = imgUrl;
+
       img.onload = () => {
-        // Create a new jsPDF instance
+        // Initialize jsPDF
         const pdf = new JsPDF({
-          unit: 'px',
-          format: 'a4',
+          unit: "px",
+          format: "a4",
           putOnlyUsedFonts: true,
         });
 
-        // Calculate width and height
+        // Calculate PDF dimensions
         const margin = 0;
         const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
         const pdfHeight = (img.height * pdfWidth) / img.width;
 
-        // Add the image to the PDF and save it
-        pdf.addImage(img, 'PNG', margin, margin, pdfWidth, pdfHeight);
+        // Add the image to the PDF
+        pdf.addImage(img, "PNG", margin, margin, pdfWidth, pdfHeight);
+
+        if (resumeDivRef.current) {
+          // Get container and its dimensions
+          const rect = resumeDivRef.current.getBoundingClientRect(); // Container dimensions
+          const links = resumeDivRef.current.querySelectorAll("a");
+
+          links.forEach((link) => {
+            const linkRect = link.getBoundingClientRect(); // Get link position
+
+            // Calculate positions relative to the container
+            const left = linkRect.left - rect.left;
+            const top = linkRect.top - rect.top;
+
+            // Convert positions to PDF units
+            const x = (left / resumeDivRef.current!.offsetWidth) * pdfWidth;
+            const y = (top / resumeDivRef.current!.offsetHeight) * pdfHeight;
+            const w =
+              (linkRect.width / resumeDivRef.current!.offsetWidth) * pdfWidth;
+            const h =
+              (linkRect.height / resumeDivRef.current!.offsetHeight) *
+              pdfHeight;
+
+            // Apply manual adjustment to remove extra offset
+            const adjustedY = y; // Removed offset adjustment
+
+            // Add the clickable link to the PDF
+            pdf.link(x, adjustedY, w, h, { url: link.href });
+          });
+        }
+
+        // Save the PDF
         pdf.save(`${data?.name}-resume.pdf`);
 
         // Clean up the object URL
         URL.revokeObjectURL(imgUrl);
       };
     } catch (error) {
-      console.error('Failed to generate PDF:', error);
+      console.error("Failed to generate PDF:", error);
     }
   };
 
@@ -150,7 +186,7 @@ const Preview = () => {
               Print
             </Button> */}
             <Button
-              onClick={() => router.push('/resume/build-resume/create/header')}
+              onClick={() => router.push("/resume/build-resume/create/header")}
               className=""
               iconBefore={<FaEdit className="mr-1" />}
             >
