@@ -10,10 +10,11 @@ export const dbConnection = async (): Promise<void> => {
 
     console.log(`Attempting to connect to MongoDB with URL: ${url}`);
 
+    mongoose.set("debug", true);
+
     await mongoose.connect(url, {
-      // Optional: Add mongoose connection options if needed
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 30000, // Adjust timeout to 30 seconds
+      family: 4, // Use IPv4
     });
 
     const connection: Connection = mongoose.connection;
