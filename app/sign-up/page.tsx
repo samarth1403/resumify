@@ -1,27 +1,31 @@
-'use client';
-import Button from '@/components/SubComponents/Button';
-import FormField from '@/components/SubComponents/FormField';
-import Heading from '@/components/SubComponents/Heading';
-import Section from '@/components/SubComponents/Section';
-import { validateSignUp } from '@/components/Validation/Validation';
-import { formDataTypes } from '@/constants';
-import axios, { isAxiosError } from 'axios';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import toast from 'react-hot-toast';
+"use client";
+import Button from "@/components/SubComponents/Button";
+import FormField from "@/components/SubComponents/FormField";
+import Heading from "@/components/SubComponents/Heading";
+import Section from "@/components/SubComponents/Section";
+import { validateSignUp } from "@/components/Validation/Validation";
+import { formDataTypes } from "@/constants";
+import { useGlobalContext } from "@/context/GlobalProvider";
+import axios, { isAxiosError } from "axios";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
+  const router = useRouter();
+  const { setIsUserLoggedIn } = useGlobalContext();
   const [isFormSubmitting, setFormIsSubmitting] = useState<boolean>(false);
   const [formData, setFormData] = useState<formDataTypes>({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
   const [errors, setErrors] = useState<Record<string, { message: string }>>({});
 
   const setFormDataKey = (
     key: string,
-    value: string | number | boolean | readonly string[],
+    value: string | number | boolean | readonly string[]
   ) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
@@ -34,16 +38,17 @@ const SignUp = () => {
     }
     setFormIsSubmitting(true);
     try {
-      const { data, status } = await axios.post('/api/user/sign-up', formData);
+      const { data, status } = await axios.post("/api/user/sign-up", formData);
       if (status === 200) {
         toast.success(data.message);
-        // router.push("/");
+        setIsUserLoggedIn(true);
+        router.push("/");
       }
     } catch (error: unknown) {
       if (isAxiosError(error)) {
-        toast.error(error.response?.data?.error || 'An error occurred');
+        toast.error(error.response?.data?.error || "An error occurred");
       } else {
-        toast.error('An error occurred');
+        toast.error("An error occurred");
       }
     } finally {
       setFormIsSubmitting(false);
@@ -102,10 +107,10 @@ const SignUp = () => {
           >
             Sign Up
           </Button>
-          <Link href={'/sign-in'}>
+          <Link href={"/sign-in"}>
             <p className="body-2 text-center">
               {`Already have an Account ? `} &nbsp;
-              <span className="text-blue-600">Sign In</span>{' '}
+              <span className="text-blue-600">Sign In</span>{" "}
             </p>
           </Link>
         </div>

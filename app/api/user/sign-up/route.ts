@@ -4,10 +4,11 @@ import { verifyAccountMail } from "@/utils/mailTemplates";
 import { sendEmail } from "@/utils/mailer";
 import bcryptjs from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 
 dbConnection();
 
-export const POST = async (request: NextRequest) => {
+export const POST = async (request: NextRequest, response: NextResponse) => {
   try {
     const { username, email, password } = await request.json();
     if (!username || !email || !password) {
@@ -44,7 +45,13 @@ export const POST = async (request: NextRequest) => {
       subject: "Verify your Account",
     });
 
-    return NextResponse.json({
+    const token: string = jwt.sign(
+      { userId: savedUser._id },
+      process.env.JWT_SECRET!,
+      { expiresIn: "1d" }
+    );
+
+    const response = NextResponse.json({
       message: "User registered successfully",
       mailResponse:
         verificationMailResponse !== undefined
@@ -52,6 +59,16 @@ export const POST = async (request: NextRequest) => {
           : "",
       success: true,
     });
+
+    response.cookies.set("resumify-token", token, {
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+      path: "/",
+    });
+
+    return response;
+
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.log(error.message);
