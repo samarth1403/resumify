@@ -93,6 +93,7 @@ const WriteReview = ({ type }: { type: string }) => {
               placeholder="Write a comment..."
               className={`w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none`}
               iconPath="/assets/images/comment.svg"
+              iconFromTop="top-10"
             />
           </div>
           <Button

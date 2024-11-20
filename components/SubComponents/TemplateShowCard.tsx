@@ -99,7 +99,10 @@ const TemplateShowCard = ({
             <RenderHtmlContent
               className={` rounded-xl shadow-2xl shadow-gray-400 duration-500 max-[320px]:scale-90 min-[375px]:scale-100 `}
               dynamicFields={template?.dynamicFields!}
-              sampleData={templateContentData}
+              sampleData={{
+                ...templateContentData,
+                color: template?.sampleData?.color,
+              }}
               html={template?.htmlOption!}
               ref={componentRef}
               type={type}
@@ -168,7 +171,10 @@ const TemplateShowCard = ({
                     <Button onClick={handleModalClose}>X</Button>
                   </div>
                   <TemplateModalComponent
-                    sampleData={templateContentData}
+                    sampleData={{
+                      ...templateContentData,
+                      color: template?.sampleData?.color,
+                    }}
                     template={template!}
                     type={type}
                   />

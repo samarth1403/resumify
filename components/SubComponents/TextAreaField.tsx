@@ -12,6 +12,7 @@ interface propTypes {
   isRequired?: boolean;
   rows: number;
   iconPath?: string;
+  iconFromTop?: string;
 }
 
 const TextAreaField = ({
@@ -25,6 +26,7 @@ const TextAreaField = ({
   isRequired,
   rows,
   iconPath,
+  iconFromTop,
 }: propTypes) => {
   return (
     <div className={`flex-start relative w-full flex-col gap-[5px] `}>
@@ -50,7 +52,7 @@ const TextAreaField = ({
           alt={""}
           width={25}
           height={25}
-          className={`absolute left-2 top-3 object-contain`}
+          className={`absolute left-2 ${iconFromTop || "top-3"} object-contain`}
         />
       )}
       {error && (
