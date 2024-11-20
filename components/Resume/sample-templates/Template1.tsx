@@ -140,12 +140,14 @@ const Template1: React.FC = () => {
           title: "Project 1",
           description: "A web application for managing tasks and deadlines.",
           link: "project1.com",
+          tags: "",
         },
         {
           title: "Project 2",
           description:
             "An e-commerce platform with real-time inventory tracking.",
           link: "project2.com",
+          tags: "",
         },
       ],
       skills: ["JavaScript", "React", "Node.js", "CSS", "HTML"],
