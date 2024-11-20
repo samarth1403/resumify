@@ -51,6 +51,7 @@ const Closer = () => {
             isRequired
             error={errors.coverLetterCloser}
             iconPath="/assets/images/comment.svg"
+            iconFromTop="top-10"
           />
         </div>
         <div className="mt-4 flex w-full flex-row flex-wrap items-center justify-center gap-2 max-[320px]:gap-4 min-[375px]:justify-between">

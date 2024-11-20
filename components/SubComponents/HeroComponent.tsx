@@ -75,7 +75,7 @@ const HeroComponent = ({
             width={100}
             height={100}
             className="hero-image size-full rounded-lg object-contain shadow-2xl shadow-shades-6"
-            loading="lazy"
+            // loading="lazy"
           />
         </div>
       </div>
