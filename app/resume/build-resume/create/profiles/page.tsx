@@ -2,7 +2,6 @@
 import { Button, FormField } from "@/components/SubComponents";
 import { profileType } from "@/constants";
 import { useGlobalContext } from "@/context/GlobalProvider";
-import axios, { isAxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -10,8 +9,7 @@ import { MdDelete } from "react-icons/md";
 
 const Profiles = () => {
   const router = useRouter();
-  const { data, setData, selectedTemplateId, user } = useGlobalContext();
-  const [isFormSubmitting, setFormIsSubmitting] = useState<boolean>(false);
+  const { data, setData } = useGlobalContext();
   const [errors, setErrors] = useState<Record<string, { message: string }>>({});
   const [profiles, setProfiles] = useState<profileType[]>(
     data?.profiles || [
@@ -47,30 +45,6 @@ const Profiles = () => {
     router.push("/resume/build-resume/preview");
     localStorage.setItem("data", JSON.stringify(data));
     setErrors({});
-    setFormIsSubmitting(true);
-    try {
-      if (user?.userId) {
-        const res = await axios.post("/api/document/create", {
-          type: "resume",
-          userData: data,
-          user: user?.userId,
-          template: selectedTemplateId,
-        });
-        if (res.status === 201) {
-          toast.success(res.data.message);
-          // router.push("/");
-        }
-      }
-    } catch (error: unknown) {
-      if (isAxiosError(error)) {
-        toast.error(error.response?.data?.error || "An error occurred");
-      } else {
-        toast.error("An error occurred");
-      }
-    } finally {
-      setFormIsSubmitting(false);
-      setErrors({});
-    }
   };
 
   const handleAddOneMore = () => {
@@ -173,9 +147,7 @@ const Profiles = () => {
       <div className="flex w-full items-center justify-between ">
         <Button onClick={handleAddOneMore}>Add +</Button>
         {data?.profiles!?.length > 0 && (
-          <Button onClick={handleContinue} isFormSubmitting={isFormSubmitting}>
-            Submit
-          </Button>
+          <Button onClick={handleContinue}>Submit</Button>
         )}
       </div>
     </div>

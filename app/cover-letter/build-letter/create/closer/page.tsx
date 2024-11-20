@@ -3,7 +3,6 @@ import { Button, FormHeading, TextAreaField } from "@/components/SubComponents";
 import { validateCoverLetter } from "@/components/Validation/Validation";
 import { dataType } from "@/constants";
 import { useGlobalContext } from "@/context/GlobalProvider";
-import axios, { isAxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -12,8 +11,7 @@ import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 const Closer = () => {
   const router = useRouter();
 
-  const [isFormSubmitting, setFormIsSubmitting] = useState<boolean>(false);
-  const { data, setData, selectedTemplateId, user } = useGlobalContext();
+  const { data, setData } = useGlobalContext();
   const [errors, setErrors] = useState<Record<string, { message: string }>>({});
 
   const setFormDataKey = (
@@ -22,8 +20,6 @@ const Closer = () => {
   ) => {
     setData((prev) => ({ ...prev, [key]: value }));
   };
-
-  console.log(user);
 
   const handleContinue = async () => {
     const { errors, errorTab } = validateCoverLetter(data as dataType);
@@ -37,31 +33,6 @@ const Closer = () => {
     router.push("/cover-letter/build-letter/preview");
     localStorage.setItem("data", JSON.stringify(data));
     setErrors({});
-
-    setFormIsSubmitting(true);
-    try {
-      if (user?.userId) {
-        const res = await axios.post("/api/document/create", {
-          type: "cover-letter",
-          userData: data,
-          user: user?.userId,
-          template: selectedTemplateId,
-        });
-        if (res.status === 201) {
-          toast.success(res.data.message);
-          // router.push("/");
-        }
-      }
-    } catch (error: unknown) {
-      if (isAxiosError(error)) {
-        toast.error(error.response?.data?.error || "An error occurred");
-      } else {
-        toast.error("An error occurred");
-      }
-    } finally {
-      setFormIsSubmitting(false);
-      setErrors({});
-    }
   };
 
   return (
@@ -94,7 +65,6 @@ const Closer = () => {
             onClick={handleContinue}
             iconAfter={<IoIosArrowRoundForward size={24} />}
             // className="border border-black bg-yellow-400 pr-3 text-black "
-            isFormSubmitting={isFormSubmitting}
           >
             Submit
           </Button>

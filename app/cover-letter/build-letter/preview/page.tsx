@@ -16,10 +16,13 @@ import useGetAllTemplates from "@/utils/useGetAllTemplates";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { LuDownload } from "react-icons/lu";
+import axios, { isAxiosError } from "axios";
+import toast from "react-hot-toast";
 
 const Preview = () => {
-  const { data, selectedTemplateId } = useGlobalContext();
+  const { data, selectedTemplateId, user } = useGlobalContext();
   const { templateData, isLoading } = useGetTemplateData();
+  const [isFormSubmitting, setFormIsSubmitting] = useState<boolean>(false);
   const [showOtherTemplates, setShowOtherTemplates] = useState<boolean>(false);
   const coverLetterDivRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -45,21 +48,49 @@ const Preview = () => {
     }
   };
 
-  // const handlePrint = useReactToPrint({
-  //   content: () => coverLetterDivRef.current,
-  //   bodyClass: 'bg-white',
-  // });
-
   // Handle change event
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setShowOtherTemplates(event.target.checked);
   };
 
+  const createUserDocument = async () => {
+    try {
+      if (user?.userId) {
+        const res = await axios.post("/api/document/create", {
+          type: "cover-letter",
+          userData: data,
+          user: user?.userId,
+          template: selectedTemplateId,
+        });
+        if (res.status === 201) {
+          if (res?.data?.message) {
+            toast.success(res.data.message);
+          }
+        }
+      }
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        toast.error(error.response?.data?.error || "An error occurred");
+      } else {
+        toast.error("An error occurred");
+      }
+    }
+  };
+
   const handleDownloadPdf = async () => {
-    await downloadPdf({
-      componentRef: coverLetterDivRef,
-      fileName: `${data?.name}-cover-letter`,
-    });
+    setFormIsSubmitting(true);
+    try {
+      await createUserDocument();
+      await downloadPdf({
+        componentRef: coverLetterDivRef,
+        fileName: `${data?.name}-cover-letter`,
+      });
+      router.push("/cover-letter/build-letter/write-cover-letter-review");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setFormIsSubmitting(false);
+    }
   };
 
   return (
@@ -125,6 +156,7 @@ const Preview = () => {
               onClick={handleDownloadPdf}
               className=""
               iconBefore={<LuDownload className="mr-1" />}
+              isFormSubmitting={isFormSubmitting}
             >
               Download
             </Button>

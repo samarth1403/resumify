@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const documentSchema = new mongoose.Schema(
+const userDocumentSchema = new mongoose.Schema(
   {
     type: {
       type: String,
@@ -11,7 +11,7 @@ const documentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    templateId: {
+    template: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Template",
     },
@@ -21,6 +21,7 @@ const documentSchema = new mongoose.Schema(
   }
 );
 
-const Document =
-  mongoose.models.Document || mongoose.model("Document", documentSchema);
-export default Document;
+const UserDocument =
+  mongoose.models.UserDocument ||
+  mongoose.model("UserDocument", userDocumentSchema);
+export default UserDocument;

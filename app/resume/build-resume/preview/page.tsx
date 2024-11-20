@@ -17,10 +17,13 @@ import useGetAllTemplates from "@/utils/useGetAllTemplates";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { LuDownload } from "react-icons/lu";
+import axios, { isAxiosError } from "axios";
+import toast from "react-hot-toast";
 
 const Preview = () => {
-  const { data, selectedTemplateId } = useGlobalContext();
+  const { data, selectedTemplateId, user } = useGlobalContext();
   const { templateData, isLoading } = useGetTemplateData();
+  const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
   const [showOtherTemplates, setShowOtherTemplates] = useState<boolean>(false);
   const resumeDivRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -62,11 +65,43 @@ const Preview = () => {
     setShowOtherTemplates(event.target.checked);
   };
 
+  const createUserDocument = async () => {
+    try {
+      if (user?.userId) {
+        const res = await axios.post("/api/document/create", {
+          type: "resume",
+          userData: data,
+          user: user?.userId,
+          template: selectedTemplateId,
+        });
+        if (res.status === 201) {
+          if (res?.data?.message) {
+            toast.success(res.data.message);
+          }
+        }
+      }
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        toast.error(error.response?.data?.error || "An error occurred");
+      } else {
+        toast.error("An error occurred");
+      }
+    }
+  };
+
   const handlePdfDownload = async () => {
-    await downloadPdf({
-      componentRef: resumeDivRef,
-      fileName: `${data?.name}-resume`,
-    });
+    setIsFormSubmitting(true);
+    try {
+      await createUserDocument();
+      await downloadPdf({
+        componentRef: resumeDivRef,
+        fileName: `${data?.name}-resume`,
+      });
+      router.push("/resume/build-resume/write-resume-review");
+    } catch (error) {
+    } finally {
+      setIsFormSubmitting(false);
+    }
   };
 
   return (
@@ -130,6 +165,7 @@ const Preview = () => {
               onClick={handlePdfDownload}
               className=""
               iconBefore={<LuDownload className="mr-1" />}
+              isFormSubmitting={isFormSubmitting}
             >
               Download
             </Button>

@@ -1,5 +1,5 @@
 import Template from "@/models/template";
-import Document from "@/models/document";
+import UserDocument from "@/models/user-document";
 import { dbConnection } from "@/utils/dbConnection";
 import { getIdfromToken } from "@/utils/getIdfromToken";
 import { NextRequest, NextResponse } from "next/server";
@@ -13,8 +13,8 @@ export const GET = async (request: NextRequest) => {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const documents = await Document.find({ user: userId }).populate(
-      "templateId",
+    const documents = await UserDocument.find({ user: userId }).populate(
+      "template",
       [
         "sampleData",
         "name",

@@ -50,7 +50,7 @@ const WriteReview = ({ type }: { type: string }) => {
     >
       <div className="my-4 flex w-full flex-col flex-nowrap items-center justify-center">
         <div className="flex w-64 flex-col flex-nowrap items-center justify-center gap-4 sm:w-72 lg:w-96">
-          <p className="h5 text-center ">{`Write a Review about ${type === "resume" ? "Resume" : "Cover Letter"}`}</p>
+          <p className="h5">Write a Review</p>
           <div className="w-full">
             <FormField
               label="Name"

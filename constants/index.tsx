@@ -528,7 +528,8 @@ export interface documentType {
   type: string;
   userData: coverLetterType;
   user: string;
-  templateId: templateType;
+  templateId: string;
+  template: templateType;
   createdAt: string;
 }
 

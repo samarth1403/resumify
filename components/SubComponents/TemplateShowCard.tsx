@@ -5,15 +5,16 @@ import {
   RenderHtmlContent,
   TemplateModalComponent,
 } from "@/components/SubComponents";
-import { dataType, templateType } from "@/constants";
-import { useRef, useState } from "react";
+import { dataType, documentType, templateType } from "@/constants";
+import React, { SetStateAction, useRef, useState } from "react";
 
 import { useGlobalContext } from "@/context/GlobalProvider";
 // import html2canvas from "html2canvas";
 // import { jsPDF as JsPDF } from "jspdf";
 import { useRouter } from "next/navigation";
-import { MdOutlinePrint, MdOutlineZoomIn } from "react-icons/md";
-import { useReactToPrint } from "react-to-print";
+import { MdOutlineDelete, MdOutlineZoomIn } from "react-icons/md";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const TemplateShowCard = ({
   templateContentData,
@@ -23,18 +24,25 @@ const TemplateShowCard = ({
   cardTitle,
   isExample = false,
   type,
+  documentId,
+  setUserDocuments = () => {},
 }: {
   templateContentData: dataType;
   isLoading?: boolean;
-  template: templateType;
+  template?: templateType;
   selfDocument?: boolean;
   isExample?: boolean;
-  cardTitle: string;
+  cardTitle?: string;
   type?: string;
+  templateId?: string;
+  documentId?: string;
+  setUserDocuments?: React.Dispatch<SetStateAction<documentType[]>>;
 }) => {
   const router = useRouter();
   const { setSelectedTemplateId } = useGlobalContext();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+  const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
   const componentRef = useRef<HTMLDivElement>(null);
 
   const handleModalOpen = () => {
@@ -48,8 +56,8 @@ const TemplateShowCard = ({
   };
 
   const handleTemplateChoose = () => {
-    setSelectedTemplateId(template._id);
-    localStorage.setItem("selectedTemplateId", template._id);
+    setSelectedTemplateId(template?._id || "");
+    localStorage.setItem("selectedTemplateId", template?._id || "");
     if (isExample || selfDocument) {
       localStorage.setItem("data", JSON.stringify(templateContentData));
     }
@@ -60,28 +68,26 @@ const TemplateShowCard = ({
     );
   };
 
-  // const downloadPdf = () => {
-  //   const input = componentRef.current!;
-
-  //   html2canvas(input, { scale: 2 })
-  //     .then((canvas) => {
-  //       const imgData = canvas.toDataURL("image/png");
-  //       const pdf = new JsPDF("p", "pt", "a4");
-
-  //       const margin = 20;
-  //       const pdfWidth = pdf.internal.pageSize.getWidth() - margin * 2;
-  //       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-  //       pdf.addImage(imgData, "PNG", margin, margin, pdfWidth, pdfHeight);
-  //       pdf.save("download.pdf");
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-    bodyClass: "bg-white",
-  });
+  const handleDelete = async () => {
+    setDeleteLoading(true);
+    try {
+      const res = await axios.delete(`/api/document/delete`, {
+        data: {
+          id: documentId,
+        },
+      });
+      if (res.status === 200) {
+        toast.success(res.data.message);
+        setUserDocuments((prev) =>
+          prev?.filter((document) => document._id !== documentId)
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setDeleteLoading(false);
+    }
+  };
 
   return (
     <div className="w-80 max-[320px]:w-64">
@@ -92,18 +98,18 @@ const TemplateShowCard = ({
           <div className="relative w-full">
             <RenderHtmlContent
               className={` rounded-xl shadow-2xl shadow-gray-400 duration-500 max-[320px]:scale-90 min-[375px]:scale-100 `}
-              dynamicFields={template?.dynamicFields}
+              dynamicFields={template?.dynamicFields!}
               sampleData={templateContentData}
-              html={template?.htmlOption}
+              html={template?.htmlOption!}
               ref={componentRef}
               type={type}
             />
             {selfDocument && (
               <div
-                onClick={handlePrint}
+                onClick={() => setDeleteModalOpen(true)}
                 className="flex-center absolute bottom-[20px] left-[14px] z-10 size-10 cursor-pointer rounded-full bg-gray-600 px-2 duration-500 hover:scale-125 hover:bg-gray-800"
               >
-                <MdOutlinePrint className="size-8 rounded-full text-white " />
+                <MdOutlineDelete className="size-8 rounded-full text-white " />
               </div>
             )}
             <div
@@ -125,7 +131,32 @@ const TemplateShowCard = ({
           <div className={`flex-center mt-4 w-full flex-nowrap px-1`}>
             <p className="h6">{cardTitle}</p>
           </div>
-
+          {deleteModalOpen && (
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-gray-500/75">
+              <div className="absolute inset-0 flex flex-col items-center justify-start  overflow-auto">
+                <div className="flex-start mt-36 w-[320px] flex-col flex-wrap gap-2 rounded-2xl bg-white p-4 lg:mt-56 ">
+                  <div className="flex w-full items-start justify-start">
+                    <p>Are you sure to delete ?</p>
+                  </div>
+                  <div className="flex w-full flex-row items-center justify-between">
+                    <Button
+                      className="outline_btn my-2"
+                      onClick={() => setDeleteModalOpen(false)}
+                    >
+                      {"Cancel"}
+                    </Button>
+                    <Button
+                      className="outline_btn my-2"
+                      onClick={() => handleDelete()}
+                      isFormSubmitting={deleteLoading}
+                    >
+                      {"Yes"}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
           {isModalOpen && (
             <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-gray-500/75">
               <div className="absolute inset-0 flex flex-col items-center justify-start  overflow-auto">
@@ -138,7 +169,7 @@ const TemplateShowCard = ({
                   </div>
                   <TemplateModalComponent
                     sampleData={templateContentData}
-                    template={template}
+                    template={template!}
                     type={type}
                   />
                 </div>

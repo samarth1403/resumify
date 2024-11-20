@@ -4,32 +4,27 @@ import { NextRequest, NextResponse } from "next/server";
 
 dbConnection();
 
-export const POST = async (request: NextRequest) => {
+export const DELETE = async (request: NextRequest) => {
   try {
-    const { user, userData, template, type } = await request.json();
-    if (!user || !userData || !template || !type) {
+    const { id } = await request.json();
+    console.log({ id });
+    if (!id) {
       throw new Error("All fields are required");
     }
-    const existingDocument = await UserDocument.findOne({
-      $and: [{ user }, { template }],
-    });
-    if (existingDocument) {
-      return NextResponse.json({ success: true }, { status: 201 });
+    const document = await UserDocument.findById(id);
+    if (!document) {
+      return NextResponse.json(
+        { message: "Document not found", success: false },
+        { status: 404 }
+      );
     }
-    const document = new UserDocument({
-      user,
-      userData,
-      template,
-      type,
-    });
-    await document.save();
+    await UserDocument.findByIdAndDelete(id);
     return NextResponse.json(
       {
-        data: document,
+        message: "Document Deleted Successfully",
         success: true,
-        message: "Document Created Successfully",
       },
-      { status: 201 }
+      { status: 200 }
     );
   } catch (error: unknown) {
     if (error instanceof Error) {

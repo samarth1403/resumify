@@ -1,35 +1,49 @@
 "use client";
-import { Loader, TemplateShowCard } from "@/components/SubComponents";
+import { Button, Loader, TemplateShowCard } from "@/components/SubComponents";
 import { documentType } from "@/constants";
+import { useState } from "react";
 
 const DocumentCard = ({
   type,
   documents,
   isLoading = true,
+  documentType,
 }: {
   type: string;
   documents: documentType[];
   isLoading: boolean;
+  documentType: string;
 }) => {
-  if (documents.length === 0) return null;
+  const [userDocuments, setUserDocuments] = useState<documentType[]>(documents);
+  if (documents.length === 0) return;
+  <div>
+    <p className="h4">You have no {type}</p>
+    <Button
+      href={`${type === "resume" ? "/resume/build-resume" : "/resume/build-letter"}`}
+    >{`Create Your ${type === "resume" ? "Resume" : "Cover Letter"}`}</Button>
+    <hr className="my-4 h-[2px] w-full bg-gray-500" />
+  </div>;
 
   return (
-    <div className="flex-start w-full flex-col">
+    <div className="flex-center w-full flex-col">
       <p className="h4">Your {type}</p>
-      <hr className="my-4 h-[2px] w-full bg-gray-500" />
+
       {!isLoading ? (
-        <div className="mt-8 flex w-full flex-row flex-wrap items-start justify-start gap-10">
-          {documents?.length > 0 &&
-            documents?.map((document) => (
-              <div key={document._id}>
-                {document.templateId && (
+        <div className="mt-8 flex w-full flex-row flex-wrap items-start justify-center gap-10">
+          {userDocuments?.length > 0 &&
+            userDocuments?.map((document) => (
+              <div key={document?._id}>
+                {document?.template && (
                   <TemplateShowCard
-                    key={document._id}
-                    templateContentData={document.userData}
+                    key={document?._id}
+                    templateContentData={document?.userData}
                     isLoading={isLoading}
-                    template={document.templateId}
-                    cardTitle={document.templateId.name}
+                    template={document?.template}
+                    cardTitle={document?.template?.name}
                     selfDocument
+                    type={documentType}
+                    documentId={document?._id}
+                    setUserDocuments={setUserDocuments}
                   />
                 )}
               </div>
@@ -38,6 +52,7 @@ const DocumentCard = ({
       ) : (
         <Loader />
       )}
+      <hr className="my-4 h-[2px] w-full bg-gray-500" />
     </div>
   );
 };
