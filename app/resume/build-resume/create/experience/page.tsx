@@ -1,9 +1,9 @@
 "use client";
-import { Button, FormField } from "@/components/SubComponents";
+import { Button, FormField, TextAreaField } from "@/components/SubComponents";
 import { experienceType } from "@/constants";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 
@@ -97,6 +97,10 @@ const Experience = () => {
     router.push("/resume/build-resume/create/education");
   };
 
+  useEffect(() => {
+    setExperiences(data?.experience || []);
+  }, [data]);
+
   return (
     <div className="flex h-auto w-full flex-col items-center justify-center gap-2 sm:gap-4 ">
       <div className="flex w-full items-center justify-between gap-2 ">
@@ -182,9 +186,8 @@ const Experience = () => {
                 />
               </div>
               <div className="w-full">
-                <FormField
+                <TextAreaField
                   // label="Description"
-                  type="text"
                   name="jobDescription"
                   value={experience.jobDescription}
                   setValue={(key, value) => setFormDataKey(key, value, index)}
@@ -193,7 +196,7 @@ const Experience = () => {
                   error={errors?.jobDescription}
                   isRequired
                   iconPath="/assets/images/comment.svg"
-                  iconFromTop="top-3"
+                  rows={4}
                 />
               </div>
             </div>

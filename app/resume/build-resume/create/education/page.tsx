@@ -3,7 +3,7 @@ import { Button, FormField } from "@/components/SubComponents";
 import { educationType } from "@/constants";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 
@@ -95,6 +95,10 @@ const Education = () => {
     setData((prev) => ({ ...prev, education: [] }));
     router.push("/resume/build-resume/create/projects");
   };
+
+  useEffect(() => {
+    setEducations(data?.education || []);
+  }, [data]);
 
   return (
     <div className="flex h-auto w-full flex-col items-center justify-center gap-2 sm:gap-4 ">

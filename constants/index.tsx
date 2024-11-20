@@ -186,12 +186,6 @@ export const footerLinks = [
         title: "Cover Letter Templates",
         uri: "/cover-letter/all-templates",
       },
-      // {
-      //   id: "1",
-      //   title: "Cover Letter Examples",
-      //   uri: "/cover-letter/examples",
-      // },
-
       {
         id: "3",
         title: "How to Write a Cover Letter",
@@ -331,6 +325,7 @@ export interface profileType {
 export interface projectType {
   title: string;
   description: string;
+  tags: string;
   link: string;
 }
 

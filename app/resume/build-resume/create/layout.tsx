@@ -13,6 +13,9 @@ const ResumeCreateLayout = ({ children }: { children: ReactNode }) => {
   const { data } = useGlobalContext();
   const { isLoading, templateData } = useGetTemplateData();
 
+  console.log({ data });
+  console.log({ templateData });
+
   return (
     <Section
       className="mt-[4.25rem] size-full "

@@ -3,7 +3,7 @@ import { Button, FormField } from "@/components/SubComponents";
 import { profileType } from "@/constants";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 
@@ -19,6 +19,10 @@ const Profiles = () => {
       },
     ]
   );
+
+  useEffect(() => {
+    setProfiles(data?.profiles || []);
+  }, [data]);
 
   const setFormDataKey = (
     key: string,

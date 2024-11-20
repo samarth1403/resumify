@@ -50,7 +50,7 @@ const TextAreaField = ({
           alt={""}
           width={25}
           height={25}
-          className={`absolute left-2 top-10 object-contain`}
+          className={`absolute left-2 top-3 object-contain`}
         />
       )}
       {error && (

@@ -1,9 +1,9 @@
 "use client";
-import { Button, FormField } from "@/components/SubComponents";
+import { Button, FormField, TextAreaField } from "@/components/SubComponents";
 import { projectType } from "@/constants";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 
@@ -17,9 +17,14 @@ const Projects = () => {
         title: "",
         description: "",
         link: "",
+        tags: "",
       },
     ]
   );
+
+  useEffect(() => {
+    setProjects(data?.projects || []);
+  }, [data]);
 
   const setFormDataKey = (
     key: string,
@@ -55,6 +60,7 @@ const Projects = () => {
         title: "",
         description: "",
         link: "",
+        tags: "",
       },
     ]);
     setData((prev) => ({
@@ -65,6 +71,7 @@ const Projects = () => {
           title: "",
           description: "",
           link: "",
+          tags: "",
         },
       ],
     }));
@@ -143,9 +150,8 @@ const Projects = () => {
                 />
               </div>
               <div className="w-full">
-                <FormField
+                <TextAreaField
                   // label="Description"
-                  type="text"
                   name="description"
                   value={project?.description}
                   setValue={(key, value) => setFormDataKey(key, value, index)}
@@ -154,7 +160,19 @@ const Projects = () => {
                   error={errors?.description}
                   isRequired
                   iconPath="/assets/images/comment.svg"
-                  iconFromTop="top-3"
+                  rows={4}
+                />
+              </div>
+              <div className="w-full">
+                <TextAreaField
+                  name="tags"
+                  value={project?.tags || ""}
+                  setValue={(key, value) => setFormDataKey(key, value, index)}
+                  placeholder={`Add Tags`}
+                  className="w-full rounded-lg border border-shades-4 p-3 focus:border-shades-8 focus:outline-none"
+                  error={errors?.tags}
+                  rows={3}
+                  iconPath="/assets/images/comment.svg"
                 />
               </div>
             </div>
