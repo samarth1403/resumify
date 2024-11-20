@@ -8,7 +8,7 @@ const Hero = () => {
       heroWord="Resumify"
       heroWordUnderlineImg="/assets/images/underline-gradient.svg"
       postTitle=""
-      text="Build an effective 2024 resume in minutes with our free-to-use resume builder. Choose a recruiter-approved template and add prewritten skills by Certified Professional Resume Writers."
+      text="Build an effective resume in minutes with our free-to-use resume builder. Go through step by step process and create a job winning resume that stands out."
       heroImage="/assets/images/hero-resume-example.svg"
       importBtn={<Button href="/">Import your Resume</Button>}
       createBtn={

@@ -41,8 +41,8 @@ export const resumeAlternateData = [
   },
   {
     id: "2",
-    title: "Download and print",
-    text: "Download your resume in PDF format or print it directly from the builder. Share it with potential employers and get ready to land your dream job.",
+    title: "Download in a click",
+    text: "Download your resume in PDF format directly from the builder. Share it with potential employers and get ready to land your dream job.",
     logo: "/assets/svg/download-man.svg",
   },
   {

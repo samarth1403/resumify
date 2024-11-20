@@ -19,8 +19,8 @@ const Templates = () => {
           className="w-full text-center"
         />
         <p className="body-1 mb-4 text-center lg:mb-8 lg:max-w-2xl">
-          Choose one of the resume templates below. Fill it in with
-          expert-written text inspired by your work experience.
+          Choose one of the resume templates below. Fill it in with your details
+          and download it in a few clicks.
         </p>
         <p className="body-1 text-center lg:max-w-2xl">
           These professionally designed templates have been tested in the real

@@ -5,7 +5,6 @@ import {
   Hero,
   Reviews,
   Steps,
-  Video,
 } from "@/components/Resume/ResumeBuilder";
 import Blogs from "@/components/Resume/ResumeBuilder/Blogs";
 import Templates from "@/components/Resume/Templates";
@@ -20,7 +19,7 @@ const Homepage = () => {
       {isUserLoggedIn ? <UserDocuments /> : <Hero />}
       <Steps />
       <Templates />
-      <Video />
+      {/* <Video /> */}
       <Features />
       {/* <OthersIntro /> */}
       {/* <Ratings /> */}
