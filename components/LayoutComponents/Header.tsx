@@ -152,9 +152,11 @@ const Header = () => {
           <div className="lg:flex-center hidden lg:flex lg:gap-4">
             <div>
               {!isLoading ? (
-                <button className="black_btn size-4 h-full rounded-full text-2xl ">
-                  {String(user?.username).charAt(0).toUpperCase()}
-                </button>
+                <Link href={"/profile"}>
+                  <button className="black_btn size-4 h-full rounded-full text-2xl ">
+                    {String(user?.username).charAt(0).toUpperCase()}
+                  </button>
+                </Link>
               ) : (
                 <div className="medium-loader" />
               )}
@@ -172,9 +174,11 @@ const Header = () => {
           {isUserLoggedIn && (
             <div className="flex lg:hidden">
               {!isLoading ? (
-                <button className="black_btn size-4 h-full rounded-full text-2xl ">
-                  {String(user?.username).charAt(0).toUpperCase()}
-                </button>
+                <Link href={"/profile"}>
+                  <button className="black_btn size-4 h-full rounded-full text-2xl ">
+                    {String(user?.username).charAt(0).toUpperCase()}
+                  </button>
+                </Link>
               ) : (
                 <div className="medium-loader" />
               )}
