@@ -12,13 +12,13 @@ import useGetTemplateData from "@/utils/useGetTemplateData";
 import { FaEdit } from "react-icons/fa";
 // import { MdMailOutline } from "react-icons/md";
 import { dataType } from "@/constants";
-import { downloadPdf } from "@/utils/helpers/DownloadPdf";
 import useGetAllTemplates from "@/utils/useGetAllTemplates";
+import axios, { isAxiosError } from "axios";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
-import { LuDownload } from "react-icons/lu";
-import axios, { isAxiosError } from "axios";
 import toast from "react-hot-toast";
+import { LuPrinter } from "react-icons/lu";
+import { useReactToPrint } from "react-to-print";
 
 const Preview = () => {
   const { data, selectedTemplateId, user } = useGlobalContext();
@@ -55,10 +55,12 @@ const Preview = () => {
     }
   };
 
-  // const handlePrint = useReactToPrint({
-  //   content: () => resumeDivRef.current,
-  //   bodyClass: 'bg-white',
-  // });
+  const handlePrint = useReactToPrint({
+    content: () => resumeDivRef?.current,
+    bodyClass: "bg-white",
+    documentTitle: `${data?.name}'s Resume`,
+    copyStyles: true,
+  });
 
   // Handle change event
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,14 +91,11 @@ const Preview = () => {
     }
   };
 
-  const handlePdfDownload = async () => {
+  const handlePdfPrint = async () => {
     setIsFormSubmitting(true);
     try {
       await createUserDocument();
-      await downloadPdf({
-        componentRef: resumeDivRef,
-        fileName: `${data?.name}-resume`,
-      });
+      handlePrint();
       router.push("/resume/build-resume/write-resume-review");
     } catch (error) {
     } finally {
@@ -118,19 +117,17 @@ const Preview = () => {
       </div>
       <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
         {!isLoading ? (
-          <div
-            className="h-auto rounded-xl shadow-2xl shadow-gray-400"
-            ref={resumeDivRef}
-          >
+          <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
             <div className="absolute left-[-9999px] flex lg:static lg:left-0">
               <TemplateModalComponent
                 template={templateData}
                 sampleData={{ ...data, color: templateData?.sampleData?.color }}
                 type="resume"
                 isPreview={true}
+                ref={resumeDivRef}
               />
             </div>
-            <div className="flex lg:hidden" ref={resumeDivRef}>
+            <div className="flex lg:hidden">
               <TemplateModalComponent
                 template={templateData}
                 sampleData={{ ...data, color: templateData?.sampleData?.color }}
@@ -162,12 +159,12 @@ const Preview = () => {
               Edit
             </Button>
             <Button
-              onClick={handlePdfDownload}
+              onClick={handlePdfPrint}
               className=""
-              iconBefore={<LuDownload className="mr-1" />}
+              iconBefore={<LuPrinter className="mr-1" />}
               isFormSubmitting={isFormSubmitting}
             >
-              Download
+              Print
             </Button>
             {/* <Button
               // onClick={handleContinue}/

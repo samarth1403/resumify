@@ -8,7 +8,7 @@ import {
 import React, { forwardRef } from "react";
 
 interface RenderHtmlContentProps {
-  className: string;
+  className?: string;
   dynamicFields: string[];
   sampleData: dataType;
   html: string;
@@ -175,7 +175,14 @@ const RenderHtmlContent = forwardRef<HTMLDivElement, RenderHtmlContentProps>(
     return (
       <div
         dangerouslySetInnerHTML={{ __html: renderedTemplate }}
-        className={className}
+        // className={className}
+        style={{
+          margin: "0px",
+          padding: "0px",
+          position: "relative",
+          top: "0px",
+          left: "0px",
+        }}
         ref={ref}
       />
     );

@@ -20,7 +20,6 @@ const TemplateModalComponent = forwardRef<
 ) {
   return (
     <RenderHtmlContent
-      className="scale-100"
       dynamicFields={template.dynamicFields}
       sampleData={sampleData}
       html={renderHtmlOption ? template.htmlOption : template.html}

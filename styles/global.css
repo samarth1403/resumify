@@ -17,6 +17,18 @@
   --font-grotesk: "Space Grotesk", sans-serif;
 }
 
+@media print {
+  @page {
+    margin: 0; /* Remove all margins */
+    padding: 0;
+    size: auto; /* Let the content decide the size */
+  }
+  body {
+    margin: 0;
+    padding: 0; /* Remove default browser settings */
+  }
+}
+
 .main {
   width: 100vw;
   min-height: 100vh;

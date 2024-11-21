@@ -11,13 +11,13 @@ import { useGlobalContext } from "@/context/GlobalProvider";
 import useGetTemplateData from "@/utils/useGetTemplateData";
 import { FaEdit } from "react-icons/fa";
 // import { MdMailOutline } from "react-icons/md";
-import { downloadPdf } from "@/utils/helpers/DownloadPdf";
 import useGetAllTemplates from "@/utils/useGetAllTemplates";
+import axios, { isAxiosError } from "axios";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
-import { LuDownload } from "react-icons/lu";
-import axios, { isAxiosError } from "axios";
 import toast from "react-hot-toast";
+import { LuPrinter } from "react-icons/lu";
+import { useReactToPrint } from "react-to-print";
 
 const Preview = () => {
   const { data, selectedTemplateId, user } = useGlobalContext();
@@ -48,6 +48,13 @@ const Preview = () => {
     }
   };
 
+  const handlePrint = useReactToPrint({
+    content: () => coverLetterDivRef?.current,
+    bodyClass: "bg-white",
+    documentTitle: `${data?.name}'s Resume`,
+    copyStyles: true,
+  });
+
   // Handle change event
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setShowOtherTemplates(event.target.checked);
@@ -77,14 +84,15 @@ const Preview = () => {
     }
   };
 
-  const handleDownloadPdf = async () => {
+  const handlePrintPdf = async () => {
     setFormIsSubmitting(true);
     try {
       await createUserDocument();
-      await downloadPdf({
-        componentRef: coverLetterDivRef,
-        fileName: `${data?.name}-cover-letter`,
-      });
+      // await downloadPdf({
+      //   componentRef: coverLetterDivRef,
+      //   fileName: `${data?.name}-cover-letter`,
+      // });
+      handlePrint();
       router.push("/cover-letter/build-letter/write-cover-letter-review");
     } catch (error) {
       console.error(error);
@@ -107,19 +115,17 @@ const Preview = () => {
       </div>
       <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
         {!isLoading ? (
-          <div
-            className="h-auto rounded-xl shadow-2xl shadow-gray-400"
-            ref={coverLetterDivRef}
-          >
+          <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
             <div className="absolute left-[-9999px] flex lg:static lg:left-0">
               <TemplateModalComponent
                 template={templateData}
                 sampleData={{ ...data, color: templateData?.sampleData?.color }}
                 type="cover-letter"
                 isPreview={true}
+                ref={coverLetterDivRef}
               />
             </div>
-            <div className="flex lg:hidden" ref={coverLetterDivRef}>
+            <div className="flex lg:hidden">
               <TemplateModalComponent
                 template={templateData}
                 sampleData={{ ...data, color: templateData?.sampleData?.color }}
@@ -153,12 +159,12 @@ const Preview = () => {
               Print
             </Button> */}
             <Button
-              onClick={handleDownloadPdf}
+              onClick={handlePrintPdf}
               className=""
-              iconBefore={<LuDownload className="mr-1" />}
+              iconBefore={<LuPrinter className="mr-1" />}
               isFormSubmitting={isFormSubmitting}
             >
-              Download
+              Print
             </Button>
           </div>
           <div className="flex w-full items-center gap-4 p-4 font-bold text-black">

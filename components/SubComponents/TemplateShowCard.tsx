@@ -15,6 +15,8 @@ import { useRouter } from "next/navigation";
 import { MdOutlineDelete, MdOutlineZoomIn } from "react-icons/md";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { LuPrinter } from "react-icons/lu";
+import { useReactToPrint } from "react-to-print";
 
 const TemplateShowCard = ({
   templateContentData,
@@ -89,6 +91,15 @@ const TemplateShowCard = ({
     }
   };
 
+  const handlePrint = useReactToPrint({
+    content: () => componentRef?.current,
+    bodyClass: "bg-white",
+    documentTitle: `${templateContentData?.name}'s Resume`,
+    copyStyles: true,
+  });
+
+  console.log("COntenDiv", componentRef.current);
+
   return (
     <div className="w-80 max-[320px]:w-64">
       {!isLoading ? (
@@ -104,15 +115,34 @@ const TemplateShowCard = ({
                 color: template?.sampleData?.color,
               }}
               html={template?.htmlOption!}
-              ref={componentRef}
               type={type}
             />
+            <div className="absolute left-[-9999px]">
+              <TemplateModalComponent
+                template={template!}
+                sampleData={{
+                  ...templateContentData,
+                  color: template?.sampleData?.color,
+                }}
+                type={type}
+                isPreview={true}
+                ref={componentRef}
+              />
+            </div>
             {selfDocument && (
               <div
                 onClick={() => setDeleteModalOpen(true)}
                 className="flex-center absolute bottom-[20px] left-[14px] z-10 size-10 cursor-pointer rounded-full bg-gray-600 px-2 duration-500 hover:scale-125 hover:bg-gray-800"
               >
                 <MdOutlineDelete className="size-8 rounded-full text-white " />
+              </div>
+            )}
+            {selfDocument && (
+              <div
+                onClick={() => handlePrint()}
+                className="flex-center absolute bottom-[20px] left-[140px] z-10 size-10 cursor-pointer rounded-full bg-gray-600 px-2 duration-500 hover:scale-125 hover:bg-gray-800"
+              >
+                <LuPrinter className="size-8 rounded-full text-white " />
               </div>
             )}
             <div
