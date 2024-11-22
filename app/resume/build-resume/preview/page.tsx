@@ -58,7 +58,7 @@ const Preview = () => {
   const handlePrint = useReactToPrint({
     content: () => resumeDivRef?.current,
     bodyClass: "bg-white",
-    documentTitle: `${data?.name}'s Resume`,
+    documentTitle: `${data?.name}-resume`,
     copyStyles: true,
   });
 

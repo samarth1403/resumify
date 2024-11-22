@@ -51,7 +51,7 @@ const Preview = () => {
   const handlePrint = useReactToPrint({
     content: () => coverLetterDivRef?.current,
     bodyClass: "bg-white",
-    documentTitle: `${data?.name}'s Resume`,
+    documentTitle: `${data?.name}-cover-letter`,
     copyStyles: true,
   });
 
