@@ -175,11 +175,11 @@ const RenderHtmlContent = forwardRef<HTMLDivElement, RenderHtmlContentProps>(
     return (
       <div
         dangerouslySetInnerHTML={{ __html: renderedTemplate }}
-        // className={className}
+        className={className}
         style={{
           margin: "0px",
           padding: "0px",
-          position: "relative",
+          position: isPreview ? "absolute" : "static",
           top: "0px",
           left: "0px",
         }}

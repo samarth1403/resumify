@@ -105,44 +105,52 @@ const Preview = () => {
 
   return (
     <Section
-      className="mt-20 w-full"
+      className="mt-20 w-full "
       crosses
       crossesOffset="lg:translate-y-[5.25rem] px-2"
       customPaddings
       id="steps"
       childrenClassName="lg:pl-2 lg:pr-1"
     >
-      <div className="flex-between w-full">
+      <div className="flex-between w-full mb-4">
         <FormHeading title={`[ Preview of Resume ]`} />
       </div>
-      <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
-        {!isLoading ? (
-          <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
-            <div className="absolute left-[-9999px] flex lg:static lg:left-0">
-              <TemplateModalComponent
-                template={templateData}
-                sampleData={{ ...data, color: templateData?.sampleData?.color }}
-                type="resume"
-                isPreview={true}
-                ref={resumeDivRef}
-              />
+      <div className="flex w-full flex-row items-start justify-start relative min-h-[1000px] gap-2 ">
+        <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
+          {!isLoading ? (
+            <div className="h-auto rounded-xl shadow-2xl shadow-gray-400 ">
+              <div className="absolute left-[-9999px] flex lg:static lg:left-0">
+                <TemplateModalComponent
+                  template={templateData}
+                  sampleData={{
+                    ...data,
+                    color: templateData?.sampleData?.color,
+                  }}
+                  type="resume"
+                  isPreview={true}
+                  ref={resumeDivRef}
+                />
+              </div>
+              <div className="flex lg:hidden">
+                <TemplateModalComponent
+                  template={templateData}
+                  sampleData={{
+                    ...data,
+                    color: templateData?.sampleData?.color,
+                  }}
+                  type="resume"
+                  renderHtmlOption={true}
+                  isPreview={true}
+                />
+              </div>
             </div>
-            <div className="flex lg:hidden">
-              <TemplateModalComponent
-                template={templateData}
-                sampleData={{ ...data, color: templateData?.sampleData?.color }}
-                type="resume"
-                renderHtmlOption={true}
-                isPreview={true}
-              />
+          ) : (
+            <div className="flex-center size-full ">
+              <Loader />
             </div>
-          </div>
-        ) : (
-          <div className="flex-center size-full ">
-            <Loader />
-          </div>
-        )}
-        <div className="flex-start w-auto flex-col gap-4 ">
+          )}
+        </div>
+        <div className="flex-start w-[320px] lg:w-[360px] flex-col gap-4 ">
           <div className="flex-start  gap-2">
             {/* <Button
               onClick={handlePrint}
