@@ -14,6 +14,11 @@ export const POST = async (request: NextRequest) => {
       $and: [{ user }, { template }],
     });
     if (existingDocument) {
+      await UserDocument.findByIdAndUpdate(
+        existingDocument._id,
+        { userData, type },
+        { new: true }
+      );
       return NextResponse.json({ success: true }, { status: 201 });
     }
     const document = new UserDocument({
