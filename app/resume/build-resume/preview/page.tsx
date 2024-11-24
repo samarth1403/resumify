@@ -112,10 +112,10 @@ const Preview = () => {
       id="steps"
       childrenClassName="lg:pl-2 lg:pr-1"
     >
-      <div className="flex-between w-full mb-4">
+      <div className="flex-between mb-4 w-full">
         <FormHeading title={`[ Preview of Resume ]`} />
       </div>
-      <div className="flex w-full flex-row items-start justify-start relative min-h-[1000px] gap-2 ">
+      <div className="relative flex min-h-[1100px] w-full flex-row items-start justify-start gap-2 ">
         <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
           {!isLoading ? (
             <div className="h-auto rounded-xl shadow-2xl shadow-gray-400 ">
@@ -150,7 +150,7 @@ const Preview = () => {
             </div>
           )}
         </div>
-        <div className="flex-start w-[320px] lg:w-[360px] flex-col gap-4 ">
+        <div className="flex-start w-[320px] flex-col gap-4 lg:w-[360px] ">
           <div className="flex-start  gap-2">
             {/* <Button
               onClick={handlePrint}

@@ -110,38 +110,46 @@ const Preview = () => {
       id="steps"
       childrenClassName="lg:pl-2 lg:pr-1"
     >
-      <div className="flex-between w-full">
+      <div className="flex-between mb-4 w-full">
         <FormHeading title={`[ Preview of Cover Letter ]`} />
       </div>
-      <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
-        {!isLoading ? (
-          <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
-            <div className="absolute left-[-9999px] flex lg:static lg:left-0">
-              <TemplateModalComponent
-                template={templateData}
-                sampleData={{ ...data, color: templateData?.sampleData?.color }}
-                type="cover-letter"
-                isPreview={true}
-                ref={coverLetterDivRef}
-              />
+      <div className="relative flex min-h-[1100px] w-full flex-row items-start justify-start gap-2 ">
+        <div className="flex-start mt-6 flex-1 flex-wrap gap-6">
+          {!isLoading ? (
+            <div className="h-auto rounded-xl shadow-2xl shadow-gray-400">
+              <div className="absolute left-[-9999px] flex lg:static lg:left-0">
+                <TemplateModalComponent
+                  template={templateData}
+                  sampleData={{
+                    ...data,
+                    color: templateData?.sampleData?.color,
+                  }}
+                  type="cover-letter"
+                  isPreview={true}
+                  ref={coverLetterDivRef}
+                />
+              </div>
+              <div className="flex lg:hidden">
+                <TemplateModalComponent
+                  template={templateData}
+                  sampleData={{
+                    ...data,
+                    color: templateData?.sampleData?.color,
+                  }}
+                  type="cover-letter"
+                  renderHtmlOption={true}
+                  isPreview={true}
+                />
+              </div>
             </div>
-            <div className="flex lg:hidden">
-              <TemplateModalComponent
-                template={templateData}
-                sampleData={{ ...data, color: templateData?.sampleData?.color }}
-                type="cover-letter"
-                renderHtmlOption={true}
-                isPreview={true}
-              />
+          ) : (
+            <div className="flex-center size-full ">
+              <Loader />
             </div>
-          </div>
-        ) : (
-          <div className="flex-center size-full ">
-            <Loader />
-          </div>
-        )}
-        <div className="flex-start w-full flex-col gap-4 lg:w-auto ">
-          <div className="flex-center lg:flex-start  gap-2">
+          )}
+        </div>
+        <div className="flex-start w-[320px] flex-col gap-4 lg:w-[360px] ">
+          <div className="flex-start  gap-2">
             <Button
               onClick={() =>
                 router.push("/cover-letter/build-letter/create/header")
