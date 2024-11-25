@@ -98,8 +98,6 @@ const TemplateShowCard = ({
     copyStyles: true,
   });
 
-  console.log("COntenDiv", componentRef.current);
-
   return (
     <div className="w-80 max-[320px]:w-64">
       {!isLoading ? (

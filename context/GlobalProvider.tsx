@@ -24,7 +24,11 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const [user, setUser] = useState<userInfoType>(initialUserInfo);
   const [selectedTemplateId, setSelectedTemplateId] = useState<string>("");
-  const [data, setData] = useState<dataType>(initialData);
+  const [data, setData] = useState<dataType>(
+    localStorage?.getItem("data")
+      ? JSON.parse(localStorage?.getItem("data") as string)
+      : initialData
+  );
 
   useEffect(() => {
     const savedTemplateId = localStorage.getItem("selectedTemplateId");
