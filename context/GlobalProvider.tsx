@@ -1,3 +1,4 @@
+"use client";
 import {
   GlobalContextType,
   dataType,
@@ -24,22 +25,21 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const [user, setUser] = useState<userInfoType>(initialUserInfo);
   const [selectedTemplateId, setSelectedTemplateId] = useState<string>("");
-  const [data, setData] = useState<dataType>(
-    localStorage?.getItem("data")
-      ? JSON.parse(localStorage?.getItem("data") as string)
-      : initialData
-  );
+  const [data, setData] = useState<dataType>(initialData);
 
   useEffect(() => {
     const savedTemplateId = localStorage.getItem("selectedTemplateId");
-    const dataFromLocalStorage = localStorage.getItem("data");
     if (savedTemplateId) {
       setSelectedTemplateId(savedTemplateId);
     }
+  }, []);
+
+  useEffect(() => {
+    const dataFromLocalStorage = localStorage.getItem("data");
     if (dataFromLocalStorage) {
       setData(JSON.parse(dataFromLocalStorage));
     }
-  }, []);
+  }, [localStorage.getItem("data")]);
 
   return (
     <GlobalContext.Provider
