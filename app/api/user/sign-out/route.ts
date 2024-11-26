@@ -19,7 +19,9 @@ export const GET = async (request: NextRequest) => {
       path: "/",
       expires: new Date(0),
       domain:
-        process.env.NODE_ENV === "production" ? "resumify-self.vercel.app" : "",
+        process.env.NODE_ENV === "production"
+          ? ".resumify-self.vercel.app"
+          : "",
     });
     return response;
   } catch (error: unknown) {
