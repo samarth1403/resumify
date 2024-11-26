@@ -1,4 +1,3 @@
-"use client";
 import {
   GlobalContextType,
   dataType,
@@ -26,6 +25,11 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<userInfoType>(initialUserInfo);
   const [selectedTemplateId, setSelectedTemplateId] = useState<string>("");
   const [data, setData] = useState<dataType>(initialData);
+  let dataFromLocalStorage = null;
+
+  if (typeof window !== "undefined") {
+    dataFromLocalStorage = localStorage.getItem("data");
+  }
 
   useEffect(() => {
     const savedTemplateId = localStorage.getItem("selectedTemplateId");
@@ -35,11 +39,10 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    const dataFromLocalStorage = localStorage.getItem("data");
     if (dataFromLocalStorage) {
       setData(JSON.parse(dataFromLocalStorage));
     }
-  }, [localStorage.getItem("data")]);
+  }, [dataFromLocalStorage]);
 
   return (
     <GlobalContext.Provider
