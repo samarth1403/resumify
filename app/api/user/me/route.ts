@@ -6,8 +6,9 @@ import { NextRequest, NextResponse } from "next/server";
 dbConnection();
 
 export const POST = async (request: NextRequest) => {
+  const { token } = await request.json();
   try {
-    const userId = getIdfromToken(request);
+    const userId = getIdfromToken(token || "");
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }

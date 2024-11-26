@@ -37,6 +37,7 @@ export const POST = async (request: NextRequest) => {
       {
         message: SIGN_IN_SUCCESS_MESSAGE,
         success: true,
+        token,
       },
       { status: 200 }
     );

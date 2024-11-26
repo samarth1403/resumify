@@ -28,7 +28,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   let dataFromLocalStorage = null;
 
   if (typeof window !== "undefined") {
-    dataFromLocalStorage = localStorage.getItem("data");
+    dataFromLocalStorage = localStorage?.getItem("data");
   }
 
   useEffect(() => {

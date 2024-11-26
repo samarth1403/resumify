@@ -1,32 +1,32 @@
-'use client';
+"use client";
 import {
   Button,
   FormField,
   Heading,
   Section,
-} from '@/components/SubComponents';
-import { validateSignIn } from '@/components/Validation/Validation';
-import { formDataTypes } from '@/constants';
-import { useGlobalContext } from '@/context/GlobalProvider';
-import axios, { isAxiosError } from 'axios';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
-import toast from 'react-hot-toast';
+} from "@/components/SubComponents";
+import { validateSignIn } from "@/components/Validation/Validation";
+import { formDataTypes } from "@/constants";
+import { useGlobalContext } from "@/context/GlobalProvider";
+import axios, { isAxiosError } from "axios";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
   const { setIsUserLoggedIn } = useGlobalContext();
   const [isFormSubmitting, setFormIsSubmitting] = useState<boolean>(false);
   const [formData, setFormData] = useState<formDataTypes>({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [errors, setErrors] = useState<Record<string, { message: string }>>({});
   const router = useRouter();
 
   const setFormDataKey = (
     key: string,
-    value: string | number | boolean | readonly string[],
+    value: string | number | boolean | readonly string[]
   ) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
@@ -39,17 +39,18 @@ const SignIn = () => {
     }
     setFormIsSubmitting(true);
     try {
-      const { data, status } = await axios.post('/api/user/sign-in', formData);
+      const { data, status } = await axios.post("/api/user/sign-in", formData);
       if (status === 200) {
-        toast.success(data.message);
+        toast.success(data?.message);
+        localStorage.setItem("resumify-token", data?.token);
         setIsUserLoggedIn(true);
-        router.push('/');
+        router.push("/");
       }
     } catch (error: unknown) {
       if (isAxiosError(error)) {
-        toast.error(error.response?.data?.error || 'An error occurred');
+        toast.error(error.response?.data?.error || "An error occurred");
       } else {
-        toast.error('An error occurred');
+        toast.error("An error occurred");
       }
       setIsUserLoggedIn(false);
     } finally {
@@ -91,7 +92,7 @@ const SignIn = () => {
             error={errors.password}
             isRequired
           />
-          <Link href={'/forgot-password'} className="flex w-full justify-end">
+          <Link href={"/forgot-password"} className="flex w-full justify-end">
             <p className="text-blue-600">Forgot Password ?</p>
           </Link>
           <Button
@@ -101,10 +102,10 @@ const SignIn = () => {
           >
             Sign In
           </Button>
-          <Link href={'/sign-up'}>
+          <Link href={"/sign-up"}>
             <p className="body-2 text-center">
               {`Don't have Account ? `} &nbsp;
-              <span className="text-blue-600">Register Now</span>{' '}
+              <span className="text-blue-600">Register Now</span>{" "}
             </p>
           </Link>
         </div>

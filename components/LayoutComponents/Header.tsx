@@ -28,11 +28,19 @@ const Header = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [toggle, setToggle] = useState(false);
 
+  let token = null;
+
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("resumify-token");
+  }
+
   useEffect(() => {
     setIsLoading(true);
     const getCurrentUser = async () => {
       try {
-        const { data, status } = await axios.post("/api/user/me");
+        const { data, status } = await axios.post("/api/user/me", {
+          token,
+        });
         if (status === 200) {
           setUser({
             username: data.user.username,
@@ -60,6 +68,7 @@ const Header = () => {
       if (status === 200) {
         toast.success(data.message);
         // Cookie.remove("resumify-token");
+        localStorage.removeItem("resumify-token");
         router.replace("/");
         setIsUserLoggedIn(false);
       }

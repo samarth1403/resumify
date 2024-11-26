@@ -7,12 +7,13 @@ import { NextRequest, NextResponse } from "next/server";
 dbConnection();
 
 export const GET = async (request: NextRequest) => {
+  const searchParams = request.nextUrl.searchParams;
+  const token = searchParams.get("token");
   try {
-    const userId = getIdfromToken(request);
+    const userId = getIdfromToken(token || "");
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
     const documents = await UserDocument.find({ user: userId }).populate(
       "template",
       [
