@@ -59,8 +59,8 @@ const Header = () => {
       const { data, status } = await axios.get("/api/user/sign-out");
       if (status === 200) {
         toast.success(data.message);
-        document.cookie =
-          "resumify-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        // document.cookie =
+        //   "resumify-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         router.replace("/");
         setIsUserLoggedIn(false);
       }

@@ -46,6 +46,8 @@ export const POST = async (request: NextRequest) => {
       sameSite: "strict",
       secure: true,
       path: "/",
+      domain:
+        process.env.NODE_ENV === "production" ? "resumify-self.vercel.app" : "",
     });
 
     return response;
